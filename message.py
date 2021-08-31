@@ -70,7 +70,8 @@ class KAConnectOK(Message):
         self.urn = ControlMessageURN.KA_CONNECT_OK.value
         
         self.data = bytes(data)
-        self.entities = []
+        self.config = Config()
+        self.world = []
         self.read()
 
     def read(self):
@@ -86,10 +87,9 @@ class KAConnectOK(Message):
                 properties[StandardPropertyURN.from_id(property_proto.urnID)]= property_proto.fields
             
             entity.set_entity(properties)
-            self.entities.append(entity)
+            self.world.append(entity)
 
             
-        self.config = Config()
         for key, value in kaConnectok.config.data.items():
             self.config.setValue(key, value)
         

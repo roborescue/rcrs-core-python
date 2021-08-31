@@ -38,7 +38,7 @@ class Agent:
     def handle_connect_ok(self, msg):
         print('handle_connect_ok(msg): ', msg.requestID , msg.agentId)
         #entities received from server should be merged to the world model
-        entities = msg.entities
+        world = msg.world
 
         #configs received from server
         config = msg.config

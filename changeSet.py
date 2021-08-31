@@ -1,5 +1,8 @@
 
 
+from typing import overload
+
+
 class ChangeSet:
     def __init__(self, _change_set = None):
         
@@ -10,11 +13,11 @@ class ChangeSet:
         if _change_set is not None:
             self.merge(_change_set)
 
-
+    @overload
     def add_change(self, entity, property):
-        #print('add_change 1:' + str(type(entity.get_id())))
         self.add_change(entity.get_id(), entity.get_urn(), property)
 
+    @overload
     def add_change(self, entity_id, entity_urn, property):
         
         if entity_id in self.deleted:
@@ -35,15 +38,15 @@ class ChangeSet:
             del self.changed[_entity_id]
         
     def get_changed_properties(self, _entity_id):
-        if self.changed.has_key(_entity_id):
+        if _entity_id in self.changed:
             return self.changed[_entity_id].values()
         return []
     
     def get_changed_property(self, _entity_id, prop_urn):
-        if self.changed.has_key(_entity_id):
+        if _entity_id in self.changed:
             property_dict = self.changed.get(_entity_id)
             if property_dict is not None and len(property_dict) > 0:
-                if property_dict.has_key(prop_urn):
+                if prop_urn in property_dict:
                     return property_dict[prop_urn]
         return None
     

@@ -23,31 +23,33 @@ class StandardEntityFactory:
 
         if urn == StandardEntityURN.BUILDING.value:
             return Building(id)
-        if urn == StandardEntityURN.REFUGE.value:
+        elif urn == StandardEntityURN.REFUGE.value:
             return Refuge(id)
-        if urn == StandardEntityURN.ROAD.value:
+        elif urn == StandardEntityURN.ROAD.value:
             return Road(id)
-        if urn == StandardEntityURN.BLOCKADE.value:
+        elif urn == StandardEntityURN.BLOCKADE.value:
             return Blockade(id)
 
-        if urn == StandardEntityURN.POLICE_FORCE.value:
+        elif urn == StandardEntityURN.POLICE_FORCE.value:
             return PoliceForceEntity(id)
-        if urn == StandardEntityURN.POLICE_OFFICE.value:
+        elif urn == StandardEntityURN.POLICE_OFFICE.value:
             return PoliceOfficeEntity(id)
-        if urn == StandardEntityURN.AMBULANCE_TEAM.value:
+        elif urn == StandardEntityURN.AMBULANCE_TEAM.value:
             return AmbulanceTeamEntity(id)
-        if urn == StandardEntityURN.AMBULANCE_CENTRE.value:
+        elif urn == StandardEntityURN.AMBULANCE_CENTRE.value:
             return AmbulanceCentreEntity(id)
-        if urn == StandardEntityURN.FIRE_BRIGADE.value:
+        elif urn == StandardEntityURN.FIRE_BRIGADE.value:
             return FireBrigadeEntity(id)
-        if urn == StandardEntityURN.FIRE_STATION.value:
+        elif urn == StandardEntityURN.FIRE_STATION.value:
             return FireStationEntity(id)
-        if urn == StandardEntityURN.CIVILIAN.value:
+        elif urn == StandardEntityURN.CIVILIAN.value:
             return Civilian(id)
         
         
-        if urn == StandardEntityURN.HYDRANT.value:
+        elif urn == StandardEntityURN.HYDRANT.value:
             return Hydrant(id)
-        if urn == StandardEntityURN.GAS_STATION.value:
+        elif urn == StandardEntityURN.GAS_STATION.value:
             return GasStation(id)
+
+        return None
 
