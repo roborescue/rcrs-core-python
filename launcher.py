@@ -12,10 +12,10 @@ class Launcher:
     def __init__(self) -> None:
         
         police = PoliceForceAgent()
-        # time.sleep(2)
-        # ambulance = AmbulanceTeamAgent()
-        # time.sleep(2)
-        # fire = FireBrigadeAgent()
+        time.sleep(2)
+        ambulance = AmbulanceTeamAgent()
+        time.sleep(2)
+        fire = FireBrigadeAgent()
 
 
 if __name__ == '__main__':

@@ -39,6 +39,11 @@ class StandardPropertyURN(Enum):
     TEMPERATURE = PROPERTY_URN_PREFIX + "temperature" 
     IMPORTANCE = PROPERTY_URN_PREFIX + "importance" 
 
+    BEDCAPACITY = PROPERTY_URN_PREFIX + "bedCapacity"
+    OCCUPIEDBEDS= PROPERTY_URN_PREFIX + "occupiedBeds"
+    REFILLCAPACITY = PROPERTY_URN_PREFIX + "refillCapacity"
+    WAITINGLISTSIZE = PROPERTY_URN_PREFIX + "waitingListSize"
+
 
     def from_id(index):
         return list(StandardPropertyURN)[index].value
