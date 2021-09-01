@@ -1,3 +1,4 @@
+from typing import overload
 from entities.edge import Edge
 from entityID import EntityID
 
@@ -35,6 +36,9 @@ class EdgeListProperty(Property):
     def __init__(self, urn):
         super().__init__(urn)
 
+    def get_fields(self):
+        pass
+
     def set_fields(self, fields):
         _values = []
         edges = fields.get(EdgeListProperty.EDGES)
@@ -42,7 +46,7 @@ class EdgeListProperty(Property):
         for i in range(len(edges)):
 
             if edges[i][4] == -1:
-                edge = Edge( edges[i][0], edges[i][1], edges[i][2], edges[i][3])
+                edge = Edge( edges[i][0], edges[i][1], edges[i][2], edges[i][3], None)
             else:
                 edge = Edge( edges[i][0], edges[i][1], edges[i][2], edges[i][3], EntityID( edges[i][4] ) )
 
@@ -50,6 +54,30 @@ class EdgeListProperty(Property):
 
         self.value = _values
         self.set_defined()
+
+    #@overload
+    def set_value(self, _value):
+        if self.value != None:
+            self.value.clear()
+            self.value.extend(_value)
+            self.set_defined()
+        else:
+            self.value = _value
+
+    def set_edges(self, _edges):
+        self.value.clear()
+        self.value.extend(_edges)
+        self.set_defined()
+    
+    def add_edge(self, _edge):
+        if isinstance(_edge, Edge):
+            self.value.append(_edge)
+    
+    def clear_edges(self):
+        self.value.clear()
+    
+    def take_value(self, _value):
+        pass
     
     def copy(self):
         new_edge_list_prop = EdgeListProperty(self.urn)
@@ -74,6 +102,8 @@ class EntityIDProperty(Property):
         self.value = EntityID(fields.fields[0].valueInt)
         self.set_defined()
     
+    
+    
     def copy(self):
         new_entity_id_prop = EntityIDProperty(self.urn)
         new_entity_id_prop.value = EntityID(self.value.get_value())
@@ -92,6 +122,15 @@ class EntityIDListProperty(Property):
             _values.append(EntityID(field))
         self.value = _values
         self.set_defined()
+    
+    #@overload
+    def set_value(self, _value):
+        if self.value != None:
+            self.value.clear()
+            self.value.extend(_value)
+            self.set_defined()
+        else:
+            self.value = _value
 
     def copy(self):
         new_entity_id_list_prop = EntityIDListProperty(self.urn)
@@ -144,12 +183,24 @@ class IntArrayProperty(Property):
         self.value = _values
         self.set_defined()
 
+    #@overload
+    def set_value(self, _value):
+        if self.value != None:
+            self.value.clear()
+            self.value.extend(_value)
+            self.set_defined()
+        else:
+            self.value = _value
+
     def copy(self):
         new_int_array_prop = IntArrayProperty(self.urn)
         new_int_array_prop.value = []
         for int_val in self.value:
             new_int_array_prop.value.append(int_val)
         return new_int_array_prop
+
+    
+        
 
     
 

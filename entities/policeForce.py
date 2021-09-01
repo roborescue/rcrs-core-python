@@ -5,7 +5,11 @@ class PoliceForceEntity(Human):
     urn = StandardEntityURN.POLICE_FORCE.value
 
     def __init__(self, entity_id):
-        Human.__init__(self, entity_id)
-        print('PoliceForce Created ... = ', entity_id)
+        super().__init__(entity_id)
 
+    def copy_impl(self):
+        return PoliceForceEntity(self.get_id()) 
+    
+    def get_entity_name():
+        return "Police force"
     

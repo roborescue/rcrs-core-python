@@ -16,3 +16,9 @@ class EntityID:
     
     def __str__(self):
         return str(self.id)
+
+    def equals(self, o):
+        if isinstance(o, EntityID):
+            return self.id == EntityID(o).id
+        
+        return False

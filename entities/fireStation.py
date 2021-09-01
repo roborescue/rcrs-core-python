@@ -7,5 +7,10 @@ class FireStationEntity(Building):
     urn = StandardEntityURN.FIRE_STATION.value
 
     def __init__(self, entity_id):
-        Building.__init__(self, entity_id)
-        print('FireStation Created .. = ', entity_id)
+        super().__init__(entity_id)
+    
+    def copy_impl(self):
+        return FireStationEntity(self.get_id())
+    
+    def get_entity_name():
+        return "Fire Station"

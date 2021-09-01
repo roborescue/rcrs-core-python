@@ -9,3 +9,9 @@ class PoliceOfficeEntity(Building):
     def __init__(self, entity_id):
         Building.__init__(self, entity_id)
         print('PoliceOffice Created ... = ', entity_id)
+
+    def copy_impl(self):
+        return PoliceOfficeEntity(self.get_id())
+    
+    def get_entity_name():
+        return "Police office"

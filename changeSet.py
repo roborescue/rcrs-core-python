@@ -13,11 +13,11 @@ class ChangeSet:
         if _change_set is not None:
             self.merge(_change_set)
 
-    @overload
-    def add_change(self, entity, property):
-        self.add_change(entity.get_id(), entity.get_urn(), property)
+    
+    # def add_change(self, entity, property):
+    #     self.add_change(entity.get_id(), entity.get_urn(), property)
 
-    @overload
+    
     def add_change(self, entity_id, entity_urn, property):
         
         if entity_id in self.deleted:

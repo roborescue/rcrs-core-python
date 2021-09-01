@@ -40,3 +40,6 @@ class Entity:
 
     def set_entity(self, properties):
         pass
+
+    def get_property(self, property_urn ):
+        return self.properties.get( property_urn )
