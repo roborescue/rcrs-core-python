@@ -1,7 +1,7 @@
-from messages.message import KASense
-from messages.message import KAConnectOK
-from messages.message import KAConnectError
-from messages.message import Shutdown
+from messages.KASense import KASense
+from messages.KAConnectOK import KAConnectOK
+from messages.KAConnectError import KAConnectError
+from messages.Shutdown import Shutdown
 from messages.controlMessageURN import ControlMessageURN
 
 

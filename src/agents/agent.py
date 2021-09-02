@@ -1,9 +1,9 @@
-from connections.connection import Connection
-from messages.message import AKAcknowledge
-from messages.message import KAConnectOK
-from messages.message import KAConnectError
-from messages.message import KASense
-from messages.message import AKConnect
+from connection.connection import Connection
+from messages.AKAcknowledge import AKAcknowledge
+from messages.KAConnectOK import KAConnectOK
+from messages.KAConnectError import KAConnectError
+from messages.KASense import KASense
+from messages.AKConnect import AKConnect
 
 
 class Agent:

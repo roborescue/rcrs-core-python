@@ -1,4 +1,4 @@
-from connections.data_stream import OutputStream
+from connection.data_stream import OutputStream
 from messages.controlMessageFactory import ControlMessageFactory
 
 

@@ -1,12 +1,12 @@
 import socket
 import threading
-from connections.encoding_tool import read_int32_from_byte_arr
-from connections.encoding_tool import write_str
-from connections.encoding_tool import write_int32
-from connections.encoding_tool import read_msg
-from connections.encoding_tool import write_msg
-from connections.data_stream import OutputStream
-from connections.data_stream import InputStream
+from connection.encoding_tool import read_int32_from_byte_arr
+from connection.encoding_tool import write_str
+from connection.encoding_tool import write_int32
+from connection.encoding_tool import read_msg
+from connection.encoding_tool import write_msg
+from connection.data_stream import OutputStream
+from connection.data_stream import InputStream
 
 class Connection:
 
