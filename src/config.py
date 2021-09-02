@@ -1,7 +1,6 @@
 
 class Config:
     
-    
     def __init__(self) -> None:
         self.data = {}
         self.noCache = {}
@@ -12,18 +11,18 @@ class Config:
         self.constraints = {}
         self.violatedConstraints = {}
 
-    def getValue(self, key):
+    def get_value(self, key):
         return self.data[key]
     
-    def getFloatValue(self, key):
+    def get_float_value(self, key):
         pass
     
-    def getBooleanValue(self, key):
+    def get_boolean_value(self, key):
         pass
     
-    def getArrayValue(self, key):
+    def get_array_value(self, key):
         pass
 
-    def setValue(self, key, value):
+    def set_value(self, key, value):
         self.data[key] = value
     

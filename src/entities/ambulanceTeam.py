@@ -7,4 +7,4 @@ class AmbulanceTeamEntity(Human):
 
     def __init__(self, entity_id):
         Human.__init__(self, entity_id)
-        print('Ambulance Team Created ... = ', entity_id)
+        pass
