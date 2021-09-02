@@ -1,17 +1,16 @@
-from standardCommandURN import StandardCommandURN
-from commands import AKRest
-from commands import AKMove
-from commands import AKLoad
-from commands import AKUnload
-from commands import AKSay
-from commands import AKTell
-from commands import AKExtinguish
-from commands import AKRescue
-from commands import AKSpeak
-from commands import AKSubscribe
-from commands import AKClearArea
-from commands import AKClear
-
+from commands.standardCommandURN import StandardCommandURN
+from commands.AKRest import AKRest
+from commands.AKMove import AKMove
+from commands.AKLoad import AKLoad
+from commands.AKUnload import AKUnload
+from commands.AKSay import AKSay
+from commands.AKTell import AKTell
+from commands.AKExtinguish import AKExtinguish
+from commands.AKRescue import AKRescue
+from commands.AKSpeak import AKSpeak
+from commands.AKSubscribe import AKSubscribe
+from commands.AKClearArea import AKClearArea
+from commands.AKClear import AKClear
 
 
 class StandardCommandFactory:

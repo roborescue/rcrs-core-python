@@ -1,25 +1,23 @@
 
-from typing import overload
 from commands.Command import Command
-from standardPropertyFactory import StandardPropertyFactory
-from changeSet import ChangeSet
-from standardEntityFactory import StandardEntityFactory
-from config import Config
-import ControlMessageProto_pb2 as protoBuf
+from properties.standardPropertyFactory import StandardPropertyFactory
+from worldmodel.changeSet import ChangeSet
+from entities.standardEntityFactory import StandardEntityFactory
+from config.config import Config
+import messages.ControlMessageProto_pb2 as protoBuf
 import random
-from standardEntityURN import StandardEntityURN
-from standardPropertyURN import StandardPropertyURN
-from config import Config
-from controlMessageURN import ControlMessageURN
-from entityID import EntityID
+from entities.standardEntityURN import StandardEntityURN
+from properties.standardPropertyURN import StandardPropertyURN
+from messages.controlMessageURN import ControlMessageURN
+from worldmodel.entityID import EntityID
+
 
 class Message:
 
     def __init__(self) -> None:
         self.urn = ''
         pass
-    
-    
+
     def read(self):
         pass
 
@@ -29,58 +27,59 @@ class Message:
     def get_urn(self):
         return self.urn
 
+
 class AKConnect(Message):
-    
+
     def __init__(self):
         super().__init__()
         self.urn = ControlMessageURN.AK_CONNECT.value
-    
+
     def set_agent(self, agent):
         self.agent = agent
         self.agent_name = agent.get_name()
-    
+
     def prepare_message(self):
-        self.request_id = random.randint(1,100)
+        self.request_id = random.randint(1, 100)
         self.requestedEntityTypes = self.agent.get_requested_entities()
         self.message = self.write()
 
-    
     def write(self):
         akConnect = protoBuf.AKConnectProto()
-        akConnect.requestID = self.request_id 
+        akConnect.requestID = self.request_id
         akConnect.version = 1
         akConnect.agentName = self.agent_name
         akConnect.requestedEntityTypes.append(self.requestedEntityTypes)
         return akConnect.SerializeToString()
-    
+
     def read(self, inputStream):
         pass
 
+
 class AKAcknowledge(Message):
-    
+
     def __init__(self):
         super().__init__()
         self.urn = ControlMessageURN.AK_ACKNOWLEDGE.value
         self.request_id = None
         self.agent_id = None
-        
+
         self.message = None
 
     def set_request_id(self, id):
         self.request_id = id
-    
+
     def set_agent_id(self, id):
         self.agent_id = id
 
     def prepare_message(self):
         self.message = self.write()
-    
 
     def write(self):
         akAck = protoBuf.AKAcknowledgeProto()
         akAck.requestID = self.request_id
         akAck.agentID = self.agent_id
         return akAck.SerializeToString()
+
 
 class KAConnectOK(Message):
 
@@ -98,21 +97,24 @@ class KAConnectOK(Message):
         self.agent_id = kaConnectok.agentID
 
         for entity_proto in kaConnectok.entities:
-            entity = StandardEntityFactory.make_entity(StandardEntityURN.from_id(entity_proto.urnID), entity_proto.entityID)
+
+            _urn = StandardEntityURN.from_id(entity_proto.urnID)
+            entity = StandardEntityFactory.make_entity(
+                _urn, entity_proto.entityID)
             properties = {}
             for property_proto in entity_proto.properties:
-                properties[StandardPropertyURN.from_id(property_proto.urnID)]= property_proto.fields
-            
+                properties[StandardPropertyURN.from_id(
+                    property_proto.urnID)] = property_proto.fields
+
             entity.set_entity(properties)
             self.world.append(entity)
 
-            
         for key, value in kaConnectok.config.data.items():
             self.config.set_value(key, value)
-        
-    
+
     def write(self):
         pass
+
 
 class KAConnectError(Message):
 
@@ -123,6 +125,7 @@ class KAConnectError(Message):
 
     def read(self):
         pass
+
     def write(self):
         pass
 
@@ -149,11 +152,10 @@ class KASense(Message):
     def get_hearing(self):
         return self.hear
 
-    
     def read(self):
         kaSenseProto = protoBuf.KASenseProto()
         kaSenseProto.ParseFromString(self.data)
-        
+
         self.agent_id = kaSenseProto.agentID
         self.time = kaSenseProto.time
 
@@ -166,16 +168,15 @@ class KASense(Message):
             property_map_proto = changes_map.get(entity_id_proto)
             for property_urn in property_map_proto.property.keys():
                 property = StandardPropertyFactory.make_property(property_urn)
-                if property != None:
+                if property is not None:
                     fields = property_map_proto.property.get(property_urn)
                     property.set_fields(fields)
 
                     self.change_set.add_change(entity_id, urn, property)
 
-
         for _entity_id in kaSenseProto.changes.deletes:
             self.change_set.entity_deleted(EntityID(_entity_id))
-        
+
         for command_proto in kaSenseProto.hears:
             _urn = command_proto.urn
             _fields = command_proto.fields
@@ -187,9 +188,6 @@ class KASense(Message):
 
     def write(self):
         pass
-
-    
-    
 
 
 class AKCommand(Message):
@@ -208,7 +206,7 @@ class Shutdown(Message):
     def __init__(self, data) -> None:
         super().__init__()
         self.urn = ControlMessageURN.SHUTDOWN.value
-    
+
     def read(self):
         pass
 

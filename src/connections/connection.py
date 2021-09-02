@@ -1,12 +1,12 @@
 import socket
 import threading
-from encoding_tool import read_int32_from_byte_arr, read_str, write_str
-from encoding_tool import write_int32
-from encoding_tool import read_msg
-from encoding_tool import write_msg
-from data_stream import OutputStream
-from data_stream import InputStream
-#import util
+from connections.encoding_tool import read_int32_from_byte_arr
+from connections.encoding_tool import write_str
+from connections.encoding_tool import write_int32
+from connections.encoding_tool import read_msg
+from connections.encoding_tool import write_msg
+from connections.data_stream import OutputStream
+from connections.data_stream import InputStream
 
 class Connection:
 
@@ -15,7 +15,6 @@ class Connection:
         self.agent = None
         self.buffer_size = 4096
         self.data_buffer = b''
-        
 
     def connect(self, address, port):
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -78,31 +77,26 @@ class Connection:
         urn = msg.get_urn()
         content = msg.write()
 
-
         out1 = OutputStream()
         write_str(urn, out1)
         d1 = out1.getvalue().encode()
 
         out1 = OutputStream()
         write_int32(len(content), out1)
-        d2 = out1.getvalue().encode() 
+        d2 = out1.getvalue().encode()
 
         out1 = OutputStream()
         write_int32(0, out1)
-        d3 = out1.getvalue().encode() 
-        
+        d3 = out1.getvalue().encode()
+
         data = d1 + d2 + content + d3
 
         out1 = OutputStream()
         write_int32(len(data), out1)
-        
+
         data = out1.getvalue().encode() + data
 
         self.send_bytes(data)
-
-        
-
-
 
     def send_bytes(self, byte_array):
         self.socket.sendall(byte_array)

@@ -1,5 +1,6 @@
-from Command import Command
-from entityID import EntityID
+from commands.Command import Command
+from worldmodel.entityID import EntityID
+
 
 class AKClear(Command):
 

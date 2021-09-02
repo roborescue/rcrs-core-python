@@ -1,11 +1,10 @@
 from entities.entity import Entity
+from properties.entityIDProperty import EntityIDProperty
+from properties.intArrayProperty import IntArrayProperty
+from properties.intProperty import IntProperty
+from entities.standardEntityURN import StandardEntityURN
+from properties.standardPropertyURN import StandardPropertyURN
 
-from property import EntityIDProperty
-from property import IntArrayProperty
-from property import IntProperty
-
-from standardEntityURN import StandardEntityURN
-from standardPropertyURN import StandardPropertyURN
 
 class Blockade(Entity):
     urn = StandardEntityURN.BLOCKADE.value

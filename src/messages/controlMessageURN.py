@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class ControlMessageURN(Enum):
     # Agent-Kernel connect.
     AK_CONNECT = "message:ak_connect"

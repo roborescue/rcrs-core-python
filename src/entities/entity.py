@@ -1,24 +1,23 @@
 
-from entityID import EntityID
+from worldmodel.entityID import EntityID
+
+
 class Entity:
     def __init__(self, _entity_id):
         self.entity_id = EntityID(_entity_id)
         self.properties = {}
-    
-    def add_entity_listener(self,l):
+
+    def add_entity_listener(self, l):
         pass
-    
-    def remove_entity_listener(self,l):
+
+    def remove_entity_listener(self, l):
         pass
-    
+
     def get_id(self):
         return self.entity_id
-    
+
     def get_properties(self):
         return self.properties
-    
-    def get_property(self, _property_urn):
-        return self.properties[_property_urn]
 
     def get_location(self, world_model):
         pass
@@ -27,8 +26,6 @@ class Entity:
         for property in _properties:
             self.properties[property.get_urn()] = property
 
-    
-    
     def copy(self):
         pass
 
@@ -41,5 +38,5 @@ class Entity:
     def set_entity(self, properties):
         pass
 
-    def get_property(self, property_urn ):
-        return self.properties.get( property_urn )
+    def get_property(self, property_urn):
+        return self.properties.get(property_urn)

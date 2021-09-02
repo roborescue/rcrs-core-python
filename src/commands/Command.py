@@ -1,4 +1,4 @@
-from entityID import EntityID
+from worldmodel.entityID import EntityID
 
 class Command:
     def __init__(self) -> None:

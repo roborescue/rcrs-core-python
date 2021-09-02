@@ -1,9 +1,9 @@
-from connection import Connection
-from message import AKAcknowledge
-from message import KAConnectOK
-from message import KAConnectError
-from message import KASense
-from message import AKConnect
+from connections.connection import Connection
+from messages.message import AKAcknowledge
+from messages.message import KAConnectOK
+from messages.message import KAConnectError
+from messages.message import KASense
+from messages.message import AKConnect
 
 
 class Agent:
@@ -22,9 +22,12 @@ class Agent:
     def get_name(self):
         return self.name
 
+    def get_id(self):
+        return self.agent_id
+
     def connect(self):
         self.connection = Connection()
-        self.connection.agent = self
+        self.connection.set_agent(self)
         self.connection.connect('127.0.0.1', 7000)
         akconnect_msg = AKConnect()
         akconnect_msg.set_agent(self)
@@ -60,32 +63,7 @@ class Agent:
     def process_sense(self, msg):
         self.think(msg.get_time(), msg.get_change_set(), msg.get_hearing())
 
-    def think(self, timestep, change_set, heard):
-        print('think method. timestep = ', timestep , self.agent_id)
+    
 
 
-class PoliceForceAgent(Agent):
-    def __init__(self):
-        Agent.__init__(self)
-        self.name = 'rescue_agent.PoliceForceAgent'
 
-    def get_requested_entities(self):
-        return 'entity:policeforce'
-
-
-class FireBrigadeAgent(Agent):
-    def __init__(self):
-        Agent.__init__(self)
-        self.name = 'rescue_agent.FireBrigadeAgent'
-
-    def get_requested_entities(self):
-        return 'entity:firebrigade'
-
-
-class AmbulanceTeamAgent(Agent):
-    def __init__(self):
-        Agent.__init__(self)
-        self.name = 'rescue_agent.AmbulanceTeamAgent'
-
-    def get_requested_entities(self):
-        return 'entity:ambulanceteam'

@@ -21,11 +21,9 @@ class Edge():
 
     def is_passable(self):
         return self.neighbour != None
-    
+
     def get_neighbour(self):
         return self.neighbour
 
-
     def to_string(self):
-        return "Edge from " + self.start + " to " + self.end + " , neighbour= " + self.neighbour 
-    
+        return "Edge from " + self.start + " to " + self.end + " , neighbour= " + self.neighbour

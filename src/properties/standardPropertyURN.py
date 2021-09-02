@@ -1,5 +1,6 @@
 from enum import Enum
-from constants import PROPERTY_URN_PREFIX
+from constants.constants import PROPERTY_URN_PREFIX
+
 
 class StandardPropertyURN(Enum):
 
@@ -7,7 +8,7 @@ class StandardPropertyURN(Enum):
     LONGITUDE = PROPERTY_URN_PREFIX + "longitude"
     LATITUDE = PROPERTY_URN_PREFIX + "latitude"
     WIND_FORCE = PROPERTY_URN_PREFIX + "windforce"
-    WIND_DIRECTION=  PROPERTY_URN_PREFIX + "winddirection"
+    WIND_DIRECTION = PROPERTY_URN_PREFIX + "winddirection"
 
     X = PROPERTY_URN_PREFIX + "x"
     Y = PROPERTY_URN_PREFIX + "y"
@@ -41,10 +42,9 @@ class StandardPropertyURN(Enum):
 
     CAPACITY = PROPERTY_URN_PREFIX + "capacity"
     BEDCAPACITY = PROPERTY_URN_PREFIX + "bedCapacity"
-    OCCUPIEDBEDS= PROPERTY_URN_PREFIX + "occupiedBeds"
+    OCCUPIEDBEDS = PROPERTY_URN_PREFIX + "occupiedBeds"
     REFILLCAPACITY = PROPERTY_URN_PREFIX + "refillCapacity"
     WAITINGLISTSIZE = PROPERTY_URN_PREFIX + "waitingListSize"
-
 
     def from_id(index):
         return list(StandardPropertyURN)[index].value

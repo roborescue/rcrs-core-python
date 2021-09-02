@@ -1,5 +1,5 @@
 from entities.policeForce import PoliceForceEntity
-from standardEntityURN import StandardEntityURN
+from entities.standardEntityURN import StandardEntityURN
 from entities.building import Building
 
 
@@ -12,6 +12,6 @@ class PoliceOfficeEntity(Building):
 
     def copy_impl(self):
         return PoliceOfficeEntity(self.get_id())
-    
-    def get_entity_name():
+
+    def get_entity_name(self):
         return "Police office"

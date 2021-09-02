@@ -1,4 +1,4 @@
-from standardEntityURN import StandardEntityURN
+from entities.standardEntityURN import StandardEntityURN
 from entities.building import Building
 from entities.road import Road
 from entities.blockade import Blockade
@@ -12,7 +12,6 @@ from entities.fireStation import FireStationEntity
 from entities.civilian import Civilian
 from entities.hydrant import Hydrant
 from entities.gassStation import GasStation
-
 
 
 class StandardEntityFactory:
@@ -29,7 +28,6 @@ class StandardEntityFactory:
             return Road(id)
         elif urn == StandardEntityURN.BLOCKADE.value:
             return Blockade(id)
-
         elif urn == StandardEntityURN.POLICE_FORCE.value:
             return PoliceForceEntity(id)
         elif urn == StandardEntityURN.POLICE_OFFICE.value:
@@ -44,12 +42,9 @@ class StandardEntityFactory:
             return FireStationEntity(id)
         elif urn == StandardEntityURN.CIVILIAN.value:
             return Civilian(id)
-        
-        
         elif urn == StandardEntityURN.HYDRANT.value:
             return Hydrant(id)
         elif urn == StandardEntityURN.GAS_STATION.value:
             return GasStation(id)
 
         return None
-

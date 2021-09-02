@@ -1,48 +1,17 @@
-from standardPropertyURN import StandardPropertyURN
-from property import IntProperty
-from property import IntArrayProperty
-from property import BooleanProperty
-from property import EdgeListProperty
-from property import EntityIDListProperty
-from property import EntityIDProperty
+from properties.standardPropertyURN import StandardPropertyURN
+from properties.intProperty import IntProperty
+from properties.intArrayProperty import IntArrayProperty
+from properties.booleanProperty import BooleanProperty
+from properties.edgeListProperty import EdgeListProperty
+from properties.entityIDListProperty import EntityIDListProperty
+from properties.entityIDProperty import EntityIDProperty
+
 
 class StandardPropertyFactory:
     def __init__(self) -> None:
         pass
 
     def make_property(urn):
-        # return {
-        #     StandardPropertyURN.START_TIME.value: IntProperty(urn),
-        #     StandardPropertyURN.LONGITUDE.value: IntProperty(urn),
-        #     StandardPropertyURN.LATITUDE.value: IntProperty(urn),
-        #     StandardPropertyURN.WIND_FORCE.value: IntProperty(urn),
-        #     StandardPropertyURN.WIND_DIRECTION.value: IntProperty(urn),
-        #     StandardPropertyURN.X.value: IntProperty(urn),
-        #     StandardPropertyURN.Y.value: IntProperty(urn),
-        #     StandardPropertyURN.FLOORS.value: IntProperty(urn),
-        #     StandardPropertyURN.BUILDING_ATTRIBUTES.value: IntProperty(urn),
-        #     StandardPropertyURN.FIERYNESS.value: IntProperty(urn),
-        #     StandardPropertyURN.BROKENNESS.value: IntProperty(urn),
-        #     StandardPropertyURN.BUILDING_CODE.value: IntProperty(urn),
-        #     StandardPropertyURN.BUILDING_AREA_GROUND.value: IntProperty(urn),
-        #     StandardPropertyURN.BUILDING_AREA_TOTAL.value: IntProperty(urn),
-        #     StandardPropertyURN.DIRECTION.value: IntProperty(urn),
-        #     StandardPropertyURN.STAMINA.value: IntProperty(urn),
-        #     StandardPropertyURN.HP.value: IntProperty(urn),
-        #     StandardPropertyURN.DAMAGE.value: IntProperty(urn),
-        #     StandardPropertyURN.BURIEDNESS.value: IntProperty(urn),
-        #     StandardPropertyURN.WATER_QUANTITY.value: IntProperty(urn),
-        #     StandardPropertyURN.TEMPERATURE.value: IntProperty(urn),
-        #     StandardPropertyURN.IMPORTANCE.value: IntProperty(urn),
-        #     StandardPropertyURN.TRAVEL_DISTANCE.value: IntProperty(urn),
-        #     StandardPropertyURN.REPAIR_COST.value: IntProperty(urn),
-        #     StandardPropertyURN.APEXES.value: IntArrayProperty(urn),
-        #     StandardPropertyURN.POSITION_HISTORY.value: IntArrayProperty(urn),
-        #     StandardPropertyURN.IGNITION.value: BooleanProperty(urn),
-        #     StandardPropertyURN.POSITION.value: EntityIDProperty(urn),
-        #     StandardPropertyURN.BLOCKADES.value: EntityIDListProperty(urn),
-        #     StandardPropertyURN.EDGES.value: EdgeListProperty(urn)
-        # }.get(urn, None)
 
         if urn == StandardPropertyURN.START_TIME.value:
             return IntProperty(urn)

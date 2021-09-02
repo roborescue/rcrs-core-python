@@ -1,5 +1,5 @@
 from Command import Command
-from entityID import EntityID
+from worldmodel.entityID import EntityID
 
 class AKSpeak(Command):
 
