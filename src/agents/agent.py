@@ -1,23 +1,25 @@
+import threading
 from connection.connection import Connection
 from messages.AKAcknowledge import AKAcknowledge
 from messages.KAConnectOK import KAConnectOK
 from messages.KAConnectError import KAConnectError
 from messages.KASense import KASense
 from messages.AKConnect import AKConnect
+import queue
 
 
 class Agent:
 
     def __init__(self):
         print('agent created .... ')
-        self.connection = None
+        self.connection_send_msg = None
         self.name = ''
         self.connect_request_id = None
         self.world_model = None
         self.config = None
         self.random = None
         self.agent_id = None
-        self.connect()
+        self.queue = queue.Queue()
 
     def get_name(self):
         return self.name
@@ -25,14 +27,18 @@ class Agent:
     def get_id(self):
         return self.agent_id
 
-    def connect(self):
-        self.connection = Connection()
-        self.connection.set_agent(self)
-        self.connection.connect('127.0.0.1', 7000)
+    def set_connection_send_func(self, send_func):
+        self.connection_send_msg = send_func
+
+    def start_up(self, request_id):
+        self.connect_request_id = request_id
         akconnect_msg = AKConnect()
         akconnect_msg.set_agent(self)
         akconnect_msg.prepare_message()
-        self.connection.send_msg(akconnect_msg)
+        self.connection_send_msg(akconnect_msg)
+
+    def test_sucsses(self):
+        return self.queue.get()
 
     def message_received(self, msg):
         if isinstance(msg, KAConnectOK):
@@ -43,7 +49,8 @@ class Agent:
             self.process_sense(msg)
 
     def handle_connect_error(self, msg):
-        pass
+        print(self.get_name(),  "KAConnectError : ", msg.reason)
+        self.queue.put(False)
 
     def handle_connect_ok(self, msg):
         print('handle_connect_ok(msg): ', msg.request_id, msg.agent_id)
@@ -58,12 +65,9 @@ class Agent:
         ack_msg.set_agent_id(msg.agent_id)
         ack_msg.set_request_id(msg.request_id)
         ack_msg.prepare_message()
-        self.connection.send_msg(ack_msg)
+        self.connection_send_msg(ack_msg)
+        
+        self.queue.put(True)
 
     def process_sense(self, msg):
         self.think(msg.get_time(), msg.get_change_set(), msg.get_hearing())
-
-    
-
-
-

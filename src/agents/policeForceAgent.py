@@ -10,5 +10,4 @@ class PoliceForceAgent(Agent):
         return 'entity:policeforce'
 
     def think(self, timestep, change_set, heard):
-        print(
-            f'PoliceForceAgent({self.get_id()}): think method. timestep = ', timestep)
+        print(f'PoliceForceAgent({self.get_id()}): think method. timestep = ', timestep)

@@ -1,5 +1,6 @@
 import socket
 import threading
+import queue
 from connection.encoding_tool import read_int32_from_byte_arr
 from connection.encoding_tool import write_str
 from connection.encoding_tool import write_int32
@@ -8,18 +9,21 @@ from connection.encoding_tool import write_msg
 from connection.data_stream import OutputStream
 from connection.data_stream import InputStream
 
+
 class Connection:
 
-    def __init__(self):
+    def __init__(self, host, port):
         self.socket = None
         self.agent = None
         self.buffer_size = 4096
         self.data_buffer = b''
+        self.host = host
+        self.port = port
 
-    def connect(self, address, port):
+    def connect(self):
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         try:
-            self.socket.connect((address, port))
+            self.socket.connect((self.host, self.port))
         except socket.error as exception:
             print(str(exception))
             self.socket.close()
@@ -29,14 +33,14 @@ class Connection:
         read_thread.daemon = True
         read_thread.start()
 
-    def set_agent(self, _agent):
-        self.agent = _agent
+    def set_message_received_func(self, _agent_function):
+        self.agent_message_received_func = _agent_function
 
     def msg_bytes_received(self, byte_array):
         input_stream = InputStream(byte_array)
         msg = read_msg(input_stream)
         if msg is not None:
-            self.agent.message_received(msg)
+            self.agent_message_received_func(msg)
 
     def read_loop(self):
         while True:
