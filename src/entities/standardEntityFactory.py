@@ -19,7 +19,6 @@ class StandardEntityFactory:
         pass
 
     def make_entity(urn, id):
-
         if urn == StandardEntityURN.BUILDING.value:
             return Building(id)
         elif urn == StandardEntityURN.REFUGE.value:

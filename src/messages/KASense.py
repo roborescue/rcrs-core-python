@@ -32,7 +32,6 @@ class KASense(Message):
     def read(self):
         kaSenseProto = protoBuf.KASenseProto()
         kaSenseProto.ParseFromString(self.data)
-
         self.agent_id = kaSenseProto.agentID
         self.time = kaSenseProto.time
 

@@ -80,25 +80,31 @@ class Connection:
 
         urn = msg.get_urn()
         content = msg.write()
-
+        print('len content = ', len(content))
+        
         out1 = OutputStream()
         write_str(urn, out1)
         d1 = out1.getvalue().encode()
 
+        print(d1)
+
         out1 = OutputStream()
         write_int32(len(content), out1)
         d2 = out1.getvalue().encode()
+
 
         out1 = OutputStream()
         write_int32(0, out1)
         d3 = out1.getvalue().encode()
 
         data = d1 + d2 + content + d3
-
         out1 = OutputStream()
         write_int32(len(data), out1)
 
         data = out1.getvalue().encode() + data
+
+        print('len data = ', len(data))
+        print('data = ', data)
 
         self.send_bytes(data)
 

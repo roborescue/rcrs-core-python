@@ -10,4 +10,5 @@ class FireStationAgent(Agent):
         return 'entity:firestation'
 
     def think(self, timestep, change_set, heard):
-        print(f'FireStationAgent({self.get_id()}): think method. timestep = ', timestep)
+        #print(f'{self.get_name()}({self.get_id()}): think method. timestep = ', timestep, f'world model size = {len(self.world_model.get_entities())}' )
+        pass

@@ -27,6 +27,16 @@ class EntityIDListProperty(Property):
         new_entity_id_list_prop = EntityIDListProperty(self.urn)
         new_entity_id_list_prop.value = []
         for entity_id in self.value:
-            new_entity_id_list_prop.value.append(EntityID(entity_id.get_value()))
+            new_entity_id_list_prop.value.append(
+                EntityID(entity_id.get_value()))
         return new_entity_id_list_prop
 
+    def take_value(self, _property):
+        if isinstance(_property, EntityIDListProperty):
+            i = EntityIDListProperty(_property)
+            if i.is_defined():
+                self.set_value(i.get_value())
+            else:
+                self.set_undefined()
+        else:
+            raise Exception("cannot take value from ", _property)

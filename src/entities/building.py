@@ -10,7 +10,7 @@ class Building(Area):
     urn = StandardEntityURN.BUILDING.value
 
     def __init__(self, entity_id):
-        Area.__init__(self, entity_id)
+        super().__init__(entity_id)
         self.floors = IntProperty(StandardPropertyURN.FLOORS.value)
         self.ignition = IntProperty(StandardPropertyURN.IGNITION.value)
         self.fieryness = IntProperty(StandardPropertyURN.FIERYNESS.value)

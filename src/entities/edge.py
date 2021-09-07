@@ -5,7 +5,7 @@ class Edge():
         self.start = [start_x, start_y]
         self.end = [end_x, end_y]
         self.line = [[start_x, start_y], [end_x, end_y]]
-        self.neighbour = _neighbour
+        self.neighbour = _neighbour if _neighbour != -1 else None
 
     def get_start_x(self):
         return self.start[0]

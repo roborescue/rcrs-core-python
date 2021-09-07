@@ -19,9 +19,11 @@ class EdgeListProperty(Property):
         for i in range(len(edges)):
 
             if edges[i][4] == -1:
+                
                 edge = Edge(edges[i][0], edges[i][1],
                             edges[i][2], edges[i][3], None)
             else:
+                print('edges[i][4] = ', edges[i][4])
                 edge = Edge(edges[i][0], edges[i][1], edges[i]
                             [2], edges[i][3], EntityID(edges[i][4]))
 

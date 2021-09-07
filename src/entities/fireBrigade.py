@@ -10,7 +10,8 @@ class FireBrigadeEntity(Human):
 
     def __init__(self, entity_id):
         super().__init__(entity_id)
-        self.water = IntProperty(StandardPropertyURN.WATER_QUANTITY)
+        self.water = IntProperty(StandardPropertyURN.WATER_QUANTITY.value)
+        
         self.register_properties([self.water])
 
     def set_entity(self, properties):
