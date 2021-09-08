@@ -5,16 +5,15 @@ from commands. standardCommandURN import StandardCommandURN
 
 class AKMove(Command):
 
-    # def __init__(self, agent_id, time, path, destinationX, destinationY) -> None:
-    def __init__(self, agent_id, time, path) -> None:
+    def __init__(self, agent_id, time, path, destinationX=-1, destinationY=-1) -> None:
         super().__init__()
         self.urn = StandardCommandURN.AK_MOVE.value
 
         self.agent_id = agent_id
         self.path = path
-        self.x = -1 #destinationX
-        self.y = -1 #destinationY
         self.time = time
+        self.x = destinationX
+        self.y = destinationY
 
     def set_fields(self, fields):
         self.agentId = EntityID(fields.get('agent_id'))

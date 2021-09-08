@@ -28,6 +28,7 @@ class AKCommand(Message):
                 #print(f, value)
                 if isinstance(value, int):
                     commandProto.fields[f].valueInt = int(value)
+                    commandProto.fields[f].valueInt = int(value)
 
                 elif isinstance(value, bool):
                     commandProto.fields[f].valueBool = bool(value)
@@ -39,26 +40,7 @@ class AKCommand(Message):
                     commandProto.fields[f].listByte = value
 
                 elif isinstance(value, list):
-                    intListProto = protoBuf.IntListProto()
-                    #intListProto.values.extend(value)
-                    
-                    # arr = [279, 266]
-                    # for v in arr:
-                    #     intListProto.addInt(v)
-                    #print(intListProto)
-
-                    path = []
-                    path.append(279)
-                    path.append(266)
-                    # path.append(266)
-
-                    # for i in range(len(value)):
-                    #     path.append(value[i])
-
-                    #commandProto.fields[f].listInt.extend(path)
-                    commandProto.fields[f].listInt.values.extend(path)
-                    # commandProto.fields[f].listInt.values.append(int(266))
-                    # commandProto.fields[f].listInt.values.append(int(266))
+                    commandProto.fields[f].listInt.values.extend(value)
 
                 elif isinstance(value, [[]]):
                     intMatrixProto = protoBuf.IntMatrixProto()
@@ -72,7 +54,7 @@ class AKCommand(Message):
 
             aKCommand.commands.append(commandProto)
 
-        print(aKCommand)
+        #print(aKCommand)
 
-        print(aKCommand.SerializeToString())    
+        #print(aKCommand.SerializeToString())    
         return aKCommand.SerializeToString()

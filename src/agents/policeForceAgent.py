@@ -17,9 +17,8 @@ class PoliceForceAgent(Agent):
         print(f'{self.get_name()}({self.get_id()}): think method. timestep = ', timestep)
         # if timestep > 1:
         #     return
-        #path = self.random_walk()
-        p11 = [] # [279, 266]
-        cmd = AKMove(self.get_id(), timestep, p11)
+        path = self.random_walk()
+        cmd = AKMove(self.get_id(), timestep, path)
 
         
         #target = self.world_model.get_entity(self.get_id()).get_position()

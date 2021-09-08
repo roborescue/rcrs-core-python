@@ -85,13 +85,13 @@ class Agent:
         # calculate 10 step path
         path = []
         start_pos = EntityID(self.get_position())
-        for i in range(10):
+        for i in range(50):
             edges = self.world_model.get_entity(start_pos).get_edges()
             neighbors = []
             for edge in edges:
                 if edge.get_neighbour() is not None:
                     neighbors.append(edge.get_neighbour())
-            next = neighbors[0]#random.choice(neighbors)
+            next = random.choice(neighbors)
             path.append(next)
             start_pos = EntityID(next)
 
