@@ -14,3 +14,13 @@ class BooleanProperty(Property):
         new_boolean_prop = BooleanProperty(self.urn)
         new_boolean_prop.value = self.value
         return new_boolean_prop
+
+    def take_value(self, _property):
+        if isinstance(_property, BooleanProperty):
+            b = BooleanProperty(_property)
+            if b.is_defined():
+                self.set_value(b.get_value())
+            else:
+                self.set_undefined()
+        else:
+            raise Exception("cannot take value from ", _property)

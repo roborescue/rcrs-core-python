@@ -10,7 +10,7 @@ class Blockade(Entity):
     urn = StandardEntityURN.BLOCKADE.value
 
     def __init__(self, entity_id):
-        Entity.__init__(self, entity_id)
+        super().__init__(entity_id)
         self.x = IntProperty(StandardPropertyURN.X.value)
         self.y = IntProperty(StandardPropertyURN.Y.value)
         self.position = EntityIDProperty(StandardPropertyURN.POSITION.value)

@@ -1,6 +1,5 @@
 from messages.message import Message
 import messages.ControlMessageProto_pb2 as protoBuf
-import random
 from messages.controlMessageURN import ControlMessageURN
 
 

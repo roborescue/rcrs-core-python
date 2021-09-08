@@ -33,7 +33,7 @@ class Entity:
         return self.urn
 
     def __hash__(self):
-        return self.entity_id.get_value()
+        return int(self.entity_id.get_value())
 
     def set_entity(self, properties):
         pass

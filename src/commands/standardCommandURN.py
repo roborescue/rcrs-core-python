@@ -1,5 +1,5 @@
 from enum import Enum
-from constants import COMMAND_URN_PREFIX
+from constants.constants import COMMAND_URN_PREFIX
 
 class StandardCommandURN(Enum):
     # Rest command. 

@@ -9,7 +9,7 @@ class EntityID:
         return False
 
     def __hash__(self):
-        return self.id
+        return int(self.id)
     
     def get_value(self):
         return self.id

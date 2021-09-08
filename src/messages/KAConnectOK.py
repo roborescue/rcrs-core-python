@@ -21,7 +21,7 @@ class KAConnectOK(Message):
         kaConnectok.ParseFromString(self.data)
         self.request_id = kaConnectok.requestID
         self.agent_id = kaConnectok.agentID
-
+        print(kaConnectok)
         for entity_proto in kaConnectok.entities:
 
             _urn = StandardEntityURN.from_id(entity_proto.urnID)

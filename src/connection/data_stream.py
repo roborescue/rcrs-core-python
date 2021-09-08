@@ -3,15 +3,13 @@ class InputStream:
     def __init__(self, data) -> None:
         self.data = data
         self.index = 0
-    
+
     def read(self, count):
         data_list = bytearray()
         for i in range(count):
             data_list.append(self.data[self.index + i])
         self.index += count
         return data_list
-
-
 
 
 class OutputStream:

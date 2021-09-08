@@ -3,7 +3,7 @@ from messages.controlMessageFactory import ControlMessageFactory
 
 
 def write_int32(value, output_stream):
-    output_stream.write(chr(((value >> 24) & 0xFF)))
+    output_stream.write(chr((value >> 24) & 0xFF))
     output_stream.write(chr((value >> 16) & 0xFF))
     output_stream.write(chr((value >> 8) & 0xFF))
     output_stream.write(chr((value & 0xFF)))
@@ -11,7 +11,7 @@ def write_int32(value, output_stream):
 
 def read_int32_from_byte_arr(byte_array):
     value = int(((byte_array[0]) << 24) + ((byte_array[1])
-                << 16) + ((byte_array[2]) << 8) + (byte_array[3]))
+                                           << 16) + ((byte_array[2]) << 8) + (byte_array[3]))
     return value
 
 
