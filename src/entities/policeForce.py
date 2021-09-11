@@ -13,3 +13,6 @@ class PoliceForceEntity(Human):
 
     def get_entity_name(self):
         return "Police force"
+
+    def set_entity(self, properties):
+        super().set_entity(properties)

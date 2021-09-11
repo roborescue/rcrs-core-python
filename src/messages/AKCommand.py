@@ -25,7 +25,6 @@ class AKCommand(Message):
 
             for f in command.get_fields().keys():
                 value = command.get_fields().get(f)
-                #print(f, value)
                 if isinstance(value, int):
                     commandProto.fields[f].valueInt = int(value)
                     commandProto.fields[f].valueInt = int(value)
@@ -54,7 +53,4 @@ class AKCommand(Message):
 
             aKCommand.commands.append(commandProto)
 
-        #print(aKCommand)
-
-        #print(aKCommand.SerializeToString())    
         return aKCommand.SerializeToString()

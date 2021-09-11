@@ -23,7 +23,6 @@ class EdgeListProperty(Property):
                 edge = Edge(edges[i][0], edges[i][1],
                             edges[i][2], edges[i][3], None)
             else:
-                print('edges[i][4] = ', edges[i][4])
                 edge = Edge(edges[i][0], edges[i][1], edges[i]
                             [2], edges[i][3], EntityID(edges[i][4]))
 

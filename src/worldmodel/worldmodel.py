@@ -1,3 +1,4 @@
+from entities.entity import Entity
 from entities.standardEntityFactory import StandardEntityFactory
 from entities.human import Human
 from entities.area import Area
@@ -29,7 +30,7 @@ class WorldModel:
             self.unindexedـetities[entity.get_id()] = entity
         print(len(entities), ' entities added to world_model')
 
-    def get_entity(self, entity_id):
+    def get_entity(self, entity_id) -> Entity:
         if entity_id in self.unindexedـetities:
             return self.unindexedـetities.get(entity_id)
     

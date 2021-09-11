@@ -1,21 +1,17 @@
 from properties.standardPropertyURN import StandardPropertyURN
-from entities.standardEntityURN import StandardEntityURN
 from entities.entity import Entity
 from properties.intProperty import IntProperty
 from properties.entityIDProperty import EntityIDProperty
 from properties.intArrayProperty import IntArrayProperty
+from worldmodel.worldmodel import WorldModel
 
 
 class Human(Entity):
     def __init__(self, entity_id):
-        Entity.__init__(self, entity_id)
-        self.x = IntProperty(StandardPropertyURN.X.value)
-        self.y = IntProperty(StandardPropertyURN.Y.value)
-        self.travel_distance = IntProperty(
-            StandardPropertyURN.TRAVEL_DISTANCE.value)
+        super().__init__(entity_id)
+        self.travel_distance = IntProperty(StandardPropertyURN.TRAVEL_DISTANCE.value)
         self.position = EntityIDProperty(StandardPropertyURN.POSITION.value)
-        self.position_history = IntArrayProperty(
-            StandardPropertyURN.POSITION_HISTORY.value)
+        self.position_history = IntArrayProperty(StandardPropertyURN.POSITION_HISTORY.value)
         self.direction = IntProperty(StandardPropertyURN.DIRECTION.value)
         self.stamina = IntProperty(StandardPropertyURN.STAMINA.value)
         self.hp = IntProperty(StandardPropertyURN.HP.value)
@@ -23,11 +19,12 @@ class Human(Entity):
         self.buriedness = IntProperty(StandardPropertyURN.BURIEDNESS.value)
 
         self.register_properties(
-            [self.x, self.y, self.travel_distance, self.position, self.position_history])
+            [self.travel_distance, self.position, self.position_history])
         self.register_properties(
             [self.direction, self.stamina, self.hp, self.damage, self.buriedness])
 
-    def get_location(self, world_model):
+    #TODO
+    def get_location(self, world_model: WorldModel):
         if self.x.is_defined() and self.y.is_defined():
             return self.x.get_value(), self.y.get_value()
         if self.position.is_defined():
@@ -35,20 +32,12 @@ class Human(Entity):
             return pos_entity.get_location(world_model)
         return None, None
 
-    def __str__(self):
-        return str(self.position.get_value())
-
-    def set_entity(self, properties):
+    def set_entity(self, properties: dict):
+        super().set_entity(properties)
         for key, values in properties.items():
             _type = StandardPropertyURN.from_string(key)
 
-            if _type == StandardPropertyURN.X.name:
-                self.x.set_value(values[0].valueInt)
-
-            elif _type == StandardPropertyURN.Y.name:
-                self.y.set_value(values[0].valueInt)
-
-            elif _type == StandardPropertyURN.POSITION.name:
+            if _type == StandardPropertyURN.POSITION.name:
                 self.position.set_value(values[0].valueInt)
 
             elif _type == StandardPropertyURN.POSITION_HISTORY.name:
@@ -105,10 +94,10 @@ class Human(Entity):
     def get_x_property(self):
         return self.x
 
-    def get_x(self):
+    def get_x(self) -> int:
         return self.x.get_value()
 
-    def set_x(self, value):
+    def set_x(self, value) -> None:
         self.x.set_value(value)
 
     def is_x_defined(self):

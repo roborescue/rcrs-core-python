@@ -13,3 +13,6 @@ class Civilian(Human):
 
     def get_entity_name(self):
         return "Civilian"
+
+    def set_entity(self, properties):
+        super().set_entity(properties)

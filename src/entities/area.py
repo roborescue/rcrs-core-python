@@ -1,34 +1,48 @@
 from entities.blockade import Blockade
-from os import urandom
 from entities.entity import Entity
-from properties.intProperty import IntProperty
 from properties.edgeListProperty import EdgeListProperty
 from properties.entityIDListProperty import EntityIDListProperty
 from properties.standardPropertyURN import StandardPropertyURN
+from entities.edge import Edge
 
 
 class Area(Entity):
     def __init__(self, entity_id):
         super().__init__(entity_id)
-        self.x = IntProperty(StandardPropertyURN.X.value)
-        self.y = IntProperty(StandardPropertyURN.Y.value)
         self.edges = EdgeListProperty(StandardPropertyURN.EDGES.value)
         self.blockades = EntityIDListProperty(
             StandardPropertyURN.BLOCKADES.value)
-        self.apexes = None
+
+        #self.apexes = None
         self.neighbours = None
         self.shape = None
 
-        self.register_properties([self.x, self.y, self.edges, self.blockades])
+        self.register_properties([self.edges, self.blockades])
 
-    def get_apexes(self):
-        if self.apexes is None:
-            self.apexes = []
-            for edge in self.get_edges():
-                self.apexes.append(edge.get_start_x())
-                self.apexes.append(edge.get_start_y())
+    def set_entity(self, properties):
+        super().set_entity(properties)
+        for key, values in properties.items():
+            _type = StandardPropertyURN.from_string(key)
 
-        return self.apexes
+            if _type == StandardPropertyURN.EDGES.name:
+                egdes_list = []
+                for edges in values[0].matrixInt.values:
+                    edge = Edge(
+                        edges.values[0], edges.values[1], edges.values[2], edges.values[3], edges.values[4])
+                    egdes_list.append(edge)
+                self.edges.set_value(egdes_list)
+
+            elif _type == StandardPropertyURN.BLOCKADES.name:
+                self.blockades.set_value(values[0].listInt.values)
+
+    # def get_apexes(self):
+    #     if self.apexes is None:
+    #         self.apexes = []
+    #         for edge in self.get_edges():
+    #             self.apexes.append(edge.get_start_x())
+    #             self.apexes.append(edge.get_start_y())
+
+    #     return self.apexes
 
     def get_location(self):
         if self.x.is_defined() and self.y.is_defined():
@@ -64,36 +78,6 @@ class Area(Entity):
             return self.blockades
         else:
             return super().get_property(urn)
-
-    def get_x_property(self):
-        return self.x
-
-    def get_x(self):
-        return self.x.get_value()
-
-    def set_x(self, value):
-        self.x.set_value(value)
-
-    def is_x_defined(self):
-        return self.x.is_defined()
-
-    def undefine_x(self):
-        self.x.set_undefined()
-
-    def get_y_property(self):
-        return self.y
-
-    def get_y(self):
-        return self.y.get_value()
-
-    def set_y(self, value):
-        self.y.set_value(value)
-
-    def is_y_defined(self):
-        return self.y.is_defined()
-
-    def undefine_y(self):
-        self.y.set_undefined()
 
     def get_edges_property(self):
         return self.edges

@@ -20,7 +20,7 @@ class Edge():
         return self.end[1]
 
     def is_passable(self):
-        return self.neighbour != None
+        return self.neighbour is not None
 
     def get_neighbour(self):
         return self.neighbour

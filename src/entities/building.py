@@ -25,11 +25,14 @@ class Building(Area):
             StandardPropertyURN.BUILDING_AREA_TOTAL.value)
         self.temperature = IntProperty(StandardPropertyURN.TEMPERATURE.value)
         self.importance = IntProperty(StandardPropertyURN.IMPORTANCE.value)
+        self.capacity = IntProperty(StandardPropertyURN.CAPACITY.value)
 
         self.register_properties(
-            [self.floors, self.ignition, self.fieryness, self.brokenness, self.building_code])
+            [self.floors, self.ignition, self.fieryness, self.brokenness])
         self.register_properties(
-            [self.attributes, self.ground_area, self.total_area, self.temperature, self.importance])
+            [self.attributes, self.ground_area, self.total_area])
+        self.register_properties(
+            [self.capacity, self.temperature, self.importance, self.building_code])
 
     def is__fiery(self):
         fieryness_value = self.fieryness.get_value()
@@ -39,27 +42,13 @@ class Building(Area):
         return False
 
     def set_entity(self, properties):
+
+        super().set_entity(properties)
+
         for key, values in properties.items():
             _type = StandardPropertyURN.from_string(key)
 
-            if _type == StandardPropertyURN.X.name:
-                self.x.set_value(values[0].valueInt)
-
-            elif _type == StandardPropertyURN.Y.name:
-                self.y.set_value(values[0].valueInt)
-
-            elif _type == StandardPropertyURN.EDGES.name:
-                egdes_list = []
-                for edges in values[0].matrixInt.values:
-                    edge = Edge(
-                        edges.values[0], edges.values[1], edges.values[2], edges.values[3], edges.values[4])
-                    egdes_list.append(edge)
-                self.edges.set_value(egdes_list)
-
-            elif _type == StandardPropertyURN.BLOCKADES.name:
-                print(values)
-
-            elif _type == StandardPropertyURN.FLOORS.name:
+            if _type == StandardPropertyURN.FLOORS.name:
                 self.floors.set_value(values[0].valueInt)
 
             elif _type == StandardPropertyURN.IGNITION.name:
@@ -167,7 +156,7 @@ class Building(Area):
         self.fieryness.set_undefined()
 
     def get_fieryness_enum(self):
-        pass  # todo
+        pass  # TODO
 
     def get_brokenness_property(self):
         return self.brokenness
@@ -200,7 +189,7 @@ class Building(Area):
         self.building_code.set_undefined()
 
     def get_building_code_enum(self):
-        pass  # todo
+        pass  # TODO
 
     def get_attributes_property(self):
         return self.attributes

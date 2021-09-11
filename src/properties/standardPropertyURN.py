@@ -55,9 +55,3 @@ class StandardPropertyURN(Enum):
                 return key.name
         return ''
 
-
-if __name__ == '__main__':
-    # for key in StandardPropertyURN:
-    #     print(key.name, key.value)
-
-    print(StandardPropertyURN.from_string('property:buildingareatotal'))

@@ -1,10 +1,14 @@
 import threading
+from commands.AKMove import AKMove
 from connection.connection import Connection
 from messages.AKAcknowledge import AKAcknowledge
+from messages.AKCommand import AKCommand
 from messages.KAConnectOK import KAConnectOK
 from messages.KAConnectError import KAConnectError
 from messages.KASense import KASense
 from messages.AKConnect import AKConnect
+from messages.AKCommand import AKCommand
+from commands.AKSubscribe import AKSubscribe
 import queue
 from worldmodel.entityID import EntityID
 from worldmodel.worldmodel import WorldModel
@@ -64,7 +68,7 @@ class Agent:
         self.world_model.add_entities(world)
 
         # configs received from server
-        config = msg.config
+        self.config = msg.config
 
         ack_msg = AKAcknowledge()
         ack_msg.set_agent_id(msg.agent_id)
@@ -96,3 +100,10 @@ class Agent:
             start_pos = EntityID(next)
 
         return path
+
+    def send_subscribe(self, time, channel):
+        akcommand = AKCommand()
+        akcommand.add_command(AKSubscribe(self.agent_id(), time, channel))
+
+        self.connection_send_msg(akcommand)
+

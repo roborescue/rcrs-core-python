@@ -1,5 +1,4 @@
 from properties.standardPropertyURN import StandardPropertyURN
-from entities.policeForce import PoliceForceEntity
 from entities.standardEntityURN import StandardEntityURN
 from entities.human import Human
 from properties.intProperty import IntProperty
@@ -11,15 +10,15 @@ class FireBrigadeEntity(Human):
     def __init__(self, entity_id):
         super().__init__(entity_id)
         self.water = IntProperty(StandardPropertyURN.WATER_QUANTITY.value)
-        
+
         self.register_properties([self.water])
 
     def set_entity(self, properties):
+        super().set_entity(properties)
         for key, values in properties.items():
             _type = StandardPropertyURN.from_string(key)
 
             if _type == StandardPropertyURN.WATER_QUANTITY.name:
-                super().set_entity(properties)
                 self.water.set_value(values[0].valueInt)
 
     def copy_impl(self):

@@ -1,7 +1,5 @@
 
 
-
-
 class ChangeSet:
     def __init__(self, _change_set=None):
 
@@ -11,9 +9,6 @@ class ChangeSet:
 
         if _change_set is not None:
             self.merge(_change_set)
-
-    # def add_change(self, entity, property):
-    #     self.add_change(entity.get_id(), entity.get_urn(), property)
 
     def add_change(self, entity_id, entity_urn, property):
 

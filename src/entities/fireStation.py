@@ -13,3 +13,6 @@ class FireStationEntity(Building):
 
     def get_entity_name(self):
         return "Fire Station"
+
+    def set_entity(self, properties):
+        super().set_entity(properties)

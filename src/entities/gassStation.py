@@ -13,3 +13,6 @@ class GasStation(Building):
 
     def get_entity_name(self):
         return "Gass Station"
+
+    def set_entity(self, properties):
+        super().set_entity(properties)

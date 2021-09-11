@@ -57,7 +57,7 @@ class KASense(Message):
             _urn = command_proto.urn
             _fields = command_proto.fields
 
-            print(_urn, _fields)
+            #print(_urn, _fields)
 
             command = Command()
             command.set_urn(_urn)
