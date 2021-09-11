@@ -51,7 +51,7 @@ class Area(Entity):
         return None, None
 
     def get_neighbours(self):
-        if self.neighbours == None:
+        if self.neighbours is None:
             neighbours = []
             for edge in self.edges.get_value():
                 if edge.is_passable():
