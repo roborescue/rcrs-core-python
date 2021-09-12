@@ -3,7 +3,6 @@ from entities.entity import Entity
 from properties.intProperty import IntProperty
 from properties.entityIDProperty import EntityIDProperty
 from properties.intArrayProperty import IntArrayProperty
-from worldmodel.worldmodel import WorldModel
 
 
 class Human(Entity):
@@ -24,7 +23,7 @@ class Human(Entity):
             [self.direction, self.stamina, self.hp, self.damage, self.buriedness])
 
     #TODO
-    def get_location(self, world_model: WorldModel):
+    def get_location(self, world_model):
         if self.x.is_defined() and self.y.is_defined():
             return self.x.get_value(), self.y.get_value()
         if self.position.is_defined():

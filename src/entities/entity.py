@@ -51,7 +51,7 @@ class Entity:
     def get_property(self, property_urn):
         return self.properties.get(property_urn)
     
-    def get_location(self) -> tuple(IntProperty, IntProperty):
+    def get_location(self):
         if self.x.is_defined() and self.y.is_defined():
             return self.x.get_value(), self.y.get_value()
         else:

@@ -11,7 +11,6 @@ import sys
 
 class WorldModel:
     def __init__(self) -> None:
-        #print(agent_name, ': world model created')
 
         self.index = index.Index()
 
@@ -33,7 +32,7 @@ class WorldModel:
     def get_entity(self, entity_id) -> Entity:
         if entity_id in self.unindexedـetities:
             return self.unindexedـetities.get(entity_id)
-    
+
         return None
 
     def add_entity(self, entity):

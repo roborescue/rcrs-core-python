@@ -21,7 +21,7 @@ class PoliceForceAgent(Agent):
             # Subscribe to channel 1
             self.send_subscribe(time, 1)
         
-        return
+        
 
         path = self.random_walk()
         cmd = AKMove(self.get_id(), time, path)
