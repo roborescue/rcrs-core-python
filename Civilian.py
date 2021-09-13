@@ -13,9 +13,11 @@ class Civilian(Agent):
     
     #override
     async def precompute(self):
+        print(f'precompute')
         pass
 
     #override
     async def think(self,time,changeSet,hear):
+        print(f'thinking time={time}')
         await self.sendAKRest(time)
         pass

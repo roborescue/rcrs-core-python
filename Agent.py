@@ -3,6 +3,8 @@ from WorldModel import WorldModel
 from abc import ABC, abstractmethod
 import asyncio
 import ControlMessageProto_pb2
+import sys
+import traceback
 class Agent(ABC):
     def __init__(self):
         pass
@@ -25,11 +27,18 @@ class Agent(ABC):
         pass
 
     async def connect(self,host,port):
-        reader, writer = await asyncio.open_connection(host, port)
-        self.reader=reader
-        self.writer=writer
-        await self.sendAKConnect(requestId=1)
-        await self.parseMessageFromKernel()
+        try:
+            reader, writer = await asyncio.open_connection(host, port)
+            self.reader=reader
+            self.writer=writer
+            await self.sendAKConnect(requestId=1)
+            await self.parseMessageFromKernel()
+        except IOError as e:
+            print(f'Exception occured in connecting: {e}')
+        
+
+        
+            
 
     async def messageReceived(self,msg):
         if(msg.urn=="urn:rescuecore2:messages.control:ka_sense"):
@@ -47,17 +56,25 @@ class Agent(ABC):
         if(self.id!=agentId):
             print(f'ERRROR this should not never happen agentid={self.id} but receive a sense for {agentId}')
         self.world.merge(changeSet)
-        await self.think(time,changeSet,hear)
-
+        try:
+            await self.think(time,changeSet,hear)
+        except Exception as e:
+            print(f'Exception occured in think: {e} \n {traceback.format_exc()}')
 
     async def handleKAConnectOk(self,msg):
+        
         entities=msg.components["Entities"].entityList.entities
         self.world=WorldModel()
         self.world.addEntities(entities)
         requestId=msg.components['Request ID'].intValue
         self.id=msg.components["Agent ID"].entityID
         self.config=msg.components["Agent config"].config
-        await self.precompute()
+        print(f'Connected successfully agent id={self.id}')
+        try:
+            await self.precompute()
+        except Exception as e:
+            print(f'Exception occured in Precompute: {e} \n {traceback.format_exc()}')
+
         await self.sendAKAcknowledge(requestId)
 
 
@@ -88,10 +105,13 @@ class Agent(ABC):
         await rcrs_encoding_utils.write_msg(msg,self.writer)
 
     async def parseMessageFromKernel(self):
+        try:
             while 1:
                 msg=await rcrs_encoding_utils.read_msg(self.reader)
-                print(msg)
+                # print(msg)
                 await self.messageReceived(msg)
+        except IOError:
+            print(f'Communication error: {e}')
 
     
 
