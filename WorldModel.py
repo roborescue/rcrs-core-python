@@ -37,3 +37,16 @@ class WorldModel:
 
         for entityID in changeSet.deletes :
             self.removeEntity(entityID)
+    
+    def get(self,entityID):
+        return self.entitiesById[entityID]
+
+    def getTypes(self, urns):
+        if not isinstance(urns, list):
+            urns=[urns]
+        out=[]
+        for urn in urns:
+            out+=self.entitiesByType[urn]
+        return out
+
+        

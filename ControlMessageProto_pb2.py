@@ -19,50 +19,10 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=b'\n\035rescuecore2.messages.protobufB\023ControlMessageProto',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x19\x43ontrolMessageProto.proto\"\x99\x01\n\x0cMessageProto\x12\x0b\n\x03urn\x18\x01 \x01(\t\x12\x31\n\ncomponents\x18\x02 \x03(\x0b\x32\x1d.MessageProto.ComponentsEntry\x1aI\n\x0f\x43omponentsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12%\n\x05value\x18\x02 \x01(\x0b\x32\x16.MessageComponentProto:\x02\x38\x01\"3\n\x10MessageListProto\x12\x1f\n\x08\x63ommands\x18\x01 \x03(\x0b\x32\r.MessageProto\"\xc2\x03\n\x15MessageComponentProto\x12$\n\tchangeSet\x18\x01 \x01(\x0b\x32\x0f.ChangeSetProtoH\x00\x12(\n\x0b\x63ommandList\x18\x02 \x01(\x0b\x32\x11.MessageListProtoH\x00\x12\x1e\n\x06\x63onfig\x18\x03 \x01(\x0b\x32\x0c.ConfigProtoH\x00\x12\x1e\n\x06\x65ntity\x18\x04 \x01(\x0b\x32\x0c.EntityProtoH\x00\x12\x12\n\x08\x65ntityID\x18\x05 \x01(\x05H\x00\x12%\n\x0c\x65ntityIDList\x18\x06 \x01(\x0b\x32\r.IntListProtoH\x00\x12&\n\nentityList\x18\x07 \x01(\x0b\x32\x10.EntityListProtoH\x00\x12$\n\tfloatList\x18\x08 \x01(\x0b\x32\x0f.FloatListProtoH\x00\x12\x12\n\x08intValue\x18\t \x01(\x05H\x00\x12 \n\x07intList\x18\n \x01(\x0b\x32\r.IntListProtoH\x00\x12\x11\n\x07rawData\x18\x0b \x01(\x0cH\x00\x12\x15\n\x0bstringValue\x18\x0c \x01(\tH\x00\x12#\n\nstringList\x18\r \x01(\x0b\x32\r.StrListProtoH\x00\x42\x0b\n\tcomponent\"\x1e\n\x0cStrListProto\x12\x0e\n\x06values\x18\x01 \x03(\t\"\x1e\n\x0cIntListProto\x12\x0e\n\x06values\x18\x01 \x03(\x05\" \n\x0e\x46loatListProto\x12\x0e\n\x06values\x18\x01 \x03(\x02\"/\n\x0eIntMatrixProto\x12\x1d\n\x06values\x18\x01 \x03(\x0b\x32\r.IntListProto\"\xb8\x02\n\nValueProto\x12\x1e\n\x04name\x18\x01 \x01(\x0e\x32\x10.ValueProto.Name\x12\x12\n\x08valueInt\x18\x02 \x01(\x05H\x00\x12\x13\n\tvalueBool\x18\x03 \x01(\x08H\x00\x12\x15\n\x0bvalueDouble\x18\x04 \x01(\x01H\x00\x12\x12\n\x08listByte\x18\x05 \x01(\x0cH\x00\x12 \n\x07listInt\x18\x06 \x01(\x0b\x32\r.IntListProtoH\x00\x12$\n\tmatrixInt\x18\x07 \x01(\x0b\x32\x0f.IntMatrixProtoH\x00\x12\"\n\x08listEdge\x18\x08 \x01(\x0b\x32\x0e.EdgeListProtoH\x00\"A\n\x04Name\x12\t\n\x05Value\x10\x00\x12\x05\n\x01X\x10\x01\x12\x05\n\x01Y\x10\x02\x12\r\n\tEntityRef\x10\x03\x12\x11\n\rEntityRefList\x10\x04\x42\x07\n\x05value\"J\n\rPropertyProto\x12\x0b\n\x03urn\x18\x01 \x01(\t\x12\x0f\n\x07\x64\x65\x66ined\x18\x02 \x01(\x08\x12\x1b\n\x06\x66ields\x18\x03 \x03(\x0b\x32\x0b.ValueProto\"\xa1\x01\n\x0b\x45ntityProto\x12\x0b\n\x03urn\x18\x01 \x01(\t\x12\x10\n\x08\x65ntityID\x18\x02 \x01(\x05\x12\x30\n\nproperties\x18\x03 \x03(\x0b\x32\x1c.EntityProto.PropertiesEntry\x1a\x41\n\x0fPropertiesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x1d\n\x05value\x18\x02 \x01(\x0b\x32\x0e.PropertyProto:\x02\x38\x01\"1\n\x0f\x45ntityListProto\x12\x1e\n\x08\x65ntities\x18\x01 \x03(\x0b\x32\x0c.EntityProto\"`\n\x0b\x43onfigProto\x12$\n\x04\x64\x61ta\x18\x01 \x03(\x0b\x32\x16.ConfigProto.DataEntry\x1a+\n\tDataEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"*\n\rEdgeListProto\x12\x19\n\x05\x65\x64ges\x18\x01 \x03(\x0b\x32\n.EdgeProto\"Z\n\tEdgeProto\x12\x0e\n\x06startX\x18\x01 \x01(\x05\x12\x0e\n\x06startY\x18\x02 \x01(\x05\x12\x0c\n\x04\x65ndX\x18\x03 \x01(\x05\x12\x0c\n\x04\x65ndY\x18\x04 \x01(\x05\x12\x11\n\tneighbour\x18\x05 \x01(\x05\"\xad\x01\n\x0e\x43hangeSetProto\x12\x32\n\x07\x63hanges\x18\x01 \x03(\x0b\x32!.ChangeSetProto.EntityChangeProto\x12\x0f\n\x07\x64\x65letes\x18\x02 \x03(\x05\x1aV\n\x11\x45ntityChangeProto\x12\x10\n\x08\x65ntityID\x18\x01 \x01(\x05\x12\x0b\n\x03urn\x18\x02 \x01(\t\x12\"\n\nproperties\x18\x03 \x03(\x0b\x32\x0e.PropertyProto\"@\n\x0f\x43ommandLogProto\x12\x0c\n\x04time\x18\x01 \x01(\x05\x12\x1f\n\x08\x63ommands\x18\x02 \x03(\x0b\x32\r.MessageProto\";\n\x19InitialConditionsLogProto\x12\x1e\n\x08\x65ntities\x18\x01 \x03(\x0b\x32\x0c.EntityProto\"}\n\x12PerceptionLogProto\x12\x0c\n\x04time\x18\x01 \x01(\x05\x12\x10\n\x08\x65ntityID\x18\x02 \x01(\x05\x12 \n\x07visible\x18\x03 \x01(\x0b\x32\x0f.ChangeSetProto\x12%\n\x0e\x63ommunications\x18\x04 \x03(\x0b\x32\r.MessageProto\"\x0f\n\rStartLogProto\"\r\n\x0b\x45ndLogProto\".\n\x0e\x43onfigLogProto\x12\x1c\n\x06\x63onfig\x18\x01 \x01(\x0b\x32\x0c.ConfigProto\"A\n\x0fUpdatesLogProto\x12\x0c\n\x04time\x18\x01 \x01(\x05\x12 \n\x07\x63hanges\x18\x02 \x01(\x0b\x32\x0f.ChangeSetProtoB4\n\x1drescuecore2.messages.protobufB\x13\x43ontrolMessageProtob\x06proto3'
+  serialized_pb=b'\n\x19\x43ontrolMessageProto.proto\"\x99\x01\n\x0cMessageProto\x12\x0b\n\x03urn\x18\x01 \x01(\t\x12\x31\n\ncomponents\x18\x02 \x03(\x0b\x32\x1d.MessageProto.ComponentsEntry\x1aI\n\x0f\x43omponentsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12%\n\x05value\x18\x02 \x01(\x0b\x32\x16.MessageComponentProto:\x02\x38\x01\"3\n\x10MessageListProto\x12\x1f\n\x08\x63ommands\x18\x01 \x03(\x0b\x32\r.MessageProto\"\xc2\x03\n\x15MessageComponentProto\x12$\n\tchangeSet\x18\x01 \x01(\x0b\x32\x0f.ChangeSetProtoH\x00\x12(\n\x0b\x63ommandList\x18\x02 \x01(\x0b\x32\x11.MessageListProtoH\x00\x12\x1e\n\x06\x63onfig\x18\x03 \x01(\x0b\x32\x0c.ConfigProtoH\x00\x12\x1e\n\x06\x65ntity\x18\x04 \x01(\x0b\x32\x0c.EntityProtoH\x00\x12\x12\n\x08\x65ntityID\x18\x05 \x01(\x05H\x00\x12%\n\x0c\x65ntityIDList\x18\x06 \x01(\x0b\x32\r.IntListProtoH\x00\x12&\n\nentityList\x18\x07 \x01(\x0b\x32\x10.EntityListProtoH\x00\x12$\n\tfloatList\x18\x08 \x01(\x0b\x32\x0f.FloatListProtoH\x00\x12\x12\n\x08intValue\x18\t \x01(\x05H\x00\x12 \n\x07intList\x18\n \x01(\x0b\x32\r.IntListProtoH\x00\x12\x11\n\x07rawData\x18\x0b \x01(\x0cH\x00\x12\x15\n\x0bstringValue\x18\x0c \x01(\tH\x00\x12#\n\nstringList\x18\r \x01(\x0b\x32\r.StrListProtoH\x00\x42\x0b\n\tcomponent\"\x1e\n\x0cStrListProto\x12\x0e\n\x06values\x18\x01 \x03(\t\"\x1e\n\x0cIntListProto\x12\x0e\n\x06values\x18\x01 \x03(\x05\" \n\x0e\x46loatListProto\x12\x0e\n\x06values\x18\x01 \x03(\x02\"/\n\x0eIntMatrixProto\x12\x1d\n\x06values\x18\x01 \x03(\x0b\x32\r.IntListProto\"\xf7\x01\n\nValueProto\x12\x12\n\x08intValue\x18\x02 \x01(\x05H\x00\x12\x13\n\tboolValue\x18\x03 \x01(\x08H\x00\x12\x15\n\x0b\x64oubleValue\x18\x04 \x01(\x01H\x00\x12\x12\n\x08\x62yteList\x18\x05 \x01(\x0cH\x00\x12 \n\x07intList\x18\x06 \x01(\x0b\x32\r.IntListProtoH\x00\x12$\n\tintMatrix\x18\x07 \x01(\x0b\x32\x0f.IntMatrixProtoH\x00\x12\"\n\x08\x65\x64geList\x18\x08 \x01(\x0b\x32\x0e.EdgeListProtoH\x00\x12 \n\x07point2D\x18\t \x01(\x0b\x32\r.Point2DProtoH\x00\x42\x07\n\x05value\"I\n\rPropertyProto\x12\x0b\n\x03urn\x18\x01 \x01(\t\x12\x0f\n\x07\x64\x65\x66ined\x18\x02 \x01(\x08\x12\x1a\n\x05value\x18\x03 \x01(\x0b\x32\x0b.ValueProto\"$\n\x0cPoint2DProto\x12\t\n\x01X\x18\x01 \x01(\x01\x12\t\n\x01Y\x18\x02 \x01(\x01\"\xa1\x01\n\x0b\x45ntityProto\x12\x0b\n\x03urn\x18\x01 \x01(\t\x12\x10\n\x08\x65ntityID\x18\x02 \x01(\x05\x12\x30\n\nproperties\x18\x03 \x03(\x0b\x32\x1c.EntityProto.PropertiesEntry\x1a\x41\n\x0fPropertiesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x1d\n\x05value\x18\x02 \x01(\x0b\x32\x0e.PropertyProto:\x02\x38\x01\"1\n\x0f\x45ntityListProto\x12\x1e\n\x08\x65ntities\x18\x01 \x03(\x0b\x32\x0c.EntityProto\"`\n\x0b\x43onfigProto\x12$\n\x04\x64\x61ta\x18\x01 \x03(\x0b\x32\x16.ConfigProto.DataEntry\x1a+\n\tDataEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"*\n\rEdgeListProto\x12\x19\n\x05\x65\x64ges\x18\x01 \x03(\x0b\x32\n.EdgeProto\"Z\n\tEdgeProto\x12\x0e\n\x06startX\x18\x01 \x01(\x05\x12\x0e\n\x06startY\x18\x02 \x01(\x05\x12\x0c\n\x04\x65ndX\x18\x03 \x01(\x05\x12\x0c\n\x04\x65ndY\x18\x04 \x01(\x05\x12\x11\n\tneighbour\x18\x05 \x01(\x05\"\xad\x01\n\x0e\x43hangeSetProto\x12\x32\n\x07\x63hanges\x18\x01 \x03(\x0b\x32!.ChangeSetProto.EntityChangeProto\x12\x0f\n\x07\x64\x65letes\x18\x02 \x03(\x05\x1aV\n\x11\x45ntityChangeProto\x12\x10\n\x08\x65ntityID\x18\x01 \x01(\x05\x12\x0b\n\x03urn\x18\x02 \x01(\t\x12\"\n\nproperties\x18\x03 \x03(\x0b\x32\x0e.PropertyProto\"@\n\x0f\x43ommandLogProto\x12\x0c\n\x04time\x18\x01 \x01(\x05\x12\x1f\n\x08\x63ommands\x18\x02 \x03(\x0b\x32\r.MessageProto\";\n\x19InitialConditionsLogProto\x12\x1e\n\x08\x65ntities\x18\x01 \x03(\x0b\x32\x0c.EntityProto\"}\n\x12PerceptionLogProto\x12\x0c\n\x04time\x18\x01 \x01(\x05\x12\x10\n\x08\x65ntityID\x18\x02 \x01(\x05\x12 \n\x07visible\x18\x03 \x01(\x0b\x32\x0f.ChangeSetProto\x12%\n\x0e\x63ommunications\x18\x04 \x03(\x0b\x32\r.MessageProto\"\x0f\n\rStartLogProto\"\r\n\x0b\x45ndLogProto\".\n\x0e\x43onfigLogProto\x12\x1c\n\x06\x63onfig\x18\x01 \x01(\x0b\x32\x0c.ConfigProto\"A\n\x0fUpdatesLogProto\x12\x0c\n\x04time\x18\x01 \x01(\x05\x12 \n\x07\x63hanges\x18\x02 \x01(\x0b\x32\x0f.ChangeSetProtoB4\n\x1drescuecore2.messages.protobufB\x13\x43ontrolMessageProtob\x06proto3'
 )
 
 
-
-_VALUEPROTO_NAME = _descriptor.EnumDescriptor(
-  name='Name',
-  full_name='ValueProto.Name',
-  filename=None,
-  file=DESCRIPTOR,
-  create_key=_descriptor._internal_create_key,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='Value', index=0, number=0,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='X', index=1, number=1,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='Y', index=2, number=2,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='EntityRef', index=3, number=3,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='EntityRefList', index=4, number=4,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-  ],
-  containing_type=None,
-  serialized_options=None,
-  serialized_start=1077,
-  serialized_end=1142,
-)
-_sym_db.RegisterEnumDescriptor(_VALUEPROTO_NAME)
 
 
 _MESSAGEPROTO_COMPONENTSENTRY = _descriptor.Descriptor(
@@ -432,57 +392,57 @@ _VALUEPROTO = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='name', full_name='ValueProto.name', index=0,
-      number=1, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='valueInt', full_name='ValueProto.valueInt', index=1,
+      name='intValue', full_name='ValueProto.intValue', index=0,
       number=2, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='valueBool', full_name='ValueProto.valueBool', index=2,
+      name='boolValue', full_name='ValueProto.boolValue', index=1,
       number=3, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='valueDouble', full_name='ValueProto.valueDouble', index=3,
+      name='doubleValue', full_name='ValueProto.doubleValue', index=2,
       number=4, type=1, cpp_type=5, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='listByte', full_name='ValueProto.listByte', index=4,
+      name='byteList', full_name='ValueProto.byteList', index=3,
       number=5, type=12, cpp_type=9, label=1,
       has_default_value=False, default_value=b"",
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='listInt', full_name='ValueProto.listInt', index=5,
+      name='intList', full_name='ValueProto.intList', index=4,
       number=6, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='matrixInt', full_name='ValueProto.matrixInt', index=6,
+      name='intMatrix', full_name='ValueProto.intMatrix', index=5,
       number=7, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='listEdge', full_name='ValueProto.listEdge', index=7,
+      name='edgeList', full_name='ValueProto.edgeList', index=6,
       number=8, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='point2D', full_name='ValueProto.point2D', index=7,
+      number=9, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -492,7 +452,6 @@ _VALUEPROTO = _descriptor.Descriptor(
   ],
   nested_types=[],
   enum_types=[
-    _VALUEPROTO_NAME,
   ],
   serialized_options=None,
   is_extendable=False,
@@ -506,7 +465,7 @@ _VALUEPROTO = _descriptor.Descriptor(
     fields=[]),
   ],
   serialized_start=839,
-  serialized_end=1151,
+  serialized_end=1086,
 )
 
 
@@ -533,9 +492,9 @@ _PROPERTYPROTO = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='fields', full_name='PropertyProto.fields', index=2,
-      number=3, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
+      name='value', full_name='PropertyProto.value', index=2,
+      number=3, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -551,8 +510,47 @@ _PROPERTYPROTO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1153,
-  serialized_end=1227,
+  serialized_start=1088,
+  serialized_end=1161,
+)
+
+
+_POINT2DPROTO = _descriptor.Descriptor(
+  name='Point2DProto',
+  full_name='Point2DProto',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='X', full_name='Point2DProto.X', index=0,
+      number=1, type=1, cpp_type=5, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='Y', full_name='Point2DProto.Y', index=1,
+      number=2, type=1, cpp_type=5, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1163,
+  serialized_end=1199,
 )
 
 
@@ -590,8 +588,8 @@ _ENTITYPROTO_PROPERTIESENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1326,
-  serialized_end=1391,
+  serialized_start=1298,
+  serialized_end=1363,
 )
 
 _ENTITYPROTO = _descriptor.Descriptor(
@@ -635,8 +633,8 @@ _ENTITYPROTO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1230,
-  serialized_end=1391,
+  serialized_start=1202,
+  serialized_end=1363,
 )
 
 
@@ -667,8 +665,8 @@ _ENTITYLISTPROTO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1393,
-  serialized_end=1442,
+  serialized_start=1365,
+  serialized_end=1414,
 )
 
 
@@ -706,8 +704,8 @@ _CONFIGPROTO_DATAENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1497,
-  serialized_end=1540,
+  serialized_start=1469,
+  serialized_end=1512,
 )
 
 _CONFIGPROTO = _descriptor.Descriptor(
@@ -737,8 +735,8 @@ _CONFIGPROTO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1444,
-  serialized_end=1540,
+  serialized_start=1416,
+  serialized_end=1512,
 )
 
 
@@ -769,8 +767,8 @@ _EDGELISTPROTO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1542,
-  serialized_end=1584,
+  serialized_start=1514,
+  serialized_end=1556,
 )
 
 
@@ -829,8 +827,8 @@ _EDGEPROTO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1586,
-  serialized_end=1676,
+  serialized_start=1558,
+  serialized_end=1648,
 )
 
 
@@ -875,8 +873,8 @@ _CHANGESETPROTO_ENTITYCHANGEPROTO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1766,
-  serialized_end=1852,
+  serialized_start=1738,
+  serialized_end=1824,
 )
 
 _CHANGESETPROTO = _descriptor.Descriptor(
@@ -913,8 +911,8 @@ _CHANGESETPROTO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1679,
-  serialized_end=1852,
+  serialized_start=1651,
+  serialized_end=1824,
 )
 
 
@@ -952,8 +950,8 @@ _COMMANDLOGPROTO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1854,
-  serialized_end=1918,
+  serialized_start=1826,
+  serialized_end=1890,
 )
 
 
@@ -984,8 +982,8 @@ _INITIALCONDITIONSLOGPROTO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1920,
-  serialized_end=1979,
+  serialized_start=1892,
+  serialized_end=1951,
 )
 
 
@@ -1037,8 +1035,8 @@ _PERCEPTIONLOGPROTO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1981,
-  serialized_end=2106,
+  serialized_start=1953,
+  serialized_end=2078,
 )
 
 
@@ -1062,8 +1060,8 @@ _STARTLOGPROTO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2108,
-  serialized_end=2123,
+  serialized_start=2080,
+  serialized_end=2095,
 )
 
 
@@ -1087,8 +1085,8 @@ _ENDLOGPROTO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2125,
-  serialized_end=2138,
+  serialized_start=2097,
+  serialized_end=2110,
 )
 
 
@@ -1119,8 +1117,8 @@ _CONFIGLOGPROTO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2140,
-  serialized_end=2186,
+  serialized_start=2112,
+  serialized_end=2158,
 )
 
 
@@ -1158,8 +1156,8 @@ _UPDATESLOGPROTO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2188,
-  serialized_end=2253,
+  serialized_start=2160,
+  serialized_end=2225,
 )
 
 _MESSAGEPROTO_COMPONENTSENTRY.fields_by_name['value'].message_type = _MESSAGECOMPONENTPROTO
@@ -1215,33 +1213,35 @@ _MESSAGECOMPONENTPROTO.oneofs_by_name['component'].fields.append(
   _MESSAGECOMPONENTPROTO.fields_by_name['stringList'])
 _MESSAGECOMPONENTPROTO.fields_by_name['stringList'].containing_oneof = _MESSAGECOMPONENTPROTO.oneofs_by_name['component']
 _INTMATRIXPROTO.fields_by_name['values'].message_type = _INTLISTPROTO
-_VALUEPROTO.fields_by_name['name'].enum_type = _VALUEPROTO_NAME
-_VALUEPROTO.fields_by_name['listInt'].message_type = _INTLISTPROTO
-_VALUEPROTO.fields_by_name['matrixInt'].message_type = _INTMATRIXPROTO
-_VALUEPROTO.fields_by_name['listEdge'].message_type = _EDGELISTPROTO
-_VALUEPROTO_NAME.containing_type = _VALUEPROTO
+_VALUEPROTO.fields_by_name['intList'].message_type = _INTLISTPROTO
+_VALUEPROTO.fields_by_name['intMatrix'].message_type = _INTMATRIXPROTO
+_VALUEPROTO.fields_by_name['edgeList'].message_type = _EDGELISTPROTO
+_VALUEPROTO.fields_by_name['point2D'].message_type = _POINT2DPROTO
 _VALUEPROTO.oneofs_by_name['value'].fields.append(
-  _VALUEPROTO.fields_by_name['valueInt'])
-_VALUEPROTO.fields_by_name['valueInt'].containing_oneof = _VALUEPROTO.oneofs_by_name['value']
+  _VALUEPROTO.fields_by_name['intValue'])
+_VALUEPROTO.fields_by_name['intValue'].containing_oneof = _VALUEPROTO.oneofs_by_name['value']
 _VALUEPROTO.oneofs_by_name['value'].fields.append(
-  _VALUEPROTO.fields_by_name['valueBool'])
-_VALUEPROTO.fields_by_name['valueBool'].containing_oneof = _VALUEPROTO.oneofs_by_name['value']
+  _VALUEPROTO.fields_by_name['boolValue'])
+_VALUEPROTO.fields_by_name['boolValue'].containing_oneof = _VALUEPROTO.oneofs_by_name['value']
 _VALUEPROTO.oneofs_by_name['value'].fields.append(
-  _VALUEPROTO.fields_by_name['valueDouble'])
-_VALUEPROTO.fields_by_name['valueDouble'].containing_oneof = _VALUEPROTO.oneofs_by_name['value']
+  _VALUEPROTO.fields_by_name['doubleValue'])
+_VALUEPROTO.fields_by_name['doubleValue'].containing_oneof = _VALUEPROTO.oneofs_by_name['value']
 _VALUEPROTO.oneofs_by_name['value'].fields.append(
-  _VALUEPROTO.fields_by_name['listByte'])
-_VALUEPROTO.fields_by_name['listByte'].containing_oneof = _VALUEPROTO.oneofs_by_name['value']
+  _VALUEPROTO.fields_by_name['byteList'])
+_VALUEPROTO.fields_by_name['byteList'].containing_oneof = _VALUEPROTO.oneofs_by_name['value']
 _VALUEPROTO.oneofs_by_name['value'].fields.append(
-  _VALUEPROTO.fields_by_name['listInt'])
-_VALUEPROTO.fields_by_name['listInt'].containing_oneof = _VALUEPROTO.oneofs_by_name['value']
+  _VALUEPROTO.fields_by_name['intList'])
+_VALUEPROTO.fields_by_name['intList'].containing_oneof = _VALUEPROTO.oneofs_by_name['value']
 _VALUEPROTO.oneofs_by_name['value'].fields.append(
-  _VALUEPROTO.fields_by_name['matrixInt'])
-_VALUEPROTO.fields_by_name['matrixInt'].containing_oneof = _VALUEPROTO.oneofs_by_name['value']
+  _VALUEPROTO.fields_by_name['intMatrix'])
+_VALUEPROTO.fields_by_name['intMatrix'].containing_oneof = _VALUEPROTO.oneofs_by_name['value']
 _VALUEPROTO.oneofs_by_name['value'].fields.append(
-  _VALUEPROTO.fields_by_name['listEdge'])
-_VALUEPROTO.fields_by_name['listEdge'].containing_oneof = _VALUEPROTO.oneofs_by_name['value']
-_PROPERTYPROTO.fields_by_name['fields'].message_type = _VALUEPROTO
+  _VALUEPROTO.fields_by_name['edgeList'])
+_VALUEPROTO.fields_by_name['edgeList'].containing_oneof = _VALUEPROTO.oneofs_by_name['value']
+_VALUEPROTO.oneofs_by_name['value'].fields.append(
+  _VALUEPROTO.fields_by_name['point2D'])
+_VALUEPROTO.fields_by_name['point2D'].containing_oneof = _VALUEPROTO.oneofs_by_name['value']
+_PROPERTYPROTO.fields_by_name['value'].message_type = _VALUEPROTO
 _ENTITYPROTO_PROPERTIESENTRY.fields_by_name['value'].message_type = _PROPERTYPROTO
 _ENTITYPROTO_PROPERTIESENTRY.containing_type = _ENTITYPROTO
 _ENTITYPROTO.fields_by_name['properties'].message_type = _ENTITYPROTO_PROPERTIESENTRY
@@ -1267,6 +1267,7 @@ DESCRIPTOR.message_types_by_name['FloatListProto'] = _FLOATLISTPROTO
 DESCRIPTOR.message_types_by_name['IntMatrixProto'] = _INTMATRIXPROTO
 DESCRIPTOR.message_types_by_name['ValueProto'] = _VALUEPROTO
 DESCRIPTOR.message_types_by_name['PropertyProto'] = _PROPERTYPROTO
+DESCRIPTOR.message_types_by_name['Point2DProto'] = _POINT2DPROTO
 DESCRIPTOR.message_types_by_name['EntityProto'] = _ENTITYPROTO
 DESCRIPTOR.message_types_by_name['EntityListProto'] = _ENTITYLISTPROTO
 DESCRIPTOR.message_types_by_name['ConfigProto'] = _CONFIGPROTO
@@ -1352,6 +1353,13 @@ PropertyProto = _reflection.GeneratedProtocolMessageType('PropertyProto', (_mess
   # @@protoc_insertion_point(class_scope:PropertyProto)
   })
 _sym_db.RegisterMessage(PropertyProto)
+
+Point2DProto = _reflection.GeneratedProtocolMessageType('Point2DProto', (_message.Message,), {
+  'DESCRIPTOR' : _POINT2DPROTO,
+  '__module__' : 'ControlMessageProto_pb2'
+  # @@protoc_insertion_point(class_scope:Point2DProto)
+  })
+_sym_db.RegisterMessage(Point2DProto)
 
 EntityProto = _reflection.GeneratedProtocolMessageType('EntityProto', (_message.Message,), {
 

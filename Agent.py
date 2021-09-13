@@ -5,6 +5,7 @@ import asyncio
 import ControlMessageProto_pb2
 import sys
 import traceback
+import URN
 class Agent(ABC):
     def __init__(self):
         pass
@@ -15,7 +16,7 @@ class Agent(ABC):
 
     # @abstractmethod
     def requestedEntityTypes(self):
-        return ['urn:rescuecore2.standard:entity:civilian']
+        return []
         
     
     # @abstractmethod
@@ -34,18 +35,18 @@ class Agent(ABC):
             await self.sendAKConnect(requestId=1)
             await self.parseMessageFromKernel()
         except IOError as e:
-            print(f'Exception occured in connecting: {e}')
+            print(f'Exception occured in connecting: {type(e).__name__}: {e}')
         
 
         
             
 
     async def messageReceived(self,msg):
-        if(msg.urn=="urn:rescuecore2:messages.control:ka_sense"):
+        if(msg.urn==URN.KA_SENSE):
             await self.handleKASense(msg)
-        elif(msg.urn=="urn:rescuecore2:messages.control:ka_connect_ok"):
+        elif(msg.urn==URN.KA_CONNECT_OK):
             await self.handleKAConnectOk(msg)
-        elif (msg.urn=="urn:rescuecore2:messages.control:ka_connect_error"):
+        elif (msg.urn==URN.KA_CONNECT_ERROR):
             await self.handleKAConnectError(msg)
     
     async def handleKASense(self,msg):
@@ -59,7 +60,7 @@ class Agent(ABC):
         try:
             await self.think(time,changeSet,hear)
         except Exception as e:
-            print(f'Exception occured in think: {e} \n {traceback.format_exc()}')
+            print(f'Exception occured in think: {type(e).__name__}: {e} \n {traceback.format_exc()}')
 
     async def handleKAConnectOk(self,msg):
         
@@ -73,7 +74,7 @@ class Agent(ABC):
         try:
             await self.precompute()
         except Exception as e:
-            print(f'Exception occured in Precompute: {e} \n {traceback.format_exc()}')
+            print(f'Exception occured in Precompute: {type(e).__name__}: {e} \n {traceback.format_exc()}')
 
         await self.sendAKAcknowledge(requestId)
 
@@ -89,7 +90,7 @@ class Agent(ABC):
 
     async def sendAKConnect(self,requestId):
         msg=ControlMessageProto_pb2.MessageProto()
-        msg.urn="urn:rescuecore2:messages.control:ak_connect"
+        msg.urn=URN.AK_CONNECT
         msg.components['Request ID'].intValue=requestId
         msg.components['Version'].intValue=1
         msg.components['Name'].stringValue=self.name()
@@ -99,7 +100,7 @@ class Agent(ABC):
 
     async def sendAKAcknowledge(self,requestId):
         msg=ControlMessageProto_pb2.MessageProto()
-        msg.urn="urn:rescuecore2:messages.control:ak_acknowledge"
+        msg.urn=URN.AK_ACKNOWLEDGE
         msg.components['Request ID'].intValue=requestId
         msg.components['Agent ID'].entityID=self.id
         await rcrs_encoding_utils.write_msg(msg,self.writer)
@@ -111,14 +112,14 @@ class Agent(ABC):
                 # print(msg)
                 await self.messageReceived(msg)
         except IOError:
-            print(f'Communication error: {e}')
+            print(f'Communication error: {type(e).__name__}: {e}')
 
     
 
 ####################################commands
-    async def sendAKRest(self,time):
+    async def rest(self,time):
         msg=ControlMessageProto_pb2.MessageProto()
-        msg.urn="urn:rescuecore2.standard:message:rest"
+        msg.urn=URN.AK_REST
         msg.components['Agent ID'].entityID=self.id
         msg.components['Time'].intValue=time
         await rcrs_encoding_utils.write_msg(msg,self.writer)
