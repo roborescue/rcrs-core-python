@@ -13,7 +13,7 @@ class Civilian(Agent):
     
     #override
     async def precompute(self):
-        print(f'precompute')
+        print(f'precompute finshed')
         pass
 
     #override
