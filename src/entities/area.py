@@ -13,7 +13,7 @@ class Area(Entity):
         self.blockades = EntityIDListProperty(
             StandardPropertyURN.BLOCKADES.value)
 
-        #self.apexes = None
+        self.apexes = None
         self.neighbours = None
         self.shape = None
 
@@ -35,14 +35,14 @@ class Area(Entity):
             elif _type == StandardPropertyURN.BLOCKADES.name:
                 self.blockades.set_value(values[0].listInt.values)
 
-    # def get_apexes(self):
-    #     if self.apexes is None:
-    #         self.apexes = []
-    #         for edge in self.get_edges():
-    #             self.apexes.append(edge.get_start_x())
-    #             self.apexes.append(edge.get_start_y())
+    def get_apexes(self):
+        if self.apexes is None:
+            self.apexes = []
+            for edge in self.get_edges():
+                self.apexes.append(edge.get_start_x())
+                self.apexes.append(edge.get_start_y())
 
-    #     return self.apexes
+        return self.apexes
 
     def get_location(self):
         if self.x.is_defined() and self.y.is_defined():
