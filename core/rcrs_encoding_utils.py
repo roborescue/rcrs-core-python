@@ -1,4 +1,4 @@
-import ControlMessageProto_pb2
+import core.RCRSProto_pb2 as RCRSProto_pb2
 def write_int32(value, writer):
     b=[((value >> 24) & 0xFF),
         ((value >> 16) & 0xFF),
@@ -8,8 +8,6 @@ def write_int32(value, writer):
     writer.write(bytes(b))
 
 async def read_int32(reader):
-    # await reader.read(1)#I don't know why it is needed!!!!!
-    # byte_array=await reader.read(4)
     byte_array=await reader.readexactly(4)
     value = int(((byte_array[0]) << 24) + ((byte_array[1])<< 16) + ((byte_array[2]) << 8) + (byte_array[3]))
     return value
@@ -24,6 +22,6 @@ async def read_msg(reader):
     # await reader.read(1)
     size=await read_int32(reader)
     content=await reader.readexactly(size)
-    message=ControlMessageProto_pb2.MessageProto();
+    message=RCRSProto_pb2.MessageProto();
     message.ParseFromString(bytes(content))
     return message

@@ -1,11 +1,10 @@
-import rcrs_encoding_utils
-from WorldModel import WorldModel
+import core.rcrs_encoding_utils as rcrs_encoding_utils
+from world.WorldModel import WorldModel
 from abc import ABC, abstractmethod
 import asyncio
-import ControlMessageProto_pb2
 import sys
 import traceback
-import URN
+import core.RCRSProto_pb2 as RCRSProto_pb2
 class Agent(ABC):
     def __init__(self):
         pass
@@ -42,11 +41,11 @@ class Agent(ABC):
             
 
     async def messageReceived(self,msg):
-        if(msg.urn==URN.KA_SENSE):
+        if(msg.urn==RCRSProto_pb2.MsgURN.KA_SENSE):
             await self.handleKASense(msg)
-        elif(msg.urn==URN.KA_CONNECT_OK):
+        elif(msg.urn==RCRSProto_pb2.MsgURN.KA_CONNECT_OK):
             await self.handleKAConnectOk(msg)
-        elif (msg.urn==URN.KA_CONNECT_ERROR):
+        elif (msg.urn==RCRSProto_pb2.MsgURN.KA_CONNECT_ERROR):
             await self.handleKAConnectError(msg)
     
     async def handleKASense(self,msg):
@@ -66,7 +65,7 @@ class Agent(ABC):
         
         entities=msg.components["Entities"].entityList.entities
         self.world=WorldModel()
-        self.world.addEntities(entities)
+        self.world.addEntitiesProto(entities)
         requestId=msg.components['Request ID'].intValue
         self.id=msg.components["Agent ID"].entityID
         self.config=msg.components["Agent config"].config
@@ -89,18 +88,18 @@ class Agent(ABC):
         sys.exit()
 
     async def sendAKConnect(self,requestId):
-        msg=ControlMessageProto_pb2.MessageProto()
-        msg.urn=URN.AK_CONNECT
+        msg=RCRSProto_pb2.MessageProto()
+        msg.urn=RCRSProto_pb2.MsgURN.AK_CONNECT
         msg.components['Request ID'].intValue=requestId
         msg.components['Version'].intValue=1
         msg.components['Name'].stringValue=self.name()
         for urn in self.requestedEntityTypes():
-            msg.components['Requested entity types'].stringList.values.append(urn)
+            msg.components['Requested entity types'].stringList.values.append(RCRSProto_pb2.EntityURN.Name(urn))
         await rcrs_encoding_utils.write_msg(msg,self.writer)
 
     async def sendAKAcknowledge(self,requestId):
-        msg=ControlMessageProto_pb2.MessageProto()
-        msg.urn=URN.AK_ACKNOWLEDGE
+        msg=RCRSProto_pb2.MessageProto()
+        msg.urn=RCRSProto_pb2.MsgURN.AK_ACKNOWLEDGE
         msg.components['Request ID'].intValue=requestId
         msg.components['Agent ID'].entityID=self.id
         await rcrs_encoding_utils.write_msg(msg,self.writer)
@@ -111,15 +110,15 @@ class Agent(ABC):
                 msg=await rcrs_encoding_utils.read_msg(self.reader)
                 # print(msg)
                 await self.messageReceived(msg)
-        except IOError:
+        except IOError as e:
             print(f'Communication error: {type(e).__name__}: {e}')
 
     
 
 ####################################commands
     async def rest(self,time):
-        msg=ControlMessageProto_pb2.MessageProto()
-        msg.urn=URN.AK_REST
+        msg=RCRSProto_pb2.MessageProto()
+        msg.urn=RCRSProto_pb2.MsgURN.AK_REST
         msg.components['Agent ID'].entityID=self.id
         msg.components['Time'].intValue=time
         await rcrs_encoding_utils.write_msg(msg,self.writer)
