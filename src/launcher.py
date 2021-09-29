@@ -1,3 +1,6 @@
+import multiprocessing
+from queue import Empty
+from agents import agent
 from connection.componentLauncher import ComponentLauncher
 from agents.policeForceAgent import PoliceForceAgent
 from agents.ambulanceTeamAgent import AmbulanceTeamAgent
@@ -9,13 +12,17 @@ from constants.constants import DEFAULT_KERNEL_PORT_NUMBER
 from constants.constants import DEFAULT_KERNEL_HOST_NAME
 import time
 import sys
+import os
 import ipaddress
+from multiprocessing import Process, Pipe
+#from multiprocessing import Manager
+#from multiprocessing import Queue
 
 
 class Launcher:
     def __init__(self, **kwargs):
 
-        launcher = ComponentLauncher(kwargs['port'], kwargs['host'])
+        self.launcher = ComponentLauncher(kwargs['port'], kwargs['host'])
         fb = kwargs['fb'] if kwargs['fb'] > 0 else sys.maxsize
         fs = kwargs['fs'] if kwargs['fs'] > 0 else sys.maxsize
         pf = kwargs['pf'] if kwargs['pf'] > 0 else sys.maxsize
@@ -23,38 +30,120 @@ class Launcher:
         at = kwargs['at'] if kwargs['at'] > 0 else sys.maxsize
         ac = kwargs['ac'] if kwargs['ac'] > 0 else sys.maxsize
 
-        for i in range(pf):
-            if launcher.connect(PoliceForceAgent()):
-                continue
-            break
+        processes = []
 
-        for i in range(at):
-            if launcher.connect(AmbulanceTeamAgent()):
-                continue
-            break
+        p_conn, c_conn = Pipe()
 
-        for i in range(fb):
-            if launcher.connect(FireBrigadeAgent()):
-                continue
-            break
+        c_conn.send(True)
+        for _ in range(pf):
+            print("befor get")
+            if p_conn.recv():
+                print("after get")
+                request_id = self.launcher.generate_request_ID()
+                
+                process = Process(target=self.launch, args=(PoliceForceAgent(), request_id, c_conn))
+                process.daemon = True
+                process.start()
+                processes.append(process)
+                #time.sleep(1/10)
+                multiprocessing.active_children()
+            else:
+                break
 
-        for i in range(po):
-            if launcher.connect(PoliceOfficeAgent()):
-                continue
-            break
+        # time.sleep(1)
+        # #mpq = Queue()
+        # #mpq.put(True)
+        # for _ in range(at):
+        #     if True:
+        #         request_id = self.launcher.generate_request_ID()
+        #         process = Process(target=self.launch, args=(AmbulanceTeamAgent(), request_id, mpq))
+        #         process.daemon = True
+        #         process.start()
+        #         processes.append(process)
+        #         #time.sleep(1/10)
+        #         multiprocessing.active_children()
+        #     else:
+        #         break
+        
+        # time.sleep(1)
+        # #mpq = Queue()
+        # #mpq.put(True)
+        # for _ in range(fb):
+        #     if True:
+        #         request_id = self.launcher.generate_request_ID()
+        #         process = Process(target=self.launch, args=(FireBrigadeAgent(), request_id, mpq))
+        #         process.daemon = True
+        #         process.start()
+        #         processes.append(process)
+        #         #time.sleep(1/10)
+        #         multiprocessing.active_children()
+        #     else:
+        #         break
 
-        for i in range(ac):
-            if launcher.connect(AmbulanceCenterAgent()):
-                continue
-            break
+        # time.sleep(1)
+        # #mpq = Queue()
+        # mpq.put(True)
+        # for _ in range(po):
+        #     if mpq.get():
+        #         request_id = self.launcher.generate_request_ID()
+        #         process = Process(target=self.launch, args=(PoliceOfficeAgent(), request_id, mpq))
+        #         process.daemon = True
+        #         process.start()
+        #         processes.append(process)
+        #         #time.sleep(1/10)
+        #         multiprocessing.active_children()
+        #     else:
+        #         break
 
-        for i in range(fs):
-            if launcher.connect(FireStationAgent()):
-                continue
-            break
+        # time.sleep(1)
+        # #mpq = Queue()
+        # mpq.put(True)
+        # for _ in range(ac):
+        #     if mpq.get():
+        #         request_id = self.launcher.generate_request_ID()
+        #         process = Process(target=self.launch, args=(AmbulanceCenterAgent(), request_id, mpq))
+        #         process.daemon = True
+        #         process.start()
+        #         processes.append(process)
+        #         #time.sleep(1/10)
+        #         multiprocessing.active_children()
+        #     else:
+        #         break
+
+        # time.sleep(1)
+        # #mpq = Queue()
+        # mpq.put(True)
+        # for _ in range(fs):
+        #     if mpq.get():
+        #         request_id = self.launcher.generate_request_ID()
+        #         process = Process(target=self.launch, args=(FireStationAgent(), request_id, mpq))
+        #         process.daemon = True
+        #         process.start()
+        #         processes.append(process)
+        #         #time.sleep(1/10)
+        #         multiprocessing.active_children()
+        #     else:
+        #         break
+
+    def launch(self, agent, _request_id, conn):
+        self.launcher.connect(agent, _request_id)
+        status = agent.test_sucsses()
+
+        if not status:
+            conn.send(False)
+            return
+        conn.send(True)
+
+        #while status:
+        time.sleep(200)
 
 
 if __name__ == '__main__':
+
+    filelist = [f for f in os.listdir('logs') if f.endswith(".log")]
+    for f in filelist:
+        os.remove(os.path.join('logs', f))
+    
 
     port = None
     host = None
@@ -128,10 +217,11 @@ if __name__ == '__main__':
         print(err)
         sys.exit(0)
 
-    launcher = Launcher(host=host, port=port, fb=fb,
-                        fs=fs, pf=pf, po=po, at=at, ac=ac)
+    print("start launcher...")
+    launcher = Launcher(host=host, port=port, fb=fb, fs=fs, pf=pf, po=po, at=at, ac=ac)
     while True:
         try:
             time.sleep(100)
         except KeyboardInterrupt:
             sys.exit(1)
+    print("launcher exited...")

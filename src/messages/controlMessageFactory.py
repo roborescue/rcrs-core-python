@@ -10,7 +10,6 @@ class ControlMessageFactory:
         pass
 
     def make_message(self, urn, data):
-
         if urn == ControlMessageURN.KA_SENSE.value:
             return KASense(data)
         elif urn == ControlMessageURN.KA_CONNECT_OK.value:

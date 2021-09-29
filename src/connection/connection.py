@@ -1,4 +1,5 @@
 import socket
+import sys
 import threading
 import queue
 from connection.encoding_tool import read_int32_from_byte_arr
@@ -8,6 +9,7 @@ from connection.encoding_tool import read_msg
 from connection.encoding_tool import write_msg
 from connection.data_stream import OutputStream
 from connection.data_stream import InputStream
+from messages.KAConnectError import KAConnectError
 
 
 class Connection:
@@ -29,9 +31,9 @@ class Connection:
             self.socket.close()
             return
 
-        read_thread = threading.Thread(target=self.read_loop)
-        read_thread.daemon = True
-        read_thread.start()
+        self.read_thread = threading.Thread(target=self.read_loop)
+        self.read_thread.daemon = True
+        self.read_thread.start()
 
     def set_message_received_func(self, _agent_function):
         self.agent_message_received_func = _agent_function
@@ -47,9 +49,8 @@ class Connection:
             try:
                 message_data = self.recv_msg()
                 self.msg_bytes_received(message_data)
-            except IOError:
-                self.socket.close()
-                break
+            except IOError as err:
+                print(err)
 
     def recv_msg(self):
         buffer_size = 4096
@@ -58,7 +59,8 @@ class Connection:
             try:
                 msg_size_data += self.socket.recv(buffer_size)
             except socket.error as error_msg:
-                raise IOError('tcp client IOError:' + error_msg)
+                print(error_msg)
+                raise IOError('tcp client IOError:', error_msg)
 
         if msg_size_data:
             msg_size = read_int32_from_byte_arr(msg_size_data[0:4])
@@ -67,11 +69,13 @@ class Connection:
                 try:
                     msg_data += self.socket.recv(buffer_size)
                 except socket.error as error_msg:
-                    raise IOError('tcp client IOError:' + error_msg)
+                    print(error_msg)
+                    raise IOError('tcp client IOError:', error_msg)
             if msg_data:
                 self.data_buffer = msg_data[msg_size:]
                 return msg_data[:msg_size]
         else:
+
             raise IOError('tcp client is disconnected')
 
         return ''

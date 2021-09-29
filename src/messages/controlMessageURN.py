@@ -21,7 +21,7 @@ class ControlMessageURN(Enum):
     KA_SENSE = "message:ka_sense"
 
     # Shutdown message.
-    SHUTDOWN = "message:shutdown" 
+    SHUTDOWN = "message:shutdown"
 
     # New EntityID request.
     ENTITY_ID_REQUEST = "message:entity_id_request" 

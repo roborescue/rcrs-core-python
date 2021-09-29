@@ -1,10 +1,15 @@
 from agents.agent import Agent
+from log.logger import Logger
+
 
 
 class AmbulanceCenterAgent(Agent):
     def __init__(self):
         Agent.__init__(self)
-        self.name = 'rescue_agent.AmbulanceCenterAgent'
+        self.name = 'AmbulanceCenterAgent'
+
+    def post_connect(self, world, agent_id):
+        self.Log = Logger(self.get_name(), self.get_id())
 
     def get_requested_entities(self):
         return 'entity:ambulancecentre'

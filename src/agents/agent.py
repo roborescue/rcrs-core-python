@@ -1,6 +1,3 @@
-import threading
-from commands.AKMove import AKMove
-from connection.connection import Connection
 from messages.AKAcknowledge import AKAcknowledge
 from messages.AKCommand import AKCommand
 from messages.KAConnectOK import KAConnectOK
@@ -8,11 +5,13 @@ from messages.KAConnectError import KAConnectError
 from messages.KASense import KASense
 from messages.AKConnect import AKConnect
 from messages.AKCommand import AKCommand
+from messages.Shutdown import Shutdown
 from commands.AKSubscribe import AKSubscribe
 import queue
 from worldmodel.entityID import EntityID
 from worldmodel.worldmodel import WorldModel
 import random
+from log.logger import Logger
 
 
 class Agent:
@@ -28,6 +27,7 @@ class Agent:
         self.agent_id = None
         self.queue = queue.Queue()
 
+        
     def get_name(self):
         return self.name
 
@@ -35,32 +35,34 @@ class Agent:
         return self.agent_id
 
     def set_connection_send_func(self, send_func):
-        self.connection_send_msg = send_func
+        self.send_msg = send_func
 
     def start_up(self, request_id):
         self.connect_request_id = request_id
         akconnect_msg = AKConnect()
         akconnect_msg.set_agent(self)
         akconnect_msg.prepare_message()
-        self.connection_send_msg(akconnect_msg)
+        self.send_msg(akconnect_msg)
 
     def test_sucsses(self):
         return self.queue.get()
 
     def message_received(self, msg):
-        if isinstance(msg, KAConnectOK):
+        if isinstance(msg, KASense):
+            self.process_sense(msg)
+        elif isinstance(msg, KAConnectOK):
             self.handle_connect_ok(msg)
         elif isinstance(msg, KAConnectError):
             self.handle_connect_error(msg)
-        elif isinstance(msg, KASense):
-            self.process_sense(msg)
-
+        
     def handle_connect_error(self, msg):
-        print(self.get_name(),  "KAConnectError : ", msg.reason)
+        Log = Logger(self.get_name())
+        Log.warning("failed : " + msg.reason)
         self.queue.put(False)
 
     def handle_connect_ok(self, msg):
         print('handle_connect_ok(msg): ', msg.request_id, msg.agent_id)
+        self.queue.put(True)
         self.agent_id = EntityID(msg.agent_id)
         # entities received from server should be merged to the world model
         world = msg.world
@@ -74,10 +76,10 @@ class Agent:
         ack_msg.set_agent_id(msg.agent_id)
         ack_msg.set_request_id(msg.request_id)
         ack_msg.prepare_message()
-        self.connection_send_msg(ack_msg)
+        self.send_msg(ack_msg)
 
-        self.queue.put(True)
-    
+        self.post_connect(world, self.agent_id)
+ 
     def get_position(self):
         return self.world_model.get_entity(self.get_id()).get_position()
 
@@ -105,5 +107,6 @@ class Agent:
         akcommand = AKCommand()
         akcommand.add_command(AKSubscribe(self.agent_id(), time, channel))
 
-        self.connection_send_msg(akcommand)
+        self.send_msg(akcommand)
 
+    

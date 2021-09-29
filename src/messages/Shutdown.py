@@ -1,5 +1,6 @@
 from messages.message import Message
 from messages.controlMessageURN import ControlMessageURN
+import messages.ControlMessageProto_pb2 as protoBuf
 
 
 class Shutdown(Message):
