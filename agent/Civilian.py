@@ -13,12 +13,12 @@ class Civilian(Agent):
         
     
     #override
-    async def precompute(self):
+    def precompute(self):
         print(f'precompute finshed')
         pass
 
     #override
-    async def think(self,time,changeSet,hear):
+    def think(self,time,changeSet,hear):
         print(f'thinking time={time}')
         #sample get entity:
         myentity=self.world.get(self.id)
@@ -35,5 +35,5 @@ class Civilian(Agent):
         road_buidling=self.world.getTypes([urn.Entity.BUILDING,urn.Entity.ROAD])
         print(f'building size={len(buildings)} building_road size={len(road_buidling)}')
         print(f'visible entities= {self.world.visibleEntities.keys()}')
-        await self.rest(time)
+        self.rest(time)
         pass
