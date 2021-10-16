@@ -11,12 +11,15 @@ class Entity:
     def getID(self):
         return self.id
     
-    def getProp(self,purn):
-        return self.properties.get(purn,None)
-
+    def getProp(self,property_urn):
+        return self.properties.get(property_urn,None)
+    
+    def __getitem__(self,property_urn):
+        return self.getProp(property_urn)
     def setProp(self,purn,val):
         self.properties[purn]=val
 
+    
     def __str__(self):
         return f'{self.urn.name}({self.id})'
 

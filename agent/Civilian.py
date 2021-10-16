@@ -35,5 +35,5 @@ class Civilian(Agent):
         buildings=self.world.getTypes(urn.Entity.BUILDING)
         road_buidling=self.world.getTypes([urn.Entity.BUILDING,urn.Entity.ROAD])
         print(f'building size={len(buildings)} building_road size={len(road_buidling)}')
-        print(f'visible entities= {[self.world[k] for k in self.world.visibleEntities.keys()]}')
+        print(f'visible entities= {[f"{e!s}" for e in self.world.visibleEntities.values()]}')
         return self.rest(time)

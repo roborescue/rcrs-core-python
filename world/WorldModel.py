@@ -48,7 +48,9 @@ class WorldModel:
     
     def get(self,entityID):
         return self._entitiesById.get(entityID,None)
-
+    def __getitem__(self,entityID):
+        return self.get(entityID)
+        
     def getTypes(self, urns):
         if not isinstance(urns, list):
             urns=[urns]
