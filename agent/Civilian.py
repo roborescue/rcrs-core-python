@@ -18,22 +18,22 @@ class Civilian(Agent):
         pass
 
     #override
-    def think(self,time,changeSet,hear):
+    def think(self,time,changeSet,hear,overtime):
         print(f'thinking time={time}')
         #sample get entity:
-        myentity=self.world.get(self.id)
+        myentity=self.world[self.id] # euvalent > myentity=self.world.get(self.id)
         print(f'I am {myentity!s}')
         #sample get property:
-        hp=myentity.getProp(urn.Property.HP)
-        if hp == None:
-            print(f'my hp is undefined my entity id is: {myentity.id}')
-        else:
+        hp=myentity[urn.Property.HP] #equvalent> hp=myentity.getProp(urn.Property.HP)
+        if not hp:
             print(f'my hp is: {hp} my entity is: {myentity!r}')
+        else:
+            print(f'my hp is undefined my entity id is: {myentity.id}')
+            
             
         # sample get All Buildings
         buildings=self.world.getTypes(urn.Entity.BUILDING)
         road_buidling=self.world.getTypes([urn.Entity.BUILDING,urn.Entity.ROAD])
         print(f'building size={len(buildings)} building_road size={len(road_buidling)}')
-        print(f'visible entities= {self.world.visibleEntities.keys()}')
-        self.rest(time)
-        pass
+        print(f'visible entities= {[self.world[k] for k in self.world.visibleEntities.keys()]}')
+        return self.rest(time)

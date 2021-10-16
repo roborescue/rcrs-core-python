@@ -23,7 +23,7 @@ class Agent(ABC):
         pass
 
     # @abstractmethod
-    def think(self,time,changeSet,hear):
+    def think(self,time,changeSet,hear,overtime):
         pass
 
     def connect(self,host,port):
@@ -57,6 +57,10 @@ class Agent(ABC):
             self.handleKAConnectError(msg)
     
     def handleKASense(self,msg):
+        overtime=False
+        if(self.sock.recv(1,socket.MSG_PEEK)):
+            print("next cycle is recevied but you are still in the previous one")
+            overtime=True
         agentId=msg.components["Agent ID"].entityID
         time=msg.components['Time'].intValue
         changeSet=msg.components['Updates'].changeSet
@@ -65,7 +69,8 @@ class Agent(ABC):
             print(f'ERRROR this should not never happen agentid={self.id} but receive a sense for {agentId}')
         self.world.merge(changeSet)
         try:
-            self.think(time,changeSet,hear)
+            actmsg=self.think(time,changeSet,hear,overtime)
+            rcrs_encoding_utils.write_msg(actmsg,self.sock)
         except Exception as e:
             print(f'Exception occured in think: {type(e).__name__}: {e} \n {traceback.format_exc()}')
 
@@ -128,4 +133,4 @@ class Agent(ABC):
         msg.urn=urn.Command.AK_REST
         msg.components['Agent ID'].entityID=self.id
         msg.components['Time'].intValue=time
-        rcrs_encoding_utils.write_msg(msg,self.sock)
+        return msg
