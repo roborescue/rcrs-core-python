@@ -58,6 +58,7 @@ class Agent(ABC):
     
     def handleKASense(self,msg):
         overtime=False
+        import socket
         if(self.sock.recv(1,socket.MSG_PEEK)):
             print("next cycle is recevied but you are still in the previous one")
             overtime=True
