@@ -1,6 +1,5 @@
 from core.Agent import Agent
-from core.RCRSProto_pb2 import EntityURN
-from core.RCRSProto_pb2 import PropertyURN
+import core.urn as urn
 class Civilian(Agent):
     def __init__(self):
         pass
@@ -10,7 +9,7 @@ class Civilian(Agent):
 
     #override
     def requestedEntityTypes(self):
-        return [EntityURN.CIVILIAN,EntityURN.AMBULANCE_TEAM,EntityURN.POLICE_FORCE,EntityURN.FIRE_BRIGADE]
+        return [urn.Entity.CIVILIAN,urn.Entity.AMBULANCE_TEAM,urn.Entity.POLICE_FORCE,urn.Entity.FIRE_BRIGADE]
         
     
     #override
@@ -25,15 +24,15 @@ class Civilian(Agent):
         myentity=self.world.get(self.id)
         print(f'I am {myentity!s}')
         #sample get property:
-        p=myentity.getProp(PropertyURN.HP)
-        if(p.defined):
-            hp=p.intValue
-            print(f'my hp is: {hp} my entity is: {myentity!r}')
+        hp=myentity.getProp(urn.Property.HP)
+        if hp == None:
+            print(f'my hp is undefined my entity id is: {myentity.id}')
         else:
-            print(f'my hp is undifined my entity id is: {myentity.id}')
+            print(f'my hp is: {hp} my entity is: {myentity!r}')
+            
         # sample get All Buildings
-        buildings=self.world.getTypes(EntityURN.BUILDING)
-        road_buidling=self.world.getTypes([EntityURN.BUILDING,EntityURN.ROAD])
+        buildings=self.world.getTypes(urn.Entity.BUILDING)
+        road_buidling=self.world.getTypes([urn.Entity.BUILDING,urn.Entity.ROAD])
         print(f'building size={len(buildings)} building_road size={len(road_buidling)}')
         print(f'visible entities= {self.world.visibleEntities.keys()}')
         await self.rest(time)

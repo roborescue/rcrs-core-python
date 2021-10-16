@@ -1,4 +1,4 @@
-from core.RCRSProto_pb2 import EntityURN,PropertyURN
+import core.urn as urn
 class Entity:
     
     def __init__(self,urn,id):
@@ -13,15 +13,16 @@ class Entity:
     
     def getProp(self,purn):
         return self.properties.get(purn,None)
+
     def setProp(self,purn,val):
         self.properties[purn]=val
 
     def __str__(self):
-        return f'{EntityURN.Name(self.urn)}({self.id})'
+        return f'{self.urn.name}({self.id})'
 
     def __repr__(self):
         s= f'{self!s}\n'
         for p in self.properties:
             pstr=str.replace(f'{self.properties[p]}','\n',', ')
-            s+=f'\t {pstr}\n'
+            s+=f'\t {p.name}= {pstr}\n'
         return s
