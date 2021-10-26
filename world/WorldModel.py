@@ -1,5 +1,5 @@
 import core.RCRSProto_pb2 as RCRSProto_pb2
-import core.urn as urn
+import core.URN as URN
 from world.Entity import Entity
 class WorldModel:
     visibleEntities={}
@@ -8,12 +8,13 @@ class WorldModel:
         self._entitiesById={}
         self._entitiesByType={}
         pass
+
     def addEntitiesProto(self,entities):
         for e in entities:
-            entity=Entity(urn.MAP[e.urn],e.entityID)
+            entity=Entity(URN.MAP[e.urn],e.entityID)
             for p in e.properties:
                 value= getattr(p,p.WhichOneof('value')) if p.defined else None
-                entity.setProp(urn.MAP[p.urn], value)
+                entity[URN.MAP[p.urn]]=value
             self.addEntity(entity)
 
     def addEntity(self,entity):
@@ -35,12 +36,12 @@ class WorldModel:
         for change in changeSet.changes:
             entity=self.get(change.entityID)
             if(entity==None):
-                entity=Entity(urn.MAP[change.urn],change.entityID)
+                entity=Entity(URN.MAP[change.urn],change.entityID)
                 self.addEntity(entity)
             self.visibleEntities[entity.id]=(entity);
             for p in change.properties:
                 value= getattr(p,p.WhichOneof('value')) if p.defined else None
-                entity.setProp(urn.MAP[p.urn], value)
+                entity[URN.MAP[p.urn]]= value
                 # entity.setProp(p.urn,p)
 
         for entityID in changeSet.deletes :

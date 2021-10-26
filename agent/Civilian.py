@@ -1,5 +1,5 @@
 from core.Agent import Agent
-import core.urn as urn
+import core.URN as URN
 class Civilian(Agent):
     def __init__(self):
         pass
@@ -9,7 +9,7 @@ class Civilian(Agent):
 
     #override
     def requestedEntityTypes(self):
-        return [urn.Entity.CIVILIAN,urn.Entity.AMBULANCE_TEAM,urn.Entity.POLICE_FORCE,urn.Entity.FIRE_BRIGADE]
+        return [URN.Entity.CIVILIAN,URN.Entity.AMBULANCE_TEAM,URN.Entity.POLICE_FORCE,URN.Entity.FIRE_BRIGADE]
         
     
     #override
@@ -19,12 +19,18 @@ class Civilian(Agent):
 
     #override
     def think(self,time,changeSet,hear,overtime):
-        print(f'thinking time={time}')
+        print(f'thinking time={time} overtime={overtime}')
         #sample get entity:
         myentity=self.world[self.id] # euvalent > myentity=self.world.get(self.id)
         print(f'I am {myentity!s}')
         #sample get property:
-        hp=myentity[urn.Property.HP] #equvalent> hp=myentity.getProp(urn.Property.HP)
+        hp=myentity[URN.Property.HP] #equvalent> hp=myentity.getProp(urn.Property.HP)
+        
+        
+        myentity.get_position()
+        
+        human[URN.Property.EDGES]
+
         if not hp:
             print(f'my hp is: {hp} my entity is: {myentity!r}')
         else:
@@ -32,8 +38,10 @@ class Civilian(Agent):
             
             
         # sample get All Buildings
-        buildings=self.world.getTypes(urn.Entity.BUILDING)
-        road_buidling=self.world.getTypes([urn.Entity.BUILDING,urn.Entity.ROAD])
+        buildings=self.world.getTypes(URN.Entity.BUILDING)
+        road_buidling=self.world.getTypes([URN.Entity.BUILDING,URN.Entity.ROAD])
         print(f'building size={len(buildings)} building_road size={len(road_buidling)}')
         print(f'visible entities= {[f"{e!s}" for e in self.world.visibleEntities.values()]}')
+        # import time
+        # time.sleep(3)
         return self.rest(time)
