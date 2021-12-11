@@ -1,9 +1,10 @@
+from connection import URN
 from entities.standardEntityURN import StandardEntityURN
 from entities.building import Building
 
 
 class FireStationEntity(Building):
-    urn = StandardEntityURN.FIRE_STATION.value
+    urn = URN.Entity.FIRE_STATION
 
     def __init__(self, entity_id):
         super().__init__(entity_id)

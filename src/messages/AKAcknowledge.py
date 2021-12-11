@@ -1,29 +1,21 @@
+from connection import URN
 from messages.message import Message
-import messages.ControlMessageProto_pb2 as protoBuf
-from messages.controlMessageURN import ControlMessageURN
-
+from connection import RCRSProto_pb2
 
 class AKAcknowledge(Message):
 
     def __init__(self):
         super().__init__()
-        self.urn = ControlMessageURN.AK_ACKNOWLEDGE.value
+        self.urn = URN.ControlMSG.AK_ACKNOWLEDGE
         self.request_id = None
         self.agent_id = None
 
         self.message = None
 
-    def set_request_id(self, id):
-        self.request_id = id
-
-    def set_agent_id(self, id):
-        self.agent_id = id
-
-    def prepare_message(self):
-        self.message = self.write()
-
-    def write(self):
-        akAck = protoBuf.AKAcknowledgeProto()
-        akAck.requestID = self.request_id
-        akAck.agentID = self.agent_id
-        return akAck.SerializeToString()
+    def prepare_message(self, request_id, agent_id):
+        msg = RCRSProto_pb2.MessageProto()
+        msg.urn = URN.ControlMSG.AK_ACKNOWLEDGE
+        msg.components[URN.ComponentControlMSG.RequestID].intValue = request_id
+        msg.components[URN.ComponentControlMSG.AgentID].entityID = agent_id.get_value()
+        return msg
+       

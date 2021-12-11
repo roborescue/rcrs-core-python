@@ -1,3 +1,4 @@
+from connection import URN
 from properties.standardPropertyURN import StandardPropertyURN
 from entities.standardEntityURN import StandardEntityURN
 from entities.human import Human
@@ -9,17 +10,15 @@ class FireBrigadeEntity(Human):
 
     def __init__(self, entity_id):
         super().__init__(entity_id)
-        self.water = IntProperty(StandardPropertyURN.WATER_QUANTITY.value)
+        self.water = IntProperty(URN.Property.WATER_QUANTITY)
 
         self.register_properties([self.water])
 
     def set_entity(self, properties):
         super().set_entity(properties)
         for key, values in properties.items():
-            _type = StandardPropertyURN.from_string(key)
-
-            if _type == StandardPropertyURN.WATER_QUANTITY.name:
-                self.water.set_value(values[0].valueInt)
+            if key == URN.Property.WATER_QUANTITY:
+                self.water.set_value(values)
 
     def copy_impl(self):
         return FireBrigadeEntity(self.get_id())
@@ -28,9 +27,7 @@ class FireBrigadeEntity(Human):
         return "Fire brigade"
 
     def get_property(self, urn):
-        _type = StandardPropertyURN.from_string(urn)
-
-        if(_type == StandardPropertyURN.WATER_QUANTITY.value):
+        if urn == URN.Property.WATER_QUANTITY:
             return self.water
         else:
             return super().get_property(urn)

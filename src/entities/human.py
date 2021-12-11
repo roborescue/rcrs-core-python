@@ -1,4 +1,4 @@
-from properties.standardPropertyURN import StandardPropertyURN
+from connection import URN
 from entities.entity import Entity
 from properties.intProperty import IntProperty
 from properties.entityIDProperty import EntityIDProperty
@@ -8,14 +8,14 @@ from properties.intArrayProperty import IntArrayProperty
 class Human(Entity):
     def __init__(self, entity_id):
         super().__init__(entity_id)
-        self.travel_distance = IntProperty(StandardPropertyURN.TRAVEL_DISTANCE.value)
-        self.position = EntityIDProperty(StandardPropertyURN.POSITION.value)
-        self.position_history = IntArrayProperty(StandardPropertyURN.POSITION_HISTORY.value)
-        self.direction = IntProperty(StandardPropertyURN.DIRECTION.value)
-        self.stamina = IntProperty(StandardPropertyURN.STAMINA.value)
-        self.hp = IntProperty(StandardPropertyURN.HP.value)
-        self.damage = IntProperty(StandardPropertyURN.DAMAGE.value)
-        self.buriedness = IntProperty(StandardPropertyURN.BURIEDNESS.value)
+        self.travel_distance = IntProperty(URN.Property.TRAVEL_DISTANCE)
+        self.position = EntityIDProperty(URN.Property.POSITION)
+        self.position_history = IntArrayProperty(URN.Property.POSITION_HISTORY)
+        self.direction = IntProperty(URN.Property.DIRECTION)
+        self.stamina = IntProperty(URN.Property.STAMINA)
+        self.hp = IntProperty(URN.Property.HP)
+        self.damage = IntProperty(URN.Property.DAMAGE)
+        self.buriedness = IntProperty(URN.Property.BURIEDNESS)
 
         self.register_properties(
             [self.travel_distance, self.position, self.position_history])
@@ -34,58 +34,52 @@ class Human(Entity):
     def set_entity(self, properties: dict):
         super().set_entity(properties)
         for key, values in properties.items():
-            _type = StandardPropertyURN.from_string(key)
 
-            if _type == StandardPropertyURN.POSITION.name:
-                self.position.set_value(values[0].valueInt)
+            if key == URN.Property.POSITION:
+                self.position.set_value(values)
 
-            elif _type == StandardPropertyURN.POSITION_HISTORY.name:
-                _values = []
-                for position in values[0].listInt.values:
-                    _values.append(position)
+            elif key == URN.Property.POSITION_HISTORY:
+                self.position_history.set_value(values)
 
-                self.position_history.set_value(_values)
+            elif key == URN.Property.DIRECTION:
+                self.direction.set_value(values)
 
-            elif _type == StandardPropertyURN.DIRECTION.name:
-                self.direction.set_value(values[0].valueInt)
+            elif key == URN.Property.STAMINA:
+                self.stamina.set_value(values)
 
-            elif _type == StandardPropertyURN.STAMINA.name:
-                self.stamina.set_value(values[0].valueInt)
+            elif key == URN.Property.HP:
+                self.hp.set_value(values)
 
-            elif _type == StandardPropertyURN.HP.name:
-                self.hp.set_value(values[0].valueInt)
+            elif key == URN.Property.DAMAGE:
+                self.damage.set_value(values)
 
-            elif _type == StandardPropertyURN.DAMAGE.name:
-                self.damage.set_value(values[0].valueInt)
+            elif key == URN.Property.BURIEDNESS:
+                self.buriedness.set_value(values)
 
-            elif _type == StandardPropertyURN.BURIEDNESS.name:
-                self.buriedness.set_value(values[0].valueInt)
-
-            elif _type == StandardPropertyURN.TRAVEL_DISTANCE.name:
-                self.travel_distance.set_value(values[0].valueInt)
+            elif key == URN.Property.TRAVEL_DISTANCE:
+                self.travel_distance.set_value(values)
 
     def get_property(self, urn):
-        _type = StandardPropertyURN.from_string(urn)
 
-        if(_type == StandardPropertyURN.POSITION.value):
+        if(urn == URN.Property.POSITION):
             return self.position
-        elif(_type == StandardPropertyURN.POSITION_HISTORY.value):
+        elif(urn == URN.Property.POSITION_HISTORY):
             return self.position_history
-        elif(_type == StandardPropertyURN.DIRECTION.value):
+        elif(urn == URN.Property.DIRECTION):
             return self.direction
-        elif(_type == StandardPropertyURN.STAMINA.value):
+        elif(urn == URN.Property.STAMINA):
             return self.stamina
-        elif(_type == StandardPropertyURN.HP.value):
+        elif(urn == URN.Property.HP):
             return self.hp
-        elif(_type == StandardPropertyURN.X.value):
+        elif(urn == URN.Property.X):
             return self.x
-        elif(_type == StandardPropertyURN.Y.value):
+        elif(urn == URN.Property.Y):
             return self.y
-        elif(_type == StandardPropertyURN.DAMAGE.value):
+        elif(urn == URN.Property.DAMAGE):
             return self.damage
-        elif(_type == StandardPropertyURN.BURIEDNESS.value):
+        elif(urn == URN.Property.BURIEDNESS):
             return self.buriedness
-        elif(_type == StandardPropertyURN.TRAVEL_DISTANCE.value):
+        elif(urn == URN.Property.TRAVEL_DISTANCE):
             return self.travel_distance
         else:
             return super().get_property(urn)

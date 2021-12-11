@@ -1,7 +1,9 @@
 
 class EntityID:
-    def __init__(self, _id):
-        self.id = _id
+    def __init__(self, id: int):
+        if isinstance(id, EntityID):
+            assert()
+        self.id = id
         
     def __eq__(self, other):
         if isinstance(other, EntityID):

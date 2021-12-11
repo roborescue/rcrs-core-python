@@ -4,27 +4,24 @@ from worldmodel.entityID import EntityID
 
 
 class EdgeListProperty(Property):
-    EDGES = 0
-
     def __init__(self, urn):
         super().__init__(urn)
+        self.value = []
 
     def get_fields(self):
         pass
 
-    def set_fields(self, fields):
+    def set_fields(self, data):
         _values = []
-        edges = fields.get(EdgeListProperty.EDGES)
+        edges = data.edges
 
         for i in range(len(edges)):
-
-            if edges[i][4] == -1:
-                
-                edge = Edge(edges[i][0], edges[i][1],
-                            edges[i][2], edges[i][3], None)
+            if edges[i].neighbour == -1:
+                edge = Edge(edges[i].startX, edges[i].startY,
+                            edges[i].endX, edges[i].endY, None)
             else:
-                edge = Edge(edges[i][0], edges[i][1], edges[i]
-                            [2], edges[i][3], EntityID(edges[i][4]))
+                edge = Edge(edges[i].startX, edges[i].startY, edges[i]
+                            .endX, edges[i].endY, EntityID(edges[i].neighbour))
 
             _values.append(edge)
 

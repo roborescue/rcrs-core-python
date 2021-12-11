@@ -1,3 +1,4 @@
+from constants.constants import ENTITY_FACTORY_KEY
 from properties.property import Property
 from worldmodel.entityID import EntityID
 
@@ -5,10 +6,10 @@ from worldmodel.entityID import EntityID
 class EntityIDProperty(Property):
     def __init__(self, urn):
         super().__init__(urn)
-        self.VALUE = 0
+        self.value = EntityID(0)
 
-    def set_fields(self, fields):
-        self.value = EntityID(fields.fields[0].valueInt)
+    def set_fields(self, value):
+        self.value = EntityID(value)
         self.set_defined()
 
     def copy(self):

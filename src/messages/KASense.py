@@ -1,4 +1,5 @@
 from commands.Command import Command
+from connection import URN, RCRSProto_pb2
 from properties.standardPropertyFactory import StandardPropertyFactory
 from worldmodel.changeSet import ChangeSet
 import messages.ControlMessageProto_pb2 as protoBuf
@@ -9,13 +10,13 @@ from messages.message import Message
 
 class KASense(Message):
 
-    def __init__(self, _data):
+    def __init__(self, data: RCRSProto_pb2):
         super().__init__()
         self.urn = ControlMessageURN.KA_SENSE.value
         self.agent_id = None
         self.time = None
         self.updates = None
-        self.data = _data
+        self.data = data
         self.change_set = ChangeSet()
         self.hear = []
         self.read()
@@ -30,37 +31,35 @@ class KASense(Message):
         return self.hear
 
     def read(self):
-        kaSenseProto = protoBuf.KASenseProto()
-        kaSenseProto.ParseFromString(self.data)
-        self.agent_id = kaSenseProto.agentID
-        self.time = kaSenseProto.time
 
-        changes_map = kaSenseProto.changes.changes
-        entities_urns = kaSenseProto.changes.entitiesURNs
-        for entity_id_proto in changes_map.keys():
-            entity_id = EntityID(entity_id_proto)
-            urn = entities_urns.get(entity_id_proto)
+        self.agent_id = self.data.components[URN.ComponentControlMSG.AgentID].entityID
+        self.time = self.data.components[URN.ComponentControlMSG.Time].intValue
+        changes = self.data.components[URN.ComponentControlMSG.Updates].changeSet
+        hears = self.data.components[URN.ComponentControlMSG.Hearing].commandList
 
-            property_map_proto = changes_map.get(entity_id_proto)
-            for property_urn in property_map_proto.property.keys():
-                property = StandardPropertyFactory.make_property(property_urn)
-                if property is not None:
-                    fields = property_map_proto.property.get(property_urn)
-                    property.set_fields(fields)
+        for change in changes.changes:
+            entity_id = EntityID(change.entityID)
+            for p in change.properties:
+                property_urn = URN.MAP[p.urn]
+                _property = StandardPropertyFactory.make_property(property_urn)
+                value = getattr(p, p.WhichOneof('value')) if p.defined else None
+                if _property is not None and value is not None:
+                    _property.set_fields(value)
+                    self.change_set.add_change(entity_id, change.urn, _property)
 
-                    self.change_set.add_change(entity_id, urn, property)
 
-        for _entity_id in kaSenseProto.changes.deletes:
-            self.change_set.entity_deleted(EntityID(_entity_id))
 
-        for command_proto in kaSenseProto.hears:
-            _urn = command_proto.urn
-            _fields = command_proto.fields
+        for entity_id in changes.deletes:
+            self.change_set.entity_deleted(EntityID(entity_id))
 
-            #print(_urn, _fields)
+        # for command in hears:
+        #     urn = command.urn
+        #     fields = command.fields
 
-            command = Command()
-            command.set_urn(_urn)
+        #     #print(_urn, _fields)
+
+        #     command = Command()
+        #     command.set_urn(urn)
 
     def write(self):
         pass

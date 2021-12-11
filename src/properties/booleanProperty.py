@@ -4,10 +4,10 @@ from properties.property import Property
 class BooleanProperty(Property):
     def __init__(self, urn):
         super().__init__(urn)
-        self.VALUE = 0
+        self.value = 0
 
-    def set_fields(self, fields):
-        self.value = bool(fields.fields[0].valueBool)
+    def set_fields(self, value):
+        self.value = bool(value)
         self.set_defined()
 
     def copy(self):

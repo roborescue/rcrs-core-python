@@ -1,9 +1,9 @@
+from connection import URN
 from entities.entity import Entity
 from properties.entityIDProperty import EntityIDProperty
 from properties.intArrayProperty import IntArrayProperty
 from properties.intProperty import IntProperty
 from entities.standardEntityURN import StandardEntityURN
-from properties.standardPropertyURN import StandardPropertyURN
 
 
 class Blockade(Entity):
@@ -11,9 +11,9 @@ class Blockade(Entity):
 
     def __init__(self, entity_id):
         super().__init__(entity_id)
-        self.position = EntityIDProperty(StandardPropertyURN.POSITION.value)
-        self.apexes = IntArrayProperty(StandardPropertyURN.APEXES.value)
-        self.repair_cost = IntProperty(StandardPropertyURN.REPAIR_COST.value)
+        self.position = EntityIDProperty(URN.Property.POSITION)
+        self.apexes = IntArrayProperty(URN.Property.APEXES)
+        self.repair_cost = IntProperty(URN.Property.REPAIR_COST)
         self.shape = None
 
         self.register_properties(
@@ -26,32 +26,29 @@ class Blockade(Entity):
         super().set_entity(properties)
 
         for key, values in properties.items():
-            _type = StandardPropertyURN.from_string(key)
+            if key == URN.Property.POSITION:
+                self.position.set_value(values)
 
-            if _type == StandardPropertyURN.POSITION.name:
-                self.position.set_value(values[0].valueInt)
+            elif key == URN.Property.REPAIR_COST:
+                self.repair_cost.set_value(values)
 
-            elif _type == StandardPropertyURN.REPAIR_COST.name:
-                self.repair_cost.set_value(values[0].valueInt)
-
-            elif _type == StandardPropertyURN.APEXES.name:
-                self.apexes.set_value(values[0].listInt.values)
+            elif key == URN.Property.APEXES:
+                self.apexes.set_value(values)
 
     def copy_impl(self):
         return Blockade(self.get_id())
 
     def get_property(self, urn):
-        _type = StandardPropertyURN.from_string(urn)
 
-        if(_type == StandardPropertyURN.X.value):
+        if(urn == URN.Property.X):
             return self.x
-        elif(_type == StandardPropertyURN.Y.value):
+        elif(urn == URN.Property.Y):
             return self.y
-        elif(_type == StandardPropertyURN.POSITION.value):
+        elif(urn == URN.Property.POSITION):
             return self.position
-        elif(_type == StandardPropertyURN.APEXES.value):
+        elif(urn == URN.Property.APEXES):
             return self.apexes
-        elif(_type == StandardPropertyURN.REPAIR_COST.value):
+        elif(urn == URN.Property.REPAIR_COST):
             return self.repair_cost
         else:
             return super().get_property(urn)

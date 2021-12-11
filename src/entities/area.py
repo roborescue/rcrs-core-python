@@ -1,17 +1,15 @@
-from entities.blockade import Blockade
+from connection import URN
 from entities.entity import Entity
 from properties.edgeListProperty import EdgeListProperty
 from properties.entityIDListProperty import EntityIDListProperty
-from properties.standardPropertyURN import StandardPropertyURN
 from entities.edge import Edge
 
 
 class Area(Entity):
     def __init__(self, entity_id):
         super().__init__(entity_id)
-        self.edges = EdgeListProperty(StandardPropertyURN.EDGES.value)
-        self.blockades = EntityIDListProperty(
-            StandardPropertyURN.BLOCKADES.value)
+        self.edges = EdgeListProperty(URN.Property.EDGES)
+        self.blockades = EntityIDListProperty(URN.Property.BLOCKADES)
 
         #self.apexes = None
         self.neighbours = None
@@ -22,18 +20,16 @@ class Area(Entity):
     def set_entity(self, properties):
         super().set_entity(properties)
         for key, values in properties.items():
-            _type = StandardPropertyURN.from_string(key)
+            if key == URN.Property.EDGES:
+                self.edges.set_fields(values)
+                # egdes_list = []
+                # for edges in values.edges:
+                #     edge = Edge(edges.startX, edges.startY, edges.endX, edges.endY, edges.neighbour)
+                #     egdes_list.append(edge)
+                # self.edges.set_value(egdes_list)
 
-            if _type == StandardPropertyURN.EDGES.name:
-                egdes_list = []
-                for edges in values[0].matrixInt.values:
-                    edge = Edge(
-                        edges.values[0], edges.values[1], edges.values[2], edges.values[3], edges.values[4])
-                    egdes_list.append(edge)
-                self.edges.set_value(egdes_list)
-
-            elif _type == StandardPropertyURN.BLOCKADES.name:
-                self.blockades.set_value(values[0].listInt.values)
+            elif key == URN.Property.BLOCKADES:
+                self.blockades.set_value(values)
 
     # def get_apexes(self):
     #     if self.apexes is None:
@@ -66,15 +62,14 @@ class Area(Entity):
         return None
 
     def get_property(self, urn):
-        _type = StandardPropertyURN.from_string(urn)
 
-        if(_type == StandardPropertyURN.X.value):
+        if(urn == URN.Property.X):
             return self.x
-        elif(_type == StandardPropertyURN.Y.value):
+        elif(urn == URN.Property.Y):
             return self.y
-        elif(_type == StandardPropertyURN.EDGES.value):
+        elif(urn == URN.Property.EDGES):
             return self.edges
-        elif(_type == StandardPropertyURN.BLOCKADES.value):
+        elif(urn == URN.Property.BLOCKADES):
             return self.blockades
         else:
             return super().get_property(urn)

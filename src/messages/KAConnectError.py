@@ -1,21 +1,17 @@
 from messages.message import Message
-from messages.controlMessageURN import ControlMessageURN
-import messages.ControlMessageProto_pb2 as protoBuf
+from connection import URN
+from connection import RCRSProto_pb2
 
 
 class KAConnectError(Message):
 
     def __init__(self, data):
         Message.__init__(self)
-        self.urn = ControlMessageURN.KA_CONNECT_ERROR.value
+        self.urn = URN.ControlMSG.GK_CONNECT_ERROR
         self.data = data
         self.read()
 
     def read(self):
-        err = protoBuf.KAConnectErrorProto()
-        err.ParseFromString(self.data)
-        self.request_id = err.requestID
-        self.reason = err.reason
+        self.request_id = self.data.components[URN.ComponentControlMSG.RequestID].intValue
+        self.reason = self.data.components[URN.ComponentControlMSG.Reason].stringValue
 
-    def write(self):
-        pass

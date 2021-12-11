@@ -5,13 +5,16 @@ from messages.KAConnectError import KAConnectError
 from messages.KASense import KASense
 from messages.AKConnect import AKConnect
 from messages.AKCommand import AKCommand
-from messages.Shutdown import Shutdown
 from commands.AKSubscribe import AKSubscribe
 import queue
 from worldmodel.entityID import EntityID
 from worldmodel.worldmodel import WorldModel
 import random
+import sys
 from log.logger import Logger
+
+from messages.controlMessageFactory import ControlMessageFactory
+
 
 
 class Agent:
@@ -27,65 +30,65 @@ class Agent:
         self.agent_id = None
         self.queue = queue.Queue()
 
-        
     def get_name(self):
         return self.name
 
     def get_id(self):
         return self.agent_id
 
-    def set_connection_send_func(self, send_func):
-        self.send_msg = send_func
+    def set_send_msg(self, connection_send_func):
+        self.send_msg = connection_send_func
 
     def start_up(self, request_id):
-        self.connect_request_id = request_id
-        akconnect_msg = AKConnect()
-        akconnect_msg.set_agent(self)
-        akconnect_msg.prepare_message()
-        self.send_msg(akconnect_msg)
+
+        ak_connect = AKConnect()
+        self.send_msg(ak_connect.prepare_message(request_id, self))
 
     def test_sucsses(self):
         return self.queue.get()
 
     def message_received(self, msg):
-        if isinstance(msg, KASense):
-            self.process_sense(msg)
-        elif isinstance(msg, KAConnectOK):
-            self.handle_connect_ok(msg)
-        elif isinstance(msg, KAConnectError):
-            self.handle_connect_error(msg)
+        c_msg = ControlMessageFactory().make_message(msg)
         
+        if isinstance(c_msg, KASense):
+            self.process_sense(c_msg)
+        elif isinstance(c_msg, KAConnectOK):
+            self.handle_connect_ok(c_msg)
+        elif isinstance(c_msg, KAConnectError):
+            self.handle_connect_error(c_msg)
+
     def handle_connect_error(self, msg):
         Log = Logger(self.get_name())
-        Log.warning("failed : " + msg.reason)
+        Log.warning( 'failed {0} : {1}'.format(msg.request_id, msg.reason) )
         self.queue.put(False)
+        sys.exit(1)
 
     def handle_connect_ok(self, msg):
-        print('handle_connect_ok(msg): ', msg.request_id, msg.agent_id)
-        self.queue.put(True)
         self.agent_id = EntityID(msg.agent_id)
-        # entities received from server should be merged to the world model
-        world = msg.world
-
-        self.world_model.add_entities(world)
-
-        # configs received from server
+        self.world_model.add_entities(msg.world)
         self.config = msg.config
 
-        ack_msg = AKAcknowledge()
-        ack_msg.set_agent_id(msg.agent_id)
-        ack_msg.set_request_id(msg.request_id)
-        ack_msg.prepare_message()
-        self.send_msg(ack_msg)
+        self.sendAKAcknowledge(msg.request_id)
 
-        self.post_connect(world, self.agent_id)
- 
+        self.queue.put(True)
+
+
+    def sendAKAcknowledge(self, request_id):
+        ak_ack = AKAcknowledge()
+        self.send_msg(ak_ack.prepare_message(request_id, self.agent_id))
+
     def get_position(self):
         return self.world_model.get_entity(self.get_id()).get_position()
 
     def process_sense(self, msg):
-        self.world_model.merge(msg.get_change_set())
-        self.think(msg.get_time(), msg.get_change_set(), msg.get_hearing())
+
+        _id = msg.agent_id
+        time = msg.time
+        change_set = msg.change_set
+        hear = msg.hear
+
+        self.world_model.merge(change_set)
+        self.think(time, change_set, hear)
 
     def random_walk(self):
         # calculate 10 step path
@@ -97,9 +100,11 @@ class Agent:
             for edge in edges:
                 if edge.get_neighbour() is not None:
                     neighbors.append(edge.get_neighbour())
-            next = random.choice(neighbors)
-            path.append(next)
-            start_pos = EntityID(next)
+            if neighbors:
+                next = random.choice(neighbors)
+                path.append(next)
+                start_pos = next
+            start_pos = EntityID(self.get_position())
 
         return path
 
@@ -108,5 +113,3 @@ class Agent:
         akcommand.add_command(AKSubscribe(self.agent_id(), time, channel))
 
         self.send_msg(akcommand)
-
-    

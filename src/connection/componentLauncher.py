@@ -12,11 +12,12 @@ class ComponentLauncher:
 
     def connect(self, agent, _request_id):
         connection = self.make_connection()
-        connection.set_message_received_func(agent.message_received)
         connection.connect()
-        agent.set_connection_send_func(connection.send_msg)
+        connection.message_received(agent.message_received)
+        agent.set_send_msg(connection.send_msg)
         agent.start_up(_request_id)
         #return agent.test_sucsses()
+        connection.parseMessageFromKernel()
 
     def generate_request_ID(self):
         self.request_id += 1

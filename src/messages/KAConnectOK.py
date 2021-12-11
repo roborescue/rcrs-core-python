@@ -1,41 +1,34 @@
 from messages.message import Message
-import messages.ControlMessageProto_pb2 as protoBuf
-from messages.controlMessageURN import ControlMessageURN
 from config.config import Config
 from entities.standardEntityFactory import StandardEntityFactory
-from properties.standardPropertyURN import StandardPropertyURN
-from entities.standardEntityURN import StandardEntityURN
+from connection import URN
 
 
 class KAConnectOK(Message):
 
     def __init__(self, data):
-        self.urn = ControlMessageURN.KA_CONNECT_OK.value
-        self.data = bytes(data)
+        self.urn = URN.ControlMSG.KA_CONNECT_OK
+        self.data = data
         self.config = Config()
         self.world = []
         self.read()
 
     def read(self):
-        kaConnectok = protoBuf.KAConnectOKProto()
-        kaConnectok.ParseFromString(self.data)
-        self.request_id = kaConnectok.requestID
-        self.agent_id = kaConnectok.agentID
-        for entity_proto in kaConnectok.entities:
 
-            _urn = StandardEntityURN.from_id(entity_proto.urnID)
-            entity = StandardEntityFactory.make_entity(
-                _urn, entity_proto.entityID)
+        entities = self.data.components[URN.ComponentControlMSG.Entities].entityList.entities
+        self.request_id = self.data.components[URN.ComponentControlMSG.RequestID].intValue
+        self.agent_id = self.data.components[URN.ComponentControlMSG.AgentID].entityID
+        config = self.data.components[URN.ComponentControlMSG.AgentConfig].config
+
+        for e in entities:
+            entity = StandardEntityFactory.make_entity(URN.MAP[e.urn], e.entityID)
             properties = {}
-            for property_proto in entity_proto.properties:
-                properties[StandardPropertyURN.from_id(
-                    property_proto.urnID)] = property_proto.fields
-
+            for property in e.properties:
+                value = getattr(property, property.WhichOneof('value')) if property.defined else None
+                properties[URN.MAP[property.urn]] = value
             entity.set_entity(properties)
             self.world.append(entity)
 
-        for key, value in kaConnectok.config.data.items():
+        for key, value in config.data.items():
             self.config.set_value(key, value)
 
-    def write(self):
-        pass

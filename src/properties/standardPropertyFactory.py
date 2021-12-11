@@ -1,4 +1,4 @@
-from properties.standardPropertyURN import StandardPropertyURN
+from connection import URN
 from properties.intProperty import IntProperty
 from properties.intArrayProperty import IntArrayProperty
 from properties.booleanProperty import BooleanProperty
@@ -12,76 +12,74 @@ class StandardPropertyFactory:
         pass
 
     def make_property(urn):
-
-        if urn == StandardPropertyURN.START_TIME.value:
+        if urn == URN.Property.START_TIME:
             return IntProperty(urn)
-        if urn == StandardPropertyURN.LONGITUDE.value:
+        if urn == URN.Property.LONGITUDE:
             return IntProperty(urn)
-        if urn == StandardPropertyURN.LATITUDE.value:
+        if urn == URN.Property.LATITUDE:
             return IntProperty(urn)
-        if urn == StandardPropertyURN.WIND_FORCE.value:
+        if urn == URN.Property.WIND_FORCE:
             return IntProperty(urn)
-        if urn == StandardPropertyURN.WIND_DIRECTION.value:
+        if urn == URN.Property.WIND_DIRECTION:
             return IntProperty(urn)
-        if urn == StandardPropertyURN.X.value:
+        if urn == URN.Property.X:
             return IntProperty(urn)
-        if urn == StandardPropertyURN.Y.value:
+        if urn == URN.Property.Y:
             return IntProperty(urn)
-        if urn == StandardPropertyURN.FLOORS.value:
+        if urn == URN.Property.FLOORS:
             return IntProperty(urn)
-        if urn == StandardPropertyURN.BUILDING_ATTRIBUTES.value:
+        if urn == URN.Property.BUILDING_ATTRIBUTES:
             return IntProperty(urn)
-        if urn == StandardPropertyURN.FIERYNESS.value:
+        if urn == URN.Property.FIERYNESS:
             return IntProperty(urn)
-        if urn == StandardPropertyURN.BROKENNESS.value:
+        if urn == URN.Property.BROKENNESS:
             return IntProperty(urn)
-        if urn == StandardPropertyURN.BUILDING_CODE.value:
+        if urn == URN.Property.BUILDING_CODE:
             return IntProperty(urn)
-        if urn == StandardPropertyURN.BUILDING_AREA_GROUND.value:
+        if urn == URN.Property.BUILDING_AREA_GROUND:
             return IntProperty(urn)
-        if urn == StandardPropertyURN.BUILDING_AREA_TOTAL.value:
+        if urn == URN.Property.BUILDING_AREA_TOTAL:
             return IntProperty(urn)
-        if urn == StandardPropertyURN.DIRECTION.value:
+        if urn == URN.Property.DIRECTION:
             return IntProperty(urn)
-        if urn == StandardPropertyURN.STAMINA.value:
+        if urn == URN.Property.STAMINA:
             return IntProperty(urn)
-        if urn == StandardPropertyURN.HP.value:
+        if urn == URN.Property.HP:
             return IntProperty(urn)
-        if urn == StandardPropertyURN.DAMAGE.value:
+        if urn == URN.Property.DAMAGE:
             return IntProperty(urn)
-        if urn == StandardPropertyURN.BURIEDNESS.value:
+        if urn == URN.Property.BURIEDNESS:
             return IntProperty(urn)
-        if urn == StandardPropertyURN.WATER_QUANTITY.value:
+        if urn == URN.Property.WATER_QUANTITY:
             return IntProperty(urn)
-        if urn == StandardPropertyURN.TEMPERATURE.value:
+        if urn == URN.Property.TEMPERATURE:
             return IntProperty(urn)
-        if urn == StandardPropertyURN.IMPORTANCE.value:
+        if urn == URN.Property.IMPORTANCE:
             return IntProperty(urn)
-        if urn == StandardPropertyURN.TRAVEL_DISTANCE.value:
+        if urn == URN.Property.TRAVEL_DISTANCE:
             return IntProperty(urn)
-        if urn == StandardPropertyURN.REPAIR_COST.value:
+        if urn == URN.Property.REPAIR_COST:
             return IntProperty(urn)
-        if urn == StandardPropertyURN.APEXES.value:
+        if urn == URN.Property.APEXES:
             return IntArrayProperty(urn)
-        if urn == StandardPropertyURN.POSITION_HISTORY.value:
+        if urn == URN.Property.POSITION_HISTORY:
             return IntArrayProperty(urn)
-        if urn == StandardPropertyURN.IGNITION.value:
+        if urn == URN.Property.IGNITION:
             return BooleanProperty(urn)
-        if urn == StandardPropertyURN.POSITION.value:
+        if urn == URN.Property.POSITION:
             return EntityIDProperty(urn)
-        if urn == StandardPropertyURN.BLOCKADES.value:
+        if urn == URN.Property.BLOCKADES:
             return EntityIDListProperty(urn)
-        if urn == StandardPropertyURN.EDGES.value:
+        if urn == URN.Property.EDGES:
             return EdgeListProperty(urn)
-        if urn == StandardPropertyURN.CAPACITY.value:
+        if urn == URN.Property.CAPACITY:
             return IntProperty(urn)
-        if urn == StandardPropertyURN.BEDCAPACITY.value:
+        if urn == URN.Property.BEDCAPACITY:
             return IntProperty(urn)
-        if urn == StandardPropertyURN.OCCUPIEDBEDS.value:
+        if urn == URN.Property.OCCUPIEDBEDS:
             return IntProperty(urn)
-        if urn == StandardPropertyURN.REFILLCAPACITY.value:
+        if urn == URN.Property.REFILLCAPACITY:
             return IntProperty(urn)
-        if urn == StandardPropertyURN.WAITINGLISTSIZE.value:
+        if urn == URN.Property.WAITINGLISTSIZE:
             return IntProperty(urn)
-
         return None

@@ -12,6 +12,7 @@ from entities.fireStation import FireStationEntity
 from entities.civilian import Civilian
 from entities.hydrant import Hydrant
 from entities.gassStation import GasStation
+from connection import URN
 
 
 class StandardEntityFactory:
@@ -19,31 +20,31 @@ class StandardEntityFactory:
         pass
 
     def make_entity(urn, id):
-        if urn == StandardEntityURN.BUILDING.value:
+        if urn == URN.Entity.BUILDING:
             return Building(id)
-        elif urn == StandardEntityURN.REFUGE.value:
+        elif urn == URN.Entity.REFUGE:
             return Refuge(id)
-        elif urn == StandardEntityURN.ROAD.value:
+        elif urn == URN.Entity.ROAD:
             return Road(id)
-        elif urn == StandardEntityURN.BLOCKADE.value:
+        elif urn == URN.Entity.BLOCKADE:
             return Blockade(id)
-        elif urn == StandardEntityURN.POLICE_FORCE.value:
+        elif urn == URN.Entity.POLICE_FORCE:
             return PoliceForceEntity(id)
-        elif urn == StandardEntityURN.POLICE_OFFICE.value:
+        elif urn == URN.Entity.POLICE_OFFICE:
             return PoliceOfficeEntity(id)
-        elif urn == StandardEntityURN.AMBULANCE_TEAM.value:
+        elif urn == URN.Entity.AMBULANCE_TEAM:
             return AmbulanceTeamEntity(id)
-        elif urn == StandardEntityURN.AMBULANCE_CENTRE.value:
+        elif urn == URN.Entity.AMBULANCE_CENTRE:
             return AmbulanceCentreEntity(id)
-        elif urn == StandardEntityURN.FIRE_BRIGADE.value:
+        elif urn == URN.Entity.FIRE_BRIGADE:
             return FireBrigadeEntity(id)
-        elif urn == StandardEntityURN.FIRE_STATION.value:
+        elif urn == URN.Entity.FIRE_STATION:
             return FireStationEntity(id)
-        elif urn == StandardEntityURN.CIVILIAN.value:
+        elif urn == URN.Entity.CIVILIAN:
             return Civilian(id)
-        elif urn == StandardEntityURN.HYDRANT.value:
+        elif urn == URN.Entity.HYDRANT:
             return Hydrant(id)
-        elif urn == StandardEntityURN.GAS_STATION.value:
+        elif urn == URN.Entity.GAS_STATION:
             return GasStation(id)
 
         return None

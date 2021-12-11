@@ -1,21 +1,21 @@
 from properties.property import Property
 from worldmodel.entityID import EntityID
+from typing import List
 
 
 class EntityIDListProperty(Property):
     def __init__(self, urn):
         super().__init__(urn)
-        self.VALUE = 0
+        self.value = []
 
-    def set_fields(self, fields):
+    def set_fields(self, data):
         _values = []
-        _fields = fields.fields[0].listInt.values
-        for field in _fields:
-            _values.append(EntityID(field))
+        for d in data.values:
+            _values.append(EntityID(d))
         self.value = _values
         self.set_defined()
 
-    def set_value(self, _value):
+    def set_value(self, _value: List[EntityID]):
         if self.value is not None:
             self.value.clear()
             self.value.extend(_value)

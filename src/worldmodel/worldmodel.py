@@ -3,10 +3,13 @@ from entities.standardEntityFactory import StandardEntityFactory
 from entities.human import Human
 from entities.area import Area
 from entities.blockade import Blockade
-
+from connection import URN
 
 from rtree import index
 import sys
+
+from worldmodel.changeSet import ChangeSet
+from worldmodel.entityID import EntityID
 
 
 class WorldModel:
@@ -29,7 +32,7 @@ class WorldModel:
             self.unindexedـetities[entity.get_id()] = entity
         print(len(entities), ' entities added to world_model')
 
-    def get_entity(self, entity_id) -> Entity:
+    def get_entity(self, entity_id: EntityID) -> Entity:
         if entity_id in self.unindexedـetities:
             return self.unindexedـetities.get(entity_id)
 
@@ -44,7 +47,7 @@ class WorldModel:
     def get_entities(self):
         return self.unindexedـetities.values()
 
-    def merge(self, change_set):
+    def merge(self, change_set: ChangeSet):
         for entity_id in change_set.get_changed_entities():
             existing_entity = self.get_entity(entity_id)
             added = False
@@ -57,7 +60,7 @@ class WorldModel:
                 added = True
 
             for property in change_set.get_changed_properties(entity_id):
-                existing_property = existing_entity.get_property(property.get_urn())
+                existing_property = existing_entity.get_property(property.get_urn())    
                 existing_property.take_value(property)
 
             if added:

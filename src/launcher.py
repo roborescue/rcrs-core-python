@@ -1,5 +1,4 @@
 import multiprocessing
-from queue import Empty
 from agents import agent
 from connection.componentLauncher import ComponentLauncher
 from agents.policeForceAgent import PoliceForceAgent
@@ -32,23 +31,14 @@ class Launcher:
 
         processes = []
 
-        p_conn, c_conn = Pipe()
-
-        c_conn.send(True)
         for _ in range(pf):
-            print("befor get")
-            if p_conn.recv():
-                print("after get")
-                request_id = self.launcher.generate_request_ID()
-                
-                process = Process(target=self.launch, args=(PoliceForceAgent(), request_id, c_conn))
-                process.daemon = True
-                process.start()
-                processes.append(process)
-                #time.sleep(1/10)
-                multiprocessing.active_children()
-            else:
-                break
+            request_id = self.launcher.generate_request_ID()
+            process = Process(target=self.launch, args=(PoliceForceAgent(), request_id))
+            process.daemon = True
+            process.start()
+            processes.append(process)
+            #time.sleep(1/100)
+            #multiprocessing.active_children()
 
         # time.sleep(1)
         # #mpq = Queue()
@@ -125,17 +115,11 @@ class Launcher:
         #     else:
         #         break
 
-    def launch(self, agent, _request_id, conn):
+    def launch(self, agent, _request_id):
         self.launcher.connect(agent, _request_id)
         status = agent.test_sucsses()
-
-        if not status:
-            conn.send(False)
-            return
-        conn.send(True)
-
-        #while status:
-        time.sleep(200)
+        while status:
+            time.sleep(2)
 
 
 if __name__ == '__main__':

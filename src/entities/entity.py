@@ -1,26 +1,25 @@
+from connection import URN
 from worldmodel.entityID import EntityID
-from properties.standardPropertyURN import StandardPropertyURN
 from properties.intProperty import IntProperty
 
 
 class Entity:
     def __init__(self, _entity_id):
         self.entity_id = EntityID(_entity_id)
-        self.x = IntProperty(StandardPropertyURN.X.value)
-        self.y = IntProperty(StandardPropertyURN.Y.value)
+        self.x = IntProperty(URN.Property.X)
+        self.y = IntProperty(URN.Property.Y)
         self.properties = {}
 
         self.register_properties([self.x, self.y])
 
     def set_entity(self, properties):
         for key, values in properties.items():
-            _type = StandardPropertyURN.from_string(key)
 
-            if _type == StandardPropertyURN.X.name:
-                self.x.set_value(values[0].valueInt)
+            if key == URN.Property.X:
+                self.x.set_value(values)
 
-            elif _type == StandardPropertyURN.Y.name:
-                self.y.set_value(values[0].valueInt)
+            elif key == URN.Property.Y:
+                self.y.set_value(values)
 
     def get_id(self) -> EntityID:
         return self.entity_id
