@@ -6,12 +6,6 @@ class Property:
         self.defined = False
         self.value = None
 
-    def get_urn(self):
-        return self.urn
-
-    def is_defined(self):
-        return self.defined
-
     def set_defined(self):
         self.defined = True
 

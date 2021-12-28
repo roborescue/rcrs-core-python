@@ -36,7 +36,7 @@ class Blockade(Entity):
                 self.apexes.set_value(values)
 
     def copy_impl(self):
-        return Blockade(self.get_id())
+        return Blockade(self.entity_id)
 
     def get_property(self, urn):
 
@@ -63,7 +63,7 @@ class Blockade(Entity):
         self.x.set_value(value)
 
     def is_x_defined(self):
-        return self.x.is_defined()
+        return self.x.defined
 
     def undefine_x(self):
         self.x.set_undefined()
@@ -78,7 +78,7 @@ class Blockade(Entity):
         self.y.set_value(value)
 
     def is_y_defined(self):
-        return self.y.is_defined()
+        return self.y.defined
 
     def undefine_y(self):
         self.y.set_undefined()
@@ -93,7 +93,7 @@ class Blockade(Entity):
         self.apexes.set_value(value)
 
     def is_apexes_defined(self):
-        return self.apexes.is_defined()
+        return self.apexes.defined
 
     def undefine_apexes(self):
         self.apexes.set_undefined()
@@ -108,7 +108,7 @@ class Blockade(Entity):
         self.position.set_value(value)
 
     def is_position_defined(self):
-        return self.position.is_defined()
+        return self.position.defined
 
     def undefine_position(self):
         self.position.set_undefined()
@@ -123,7 +123,7 @@ class Blockade(Entity):
         self.repair_cost.set_value(value)
 
     def is_repaire_cost_defined(self):
-        return self.repair_cost.is_defined()
+        return self.repair_cost.defined
 
     def undefine_repaire_cost(self):
         self.repair_cost.set_undefined()

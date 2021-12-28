@@ -24,9 +24,9 @@ class Human(Entity):
 
     #TODO
     def get_location(self, world_model):
-        if self.x.is_defined() and self.y.is_defined():
+        if self.x.defined and self.y.defined:
             return self.x.get_value(), self.y.get_value()
-        if self.position.is_defined():
+        if self.position.defined:
             pos_entity = world_model.get_entity(self.get_position())
             return pos_entity.get_location(world_model)
         return None, None
@@ -34,10 +34,9 @@ class Human(Entity):
     def set_entity(self, properties: dict):
         super().set_entity(properties)
         for key, values in properties.items():
-
             if key == URN.Property.POSITION:
                 self.position.set_value(values)
-
+            
             elif key == URN.Property.POSITION_HISTORY:
                 self.position_history.set_value(values)
 
@@ -94,7 +93,7 @@ class Human(Entity):
         self.x.set_value(value)
 
     def is_x_defined(self):
-        return self.x.is_defined()
+        return self.x.defined
 
     def undefine_x(self):
         self.x.set_undefined()
@@ -109,7 +108,7 @@ class Human(Entity):
         self.y.set_value(value)
 
     def is_y_defined(self):
-        return self.y.is_defined()
+        return self.y.defined
 
     def undefine_y(self):
         self.y.set_undefined()
@@ -124,7 +123,7 @@ class Human(Entity):
         self.position.set_value(value)
 
     def is_position_defined(self):
-        return self.position.is_defined()
+        return self.position.defined
 
     def undefine_position(self):
         self.position.set_undefined()
@@ -139,7 +138,7 @@ class Human(Entity):
         self.position_history.set_value(value)
 
     def is_position_history_defined(self):
-        return self.position_history.is_defined()
+        return self.position_history.defined
 
     def undefine_position_history(self):
         self.position_history.set_undefined()
@@ -154,7 +153,7 @@ class Human(Entity):
         self.direction.set_value(value)
 
     def is_direction_defined(self):
-        return self.direction.is_defined()
+        return self.direction.defined
 
     def undefine_direction(self):
         self.direction.set_undefined()
@@ -169,7 +168,7 @@ class Human(Entity):
         self.stamina.set_value(value)
 
     def is_stamina_defined(self):
-        return self.stamina.is_defined()
+        return self.stamina.defined
 
     def undefine_stamina(self):
         self.stamina.set_undefined()
@@ -184,7 +183,7 @@ class Human(Entity):
         self.hp.set_value(value)
 
     def is_hp_defined(self):
-        return self.hp.is_defined()
+        return self.hp.defined
 
     def undefine_hp(self):
         self.hp.set_undefined()
@@ -199,7 +198,7 @@ class Human(Entity):
         self.damage.set_value(value)
 
     def is_damage_defined(self):
-        return self.damage.is_defined()
+        return self.damage.defined
 
     def undefine_damage(self):
         self.damage.set_undefined()
@@ -214,7 +213,7 @@ class Human(Entity):
         self.buriedness.set_value(value)
 
     def is_buriedness_defined(self):
-        return self.buriedness.is_defined()
+        return self.buriedness.defined
 
     def undefine_buriedness(self):
         self.buriedness.set_undefined()
@@ -229,7 +228,7 @@ class Human(Entity):
         self.travel_distance.set_value(value)
 
     def is_travel_distance_defined(self):
-        return self.travel_distance.is_defined()
+        return self.travel_distance.defined
 
     def undefine_travel_distance(self):
         self.travel_distance.set_undefined()

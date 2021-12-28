@@ -9,7 +9,7 @@ class PoliceForceEntity(Human):
         super().__init__(entity_id)
 
     def copy_impl(self):
-        return PoliceForceEntity(self.get_id())
+        return PoliceForceEntity(self.entity_id)
 
     def get_entity_name(self):
         return "Police force"

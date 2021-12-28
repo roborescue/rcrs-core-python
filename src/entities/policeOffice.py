@@ -9,7 +9,7 @@ class PoliceOfficeEntity(Building):
         Building.__init__(self, entity_id)
 
     def copy_impl(self):
-        return PoliceOfficeEntity(self.get_id())
+        return PoliceOfficeEntity(self.entity_id)
 
     def get_entity_name(self):
         return "Police office"

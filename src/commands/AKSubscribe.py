@@ -1,5 +1,4 @@
 from commands.Command import Command
-from worldmodel.entityID import EntityID
 from commands. standardCommandURN import StandardCommandURN
 
 
@@ -16,7 +15,7 @@ class AKSubscribe(Command):
             self.channels.append(ch)
 
     def set_fields(self, fields):
-        self.agent_id = EntityID(fields.get('agent_id'))
+        self.agent_id = fields.get('agent_id')
         self.time = fields.get('time')
         if isinstance(fields.get('channels'), []):
             for ch in fields.get("channels"):

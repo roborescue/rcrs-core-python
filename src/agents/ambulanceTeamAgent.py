@@ -13,13 +13,13 @@ class AmbulanceTeamAgent(Agent):
         return 'entity:ambulanceteam'
     
     def post_connect(self, world, agent_id):
-        self.Log = Logger(self.get_name(), self.get_id())
+        self.Log = Logger(self.get_name(), self.agent_id)
 
     def think(self, time, change_set, heard):
         self.Log.info(time)
 
         path = self.random_walk()
-        cmd = AKMove(self.get_id(), time, path)
+        cmd = AKMove(self.agent_id, time, path)
 
         akcommand = AKCommand()
         akcommand.add_command(cmd)

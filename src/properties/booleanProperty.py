@@ -18,7 +18,7 @@ class BooleanProperty(Property):
     def take_value(self, _property):
         if isinstance(_property, BooleanProperty):
             b = BooleanProperty(_property)
-            if b.is_defined():
+            if b.defined:
                 self.set_value(b.get_value())
             else:
                 self.set_undefined()

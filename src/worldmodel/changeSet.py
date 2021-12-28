@@ -20,7 +20,7 @@ class ChangeSet:
         if entity_id in self.changed:
             property_dict = self.changed.get(entity_id)
 
-        property_dict[new_property.get_urn()] = new_property
+        property_dict[new_property.urn] = new_property
         self.changed[entity_id] = property_dict
         self.entity_urns[entity_id] = entity_urn
 

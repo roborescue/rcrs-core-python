@@ -10,7 +10,7 @@ class FireStationEntity(Building):
         super().__init__(entity_id)
 
     def copy_impl(self):
-        return FireStationEntity(self.get_id())
+        return FireStationEntity(self.entity_id)
 
     def get_entity_name(self):
         return "Fire Station"

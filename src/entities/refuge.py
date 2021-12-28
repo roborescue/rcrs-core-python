@@ -37,7 +37,7 @@ class Refuge(Building):
                 [self.refill_capacity, self.waiting_list_size])
 
     def copy_impl(self):
-        return Refuge(self.get_id())
+        return Refuge(self.entity_id)
 
     def get_entity_name(self) -> str:
         return "Refuge"
@@ -66,7 +66,7 @@ class Refuge(Building):
         self.bed_capacity.set_value(value)
 
     def is_bed_capacity_defined(self):
-        return self.bed_capacity.is_defined()
+        return self.bed_capacity.defined
 
     def undefine_bed_capacity(self):
         self.bed_capacity.set_undefined()
@@ -82,7 +82,7 @@ class Refuge(Building):
         self.occupied_beds.set_value(value)
 
     def is_occupied_beds_defined(self):
-        return self.occupied_beds.is_defined()
+        return self.occupied_beds.defined
 
     def undefine_occupied_beds(self):
         self.occupied_beds.set_undefined()
@@ -98,7 +98,7 @@ class Refuge(Building):
         self.refill_capacity.set_value(value)
 
     def is_refill_capacity_defined(self):
-        return self.refill_capacity.is_defined()
+        return self.refill_capacity.defined
 
     def undefine_refill_capacity(self):
         self.refill_capacity.set_undefined()
@@ -114,7 +114,7 @@ class Refuge(Building):
         self.waiting_list_size.set_value(value)
 
     def is_waiting_list_size_defined(self):
-        return self.waiting_list_size.is_defined()
+        return self.waiting_list_size.defined
 
     def undefine_waiting_list_size(self):
         self.waiting_list_size.set_undefined()

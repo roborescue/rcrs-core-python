@@ -38,4 +38,4 @@ class World(Entity):
                 self.wind_direction.set_value(values)
     
     def copy_impl(self):
-        return World(self.get_id())
+        return World(self.entity_id)

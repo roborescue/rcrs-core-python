@@ -11,7 +11,7 @@ class Area(Entity):
         self.edges = EdgeListProperty(URN.Property.EDGES)
         self.blockades = EntityIDListProperty(URN.Property.BLOCKADES)
 
-        #self.apexes = None
+        self.apexes = None
         self.neighbours = None
         self.shape = None
 
@@ -22,26 +22,26 @@ class Area(Entity):
         for key, values in properties.items():
             if key == URN.Property.EDGES:
                 self.edges.set_fields(values)
-                # egdes_list = []
-                # for edges in values.edges:
-                #     edge = Edge(edges.startX, edges.startY, edges.endX, edges.endY, edges.neighbour)
-                #     egdes_list.append(edge)
-                # self.edges.set_value(egdes_list)
+                egdes_list = []
+                for edges in values.edges:
+                    edge = Edge(edges.startX, edges.startY, edges.endX, edges.endY, edges.neighbour)
+                    egdes_list.append(edge)
+                self.edges.set_value(egdes_list)
 
             elif key == URN.Property.BLOCKADES:
                 self.blockades.set_value(values)
 
-    # def get_apexes(self):
-    #     if self.apexes is None:
-    #         self.apexes = []
-    #         for edge in self.get_edges():
-    #             self.apexes.append(edge.get_start_x())
-    #             self.apexes.append(edge.get_start_y())
+    def get_apexes(self):
+        if self.apexes is None:
+            self.apexes = []
+            for edge in self.get_edges():
+                self.apexes.append(edge.get_start_x())
+                self.apexes.append(edge.get_start_y())
 
-    #     return self.apexes
+        return self.apexes
 
     def get_location(self):
-        if self.x.is_defined() and self.y.is_defined():
+        if self.x.defined and self.y.defined:
             return self.x.get_value(), self.y.get_value()
 
         return None, None
@@ -84,7 +84,7 @@ class Area(Entity):
         self.edges.set_edges(value)
 
     def is_edges_defined(self):
-        return self.edges.is_defined()
+        return self.edges.defined
 
     def undefine_edges(self):
         self.edges.set_undefined()
@@ -102,7 +102,7 @@ class Area(Entity):
         self.blockades.set_value(value)
 
     def is_blockades_defined(self):
-        return self.blockades.is_defined()
+        return self.blockades.defined
 
     def undefine_blockades(self):
         self.blockades.set_undefined()

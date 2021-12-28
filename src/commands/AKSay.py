@@ -1,5 +1,4 @@
 from commands.Command import Command
-from worldmodel.entityID import EntityID
 from commands. standardCommandURN import StandardCommandURN
 
 
@@ -13,7 +12,7 @@ class AKSay(Command):
         self.time = time
 
     def set_fields(self, fields):
-        self.agent_id = EntityID(fields.get('agent_id'))
+        self.agent_id = fields.get('agent_id')
         self.time = fields.get('time')
         self.data = fields.get('data')
 

@@ -21,7 +21,7 @@ class AKCommand(Message):
         
         for command in self.commands:
             commandProto = protoBuf.CommandProto()
-            commandProto.urn = command.get_urn()
+            commandProto.urn = command.urn
 
             for f in command.get_fields().keys():
                 value = command.get_fields().get(f)

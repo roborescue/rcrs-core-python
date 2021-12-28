@@ -1,5 +1,4 @@
 from Command import Command
-from worldmodel.entityID import EntityID
 from commands. standardCommandURN import StandardCommandURN
 
 
@@ -14,7 +13,7 @@ class AKClearArea(Command):
         self.y = destinationY
 
     def set_fields(self, fields):
-        self.agent_id = EntityID(fields.get('agent_id'))
+        self.agent_id = fields.get('agent_id')
         self.time = fields.get('time')
         self.target = fields.get('target_id')
         self.target = fields.get('x')

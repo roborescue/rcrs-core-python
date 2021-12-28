@@ -1,6 +1,4 @@
 from properties.property import Property
-from worldmodel.entityID import EntityID
-
 
 class IntArrayProperty(Property):
     def __init__(self, urn):
@@ -9,10 +7,10 @@ class IntArrayProperty(Property):
 
     def set_fields(self, data):
         self.value = data.values[:]
-        # _values = []
-        # for d in data.values:
-        #     _values.append(d)
-        # self.value = _values
+        _values = []
+        for d in data.values:
+            _values.append(d)
+        self.value = _values
         self.set_defined()
 
     def set_value(self, data):
@@ -33,7 +31,7 @@ class IntArrayProperty(Property):
     def take_value(self, _property):
         if isinstance(_property, IntArrayProperty):
             i = IntArrayProperty(_property)
-            if i.is_defined():
+            if i.defined:
                 self.set_value(i.get_value())
             else:
                 self.set_undefined()

@@ -1,5 +1,4 @@
 from commands.Command import Command
-from worldmodel.entityID import EntityID
 from commands. standardCommandURN import StandardCommandURN
 
 
@@ -16,7 +15,7 @@ class AKMove(Command):
         self.y = destinationY
 
     def set_fields(self, fields):
-        self.agentId = EntityID(fields.get('agent_id'))
+        self.agentId = fields.get('agent_id')
         self.time = fields.get('time')
         self.target = fields.get('target_id')
 

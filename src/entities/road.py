@@ -15,4 +15,4 @@ class Road(Area):
         return "Road"
 
     def copy_impl(self):
-        return Road(self.get_id())
+        return Road(self.entity_id)

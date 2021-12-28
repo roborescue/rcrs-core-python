@@ -9,7 +9,7 @@ class Civilian(Human):
         super().__init__(entity_id)
 
     def copy_impl(self):
-        return Civilian(self.get_id())
+        return Civilian(self.entity_id)
 
     def get_entity_name(self):
         return "Civilian"

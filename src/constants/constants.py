@@ -28,7 +28,7 @@ DEFAULT_KERNEL_HOST_NAME    = "localhost"
 # Config key for the kernel port number. 
 KERNEL_PORT_NUMBER_KEY      = "kernel.port"
 # Default kernel port number. 
-DEFAULT_KERNEL_PORT_NUMBER  = 7000
+DEFAULT_KERNEL_PORT_NUMBER  = 27931
 # Config key for the gis port number. 
 GIS_PORT_NUMBER_KEY         = "gis.port"
 # Default gis port number. 

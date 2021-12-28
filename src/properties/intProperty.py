@@ -18,7 +18,7 @@ class IntProperty(Property):
     def take_value(self, _property):
         if isinstance(_property, IntProperty):
             i = IntProperty(_property)
-            if i.is_defined():
+            if i.defined:
                 self.set_value(i.get_value())
             else:
                 self.set_undefined()

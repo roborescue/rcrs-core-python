@@ -4,7 +4,6 @@ from properties.standardPropertyFactory import StandardPropertyFactory
 from worldmodel.changeSet import ChangeSet
 import messages.ControlMessageProto_pb2 as protoBuf
 from messages.controlMessageURN import ControlMessageURN
-from worldmodel.entityID import EntityID
 from messages.message import Message
 
 
@@ -38,7 +37,7 @@ class KASense(Message):
         hears = self.data.components[URN.ComponentControlMSG.Hearing].commandList
 
         for change in changes.changes:
-            entity_id = EntityID(change.entityID)
+            entity_id = change.entityID
             for p in change.properties:
                 property_urn = URN.MAP[p.urn]
                 _property = StandardPropertyFactory.make_property(property_urn)
@@ -50,7 +49,7 @@ class KASense(Message):
 
 
         for entity_id in changes.deletes:
-            self.change_set.entity_deleted(EntityID(entity_id))
+            self.change_set.entity_deleted(entity_id)
 
         # for command in hears:
         #     urn = command.urn

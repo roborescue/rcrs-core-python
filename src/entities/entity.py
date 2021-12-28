@@ -1,11 +1,10 @@
 from connection import URN
-from worldmodel.entityID import EntityID
 from properties.intProperty import IntProperty
 
 
 class Entity:
     def __init__(self, _entity_id):
-        self.entity_id = EntityID(_entity_id)
+        self.entity_id = _entity_id
         self.x = IntProperty(URN.Property.X)
         self.y = IntProperty(URN.Property.Y)
         self.properties = {}
@@ -21,28 +20,22 @@ class Entity:
             elif key == URN.Property.Y:
                 self.y.set_value(values)
 
-    def get_id(self) -> EntityID:
-        return self.entity_id
-
     def get_properties(self):
         return self.properties
 
     def register_properties(self, _properties):
         for property in _properties:
-            self.properties[property.get_urn()] = property
+            self.properties[property.urn] = property
 
     def copy_impl(self):
-        return Entity(self.get_id())
+        return Entity(self.entity_id)
 
     def copy(self):
         entity = self.copy_impl()
         for property in self.properties:
-            copy = entity.get_property(property.get_urn())
+            copy = entity.get_property(property.urn)
             copy.take_value(property)
         return entity
-
-    def get_urn(self):
-        return self.urn
 
     def __hash__(self):
         return int(self.entity_id.get_value())
@@ -51,7 +44,7 @@ class Entity:
         return self.properties.get(property_urn)
     
     def get_location(self):
-        if self.x.is_defined() and self.y.is_defined():
+        if self.x.defined and self.y.defined:
             return self.x.get_value(), self.y.get_value()
         else:
             return None, None
@@ -67,7 +60,7 @@ class Entity:
         self.x.set_value(value)
 
     def is_x_defined(self):
-        return self.x.is_defined()
+        return self.x.defined
 
     def undefine_x(self):
         self.x.set_undefined()
@@ -83,7 +76,7 @@ class Entity:
         self.y.set_value(value)
 
     def is_y_defined(self):
-        return self.y.is_defined()
+        return self.y.defined
 
     def undefine_y(self):
         self.y.set_undefined()

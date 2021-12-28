@@ -16,4 +16,4 @@ class AmbulanceCentreEntity(Building):
         return "Ambulance Centre"
 
     def copy_impl(self):
-        return AmbulanceCentreEntity(self.get_id())
+        return AmbulanceCentreEntity(self.entity_id)

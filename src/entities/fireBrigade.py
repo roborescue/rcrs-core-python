@@ -21,7 +21,7 @@ class FireBrigadeEntity(Human):
                 self.water.set_value(values)
 
     def copy_impl(self):
-        return FireBrigadeEntity(self.get_id())
+        return FireBrigadeEntity(self.entity_id)
 
     def get_entity_name(self):
         return "Fire brigade"
@@ -42,7 +42,7 @@ class FireBrigadeEntity(Human):
         self.water.set_value(value)
 
     def is_water_defined(self):
-        return self.water.is_defined()
+        return self.water.defined
 
     def undefine_water(self):
         self.water.set_undefined()

@@ -7,7 +7,6 @@ from messages.AKConnect import AKConnect
 from messages.AKCommand import AKCommand
 from commands.AKSubscribe import AKSubscribe
 import queue
-from worldmodel.entityID import EntityID
 from worldmodel.worldmodel import WorldModel
 import random
 import sys
@@ -32,9 +31,6 @@ class Agent:
 
     def get_name(self):
         return self.name
-
-    def get_id(self):
-        return self.agent_id
 
     def set_send_msg(self, connection_send_func):
         self.send_msg = connection_send_func
@@ -64,7 +60,7 @@ class Agent:
         sys.exit(1)
 
     def handle_connect_ok(self, msg):
-        self.agent_id = EntityID(msg.agent_id)
+        self.agent_id = msg.agent_id
         self.world_model.add_entities(msg.world)
         self.config = msg.config
 
@@ -78,7 +74,7 @@ class Agent:
         self.send_msg(ak_ack.prepare_message(request_id, self.agent_id))
 
     def get_position(self):
-        return self.world_model.get_entity(self.get_id()).get_position()
+        return self.world_model.get_entity(self.agent_id).get_position()
 
     def process_sense(self, msg):
 
@@ -93,7 +89,7 @@ class Agent:
     def random_walk(self):
         # calculate 10 step path
         path = []
-        start_pos = EntityID(self.get_position())
+        start_pos = self.get_position()
         for i in range(50):
             edges = self.world_model.get_entity(start_pos).get_edges()
             neighbors = []
@@ -104,7 +100,7 @@ class Agent:
                 next = random.choice(neighbors)
                 path.append(next)
                 start_pos = next
-            start_pos = EntityID(self.get_position())
+            start_pos = self.get_position()
 
         return path
 

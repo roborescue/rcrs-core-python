@@ -73,7 +73,7 @@ class Building(Area):
                 self.importance.set_value(values)
 
     def copy_impl(self):
-        return Building(self.get_id())
+        return Building(self.entity_id)
 
     def get_entity_name(self):
         return "Building"
@@ -113,7 +113,7 @@ class Building(Area):
         self.floors.set_value(value)
 
     def is_floors_defined(self):
-        return self.floors.is_defined()
+        return self.floors.defined
 
     def undefine_floors(self):
         self.floors.set_undefined()
@@ -128,7 +128,7 @@ class Building(Area):
         self.ignition.set_value(value)
 
     def is_ignition_defined(self):
-        return self.ignition.is_defined()
+        return self.ignition.defined
 
     def undefine_ignition(self):
         self.ignition.set_undefined()
@@ -143,7 +143,7 @@ class Building(Area):
         self.fieryness.set_value(value)
 
     def is_fieryness_defined(self):
-        return self.fieryness.is_defined()
+        return self.fieryness.defined
 
     def undefine_fieryness(self):
         self.fieryness.set_undefined()
@@ -161,7 +161,7 @@ class Building(Area):
         self.brokenness.set_value(value)
 
     def is_brokenness_defined(self):
-        return self.brokenness.is_defined()
+        return self.brokenness.defined
 
     def undefine_brokenness(self):
         self.brokenness.set_undefined()
@@ -176,7 +176,7 @@ class Building(Area):
         self.building_code.set_value(value)
 
     def is_building_code_defined(self):
-        return self.building_code.is_defined()
+        return self.building_code.defined
 
     def undefine_building_code(self):
         self.building_code.set_undefined()
@@ -194,7 +194,7 @@ class Building(Area):
         self.attributes.set_value(value)
 
     def is_attributes_defined(self):
-        return self.attributes.is_defined()
+        return self.attributes.defined
 
     def undefine_attributes(self):
         self.attributes.set_undefined()
@@ -209,7 +209,7 @@ class Building(Area):
         self.ground_area.set_value(value)
 
     def is_ground_area_defined(self):
-        return self.ground_area.is_defined()
+        return self.ground_area.defined
 
     def undefine_ground_area(self):
         self.ground_area.set_undefined()
@@ -224,7 +224,7 @@ class Building(Area):
         self.total_area.set_value(value)
 
     def is_total_area_defined(self):
-        return self.total_area.is_defined()
+        return self.total_area.defined
 
     def undefine_total_area(self):
         self.total_area.set_undefined()
@@ -239,7 +239,7 @@ class Building(Area):
         self.temperature.set_value(value)
 
     def is_temperature_defined(self):
-        return self.temperature.is_defined()
+        return self.temperature.defined
 
     def undefine_temperature(self):
         self.temperature.set_undefined()
@@ -254,7 +254,7 @@ class Building(Area):
         self.importance.set_value(value)
 
     def is_importance_defined(self):
-        return self.importance.is_defined()
+        return self.importance.defined
 
     def undefine_importance(self):
         self.importance.set_undefined()
