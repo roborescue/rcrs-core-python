@@ -38,29 +38,3 @@ class Entity:
             return self.x.get_value(), self.y.get_value()
         else:
             return None, None
-    
-    # y property
-    def get_x_property(self):
-        return self.x
-
-    def get_x(self):
-        return self.x.get_value()
-
-    def set_x(self, value):
-        self.x.set_value(value)
-
-    def is_x_defined(self):
-        return self.x.defined
-
-    # x property
-    def get_y_property(self):
-        return self.y
-
-    def get_y(self):
-        return self.y.get_value()
-
-    def set_y(self, value):
-        self.y.set_value(value)
-
-    def is_y_defined(self):
-        return self.y.defined

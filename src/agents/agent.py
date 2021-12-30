@@ -74,7 +74,7 @@ class Agent:
         self.send_msg(ak_ack.prepare_message(request_id, self.agent_id))
 
     def get_position(self):
-        return self.world_model.get_entity(self.agent_id).get_position()
+        return self.world_model.get_entity(self.agent_id).position.value
 
     def process_sense(self, msg):
 
@@ -91,7 +91,7 @@ class Agent:
         path = []
         start_pos = self.get_position()
         for i in range(50):
-            edges = self.world_model.get_entity(start_pos).get_edges()
+            edges = self.world_model.get_entity(start_pos).edges.value
             neighbors = []
             for edge in edges:
                 if edge.get_neighbour() is not None:

@@ -29,7 +29,7 @@ class PoliceForceAgent(Agent):
         path = self.random_walk()
         cmd = AKMove(self.agent_id, time, path)
 
-        # #target = self.world_model.get_entity(self.agent_id).get_position()
+        # #target = self.world_model.get_entity(self.agent_id).position.value
 
         # cmd2 = AKClear(self.agent_id, time, 2100749334)
 

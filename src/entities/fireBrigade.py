@@ -28,15 +28,3 @@ class FireBrigadeEntity(Human):
             return self.water
         else:
             return super().get_property(urn)
-
-    def get_water_property(self):
-        return self.water
-
-    def get_water(self):
-        return self.water.get_value()
-
-    def set_water(self, value):
-        self.water.set_value(value)
-
-    def is_water_defined(self):
-        return self.water.defined

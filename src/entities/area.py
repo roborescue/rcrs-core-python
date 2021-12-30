@@ -73,33 +73,3 @@ class Area(Entity):
             return self.blockades
         else:
             return super().get_property(urn)
-
-    def get_edges_property(self):
-        return self.edges
-
-    def get_edges(self):
-        return self.edges.get_value()
-
-    def set_edges(self, value):
-        self.edges.set_edges(value)
-
-    def is_edges_defined(self):
-        return self.edges.defined
-
-    def add_edge(self, edge):
-        self.edges.add_edge(edge)
-
-    def get_blockades_property(self):
-        return self.blockades
-
-    def get_blockades(self):
-        return self.blockades.get_value()
-
-    def set_blockades(self, value):
-        self.blockades.set_value(value)
-
-    def is_blockades_defined(self):
-        return self.blockades.defined
-
-    def get_shape(self):
-        return None
