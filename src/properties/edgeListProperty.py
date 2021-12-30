@@ -24,20 +24,20 @@ class EdgeListProperty(Property):
             _values.append(edge)
 
         self.value = _values
-        self.set_defined()
+        self.defined = True
 
     def set_value(self, _value):
         if self.value is not None:
             self.value.clear()
             self.value.extend(_value)
-            self.set_defined()
+            self.defined = True
         else:
             self.value = _value
 
     def set_edges(self, _edges):
         self.value.clear()
         self.value.extend(_edges)
-        self.set_defined()
+        self.defined = True
 
     def add_edge(self, _edge):
         if isinstance(_edge, Edge):

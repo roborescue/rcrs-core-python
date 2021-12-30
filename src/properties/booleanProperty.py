@@ -21,6 +21,6 @@ class BooleanProperty(Property):
             if b.defined:
                 self.set_value(b.get_value())
             else:
-                self.set_value(None)
+                self.defined = False
         else:
             raise Exception("cannot take value from ", _property)

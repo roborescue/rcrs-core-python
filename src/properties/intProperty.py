@@ -8,7 +8,7 @@ class IntProperty(Property):
 
     def set_fields(self, value):
         self.value = value
-        self.set_defined()
+        self.defined = True
 
     def copy(self):
         new_int_prop = IntProperty(self.urn)
@@ -21,6 +21,6 @@ class IntProperty(Property):
             if i.defined:
                 self.set_value(i.get_value())
             else:
-                self.set_value(None)
+                self.defined = False
         else:
             raise Exception("cannot take value from ", _property)

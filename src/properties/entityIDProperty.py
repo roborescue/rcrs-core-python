@@ -8,7 +8,7 @@ class EntityIDProperty(Property):
 
     def set_fields(self, value):
         self.value = value
-        self.set_defined()
+        self.defined = True
 
     def copy(self):
         new_entity_id_prop = EntityIDProperty(self.urn)
@@ -21,6 +21,6 @@ class EntityIDProperty(Property):
             if i.defined:
                 self.set_value(i.get_value())
             else:
-                self.set_value(None)
+                self.defined = False
         else:
             raise Exception("cannot take value from ", _property)
