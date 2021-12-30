@@ -35,9 +35,6 @@ class Blockade(Entity):
             elif key == URN.Property.APEXES:
                 self.apexes.set_value(values)
 
-    def copy_impl(self):
-        return Blockade(self.entity_id)
-
     def get_property(self, urn):
 
         if(urn == URN.Property.X):

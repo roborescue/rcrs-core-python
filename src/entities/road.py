@@ -13,6 +13,3 @@ class Road(Area):
 
     def get_entity_name(self) -> str:
         return "Road"
-
-    def copy_impl(self):
-        return Road(self.entity_id)

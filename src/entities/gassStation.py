@@ -9,9 +9,6 @@ class GasStation(Building):
     def __init__(self, entity_id):
         super().__init__(entity_id)
 
-    def copy_impl(self):
-        return GasStation(self.entity_id)
-
     def get_entity_name(self):
         return "Gass Station"
 

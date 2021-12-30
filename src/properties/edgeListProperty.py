@@ -48,12 +48,3 @@ class EdgeListProperty(Property):
 
     def take_value(self, _value):
         pass
-
-    def copy(self):
-        new_edge_list_prop = EdgeListProperty(self.urn)
-        new_edge_list_prop.value = []
-        for edge in self.value:
-            new_edge_list_prop.value.append(Edge(edge.get_start_x(), edge.get_start_y(),
-                                                 edge.get_end_x(), edge.get_end_y(),
-                                                 edge.get_neighbor().get_value()))
-        return new_edge_list_prop

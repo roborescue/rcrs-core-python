@@ -21,13 +21,6 @@ class IntArrayProperty(Property):
         else:
             self.value = data.values[:]
 
-    def copy(self):
-        new_int_array_prop = IntArrayProperty(self.urn)
-        new_int_array_prop.value = []
-        for int_val in self.value:
-            new_int_array_prop.value.append(int_val)
-        return new_int_array_prop
-    
     def take_value(self, _property):
         if isinstance(_property, IntArrayProperty):
             i = IntArrayProperty(_property)

@@ -36,9 +36,6 @@ class Refuge(Building):
             self.register_properties(
                 [self.refill_capacity, self.waiting_list_size])
 
-    def copy_impl(self):
-        return Refuge(self.entity_id)
-
     def get_entity_name(self) -> str:
         return "Refuge"
 

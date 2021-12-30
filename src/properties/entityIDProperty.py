@@ -10,11 +10,6 @@ class EntityIDProperty(Property):
         self.value = value
         self.defined = True
 
-    def copy(self):
-        new_entity_id_prop = EntityIDProperty(self.urn)
-        new_entity_id_prop.value = self.value
-        return new_entity_id_prop
-
     def take_value(self, _property):
         if isinstance(_property, EntityIDProperty):
             i = EntityIDProperty(_property)

@@ -8,12 +8,7 @@ class BooleanProperty(Property):
 
     def set_fields(self, value):
         self.value = bool(value)
-        self.set_defined()
-
-    def copy(self):
-        new_boolean_prop = BooleanProperty(self.urn)
-        new_boolean_prop.value = self.value
-        return new_boolean_prop
+        self.defined = True
 
     def take_value(self, _property):
         if isinstance(_property, BooleanProperty):

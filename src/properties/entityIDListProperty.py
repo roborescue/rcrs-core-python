@@ -21,14 +21,6 @@ class EntityIDListProperty(Property):
         else:
             self.value = _value
 
-    def copy(self):
-        new_entity_id_list_prop = EntityIDListProperty(self.urn)
-        new_entity_id_list_prop.value = []
-        for entity_id in self.value:
-            new_entity_id_list_prop.value.append(
-                entity_id)
-        return new_entity_id_list_prop
-
     def take_value(self, _property):
         if isinstance(_property, EntityIDListProperty):
             i = EntityIDListProperty(_property)

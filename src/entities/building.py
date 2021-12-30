@@ -72,9 +72,6 @@ class Building(Area):
             elif key == URN.Property.IMPORTANCE:
                 self.importance.set_value(values)
 
-    def copy_impl(self):
-        return Building(self.entity_id)
-
     def get_entity_name(self):
         return "Building"
 

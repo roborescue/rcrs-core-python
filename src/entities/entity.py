@@ -27,16 +27,6 @@ class Entity:
         for property in _properties:
             self.properties[property.urn] = property
 
-    def copy_impl(self):
-        return Entity(self.entity_id)
-
-    def copy(self):
-        entity = self.copy_impl()
-        for property in self.properties:
-            copy = entity.get_property(property.urn)
-            copy.take_value(property)
-        return entity
-
     def __hash__(self):
         return int(self.entity_id.get_value())
 

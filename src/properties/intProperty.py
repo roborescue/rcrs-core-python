@@ -10,11 +10,6 @@ class IntProperty(Property):
         self.value = value
         self.defined = True
 
-    def copy(self):
-        new_int_prop = IntProperty(self.urn)
-        new_int_prop.value = self.value
-        return new_int_prop
-
     def take_value(self, _property):
         if isinstance(_property, IntProperty):
             i = IntProperty(_property)

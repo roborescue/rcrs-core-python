@@ -14,6 +14,3 @@ class AmbulanceTeamEntity(Human):
 
     def get_entity_name(self):
         return "Ambulance Team"
-
-    def copy_impl(self):
-        return AmbulanceTeamEntity(self.entity_id)

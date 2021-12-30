@@ -20,9 +20,6 @@ class FireBrigadeEntity(Human):
             if key == URN.Property.WATER_QUANTITY:
                 self.water.set_value(values)
 
-    def copy_impl(self):
-        return FireBrigadeEntity(self.entity_id)
-
     def get_entity_name(self):
         return "Fire brigade"
 
