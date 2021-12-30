@@ -43,6 +43,3 @@ class FireBrigadeEntity(Human):
 
     def is_water_defined(self):
         return self.water.defined
-
-    def undefine_water(self):
-        self.water.set_undefined()

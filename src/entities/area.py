@@ -86,9 +86,6 @@ class Area(Entity):
     def is_edges_defined(self):
         return self.edges.defined
 
-    def undefine_edges(self):
-        self.edges.set_undefined()
-
     def add_edge(self, edge):
         self.edges.add_edge(edge)
 
@@ -103,9 +100,6 @@ class Area(Entity):
 
     def is_blockades_defined(self):
         return self.blockades.defined
-
-    def undefine_blockades(self):
-        self.blockades.set_undefined()
 
     def get_shape(self):
         return None

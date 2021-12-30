@@ -35,6 +35,6 @@ class EntityIDListProperty(Property):
             if i.defined:
                 self.set_value(i.get_value())
             else:
-                self.set_undefined()
+                self.set_value(None)
         else:
             raise Exception("cannot take value from ", _property)

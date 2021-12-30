@@ -9,9 +9,6 @@ class Property:
     def set_defined(self):
         self.defined = True
 
-    def set_undefined(self):
-        self.defined = False
-
     def get_value(self):
         return self.value
 

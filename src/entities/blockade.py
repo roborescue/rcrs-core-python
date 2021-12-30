@@ -65,9 +65,6 @@ class Blockade(Entity):
     def is_x_defined(self):
         return self.x.defined
 
-    def undefine_x(self):
-        self.x.set_undefined()
-
     def get_y_property(self):
         return self.y
 
@@ -79,9 +76,6 @@ class Blockade(Entity):
 
     def is_y_defined(self):
         return self.y.defined
-
-    def undefine_y(self):
-        self.y.set_undefined()
 
     def get_apexes_property(self):
         return self.apexes
@@ -95,9 +89,6 @@ class Blockade(Entity):
     def is_apexes_defined(self):
         return self.apexes.defined
 
-    def undefine_apexes(self):
-        self.apexes.set_undefined()
-
     def get_position_property(self):
         return self.position
 
@@ -110,9 +101,6 @@ class Blockade(Entity):
     def is_position_defined(self):
         return self.position.defined
 
-    def undefine_position(self):
-        self.position.set_undefined()
-
     def get_repaire_cost_property(self):
         return self.repair_cost
 
@@ -124,9 +112,6 @@ class Blockade(Entity):
 
     def is_repaire_cost_defined(self):
         return self.repair_cost.defined
-
-    def undefine_repaire_cost(self):
-        self.repair_cost.set_undefined()
 
     def get_shape(self):
         return None

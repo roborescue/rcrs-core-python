@@ -95,9 +95,6 @@ class Human(Entity):
     def is_x_defined(self):
         return self.x.defined
 
-    def undefine_x(self):
-        self.x.set_undefined()
-
     def get_y_property(self):
         return self.y
 
@@ -109,9 +106,6 @@ class Human(Entity):
 
     def is_y_defined(self):
         return self.y.defined
-
-    def undefine_y(self):
-        self.y.set_undefined()
 
     def get_position_property(self):
         return self.position
@@ -125,9 +119,6 @@ class Human(Entity):
     def is_position_defined(self):
         return self.position.defined
 
-    def undefine_position(self):
-        self.position.set_undefined()
-
     def get_position_history_property(self):
         return self.position_history
 
@@ -139,9 +130,6 @@ class Human(Entity):
 
     def is_position_history_defined(self):
         return self.position_history.defined
-
-    def undefine_position_history(self):
-        self.position_history.set_undefined()
 
     def get_direction_property(self):
         return self.direction
@@ -155,9 +143,6 @@ class Human(Entity):
     def is_direction_defined(self):
         return self.direction.defined
 
-    def undefine_direction(self):
-        self.direction.set_undefined()
-
     def get_stamina_property(self):
         return self.stamina
 
@@ -169,9 +154,6 @@ class Human(Entity):
 
     def is_stamina_defined(self):
         return self.stamina.defined
-
-    def undefine_stamina(self):
-        self.stamina.set_undefined()
 
     def get_hp_property(self):
         return self.hp
@@ -185,9 +167,6 @@ class Human(Entity):
     def is_hp_defined(self):
         return self.hp.defined
 
-    def undefine_hp(self):
-        self.hp.set_undefined()
-
     def get_damage_property(self):
         return self.damage
 
@@ -199,9 +178,6 @@ class Human(Entity):
 
     def is_damage_defined(self):
         return self.damage.defined
-
-    def undefine_damage(self):
-        self.damage.set_undefined()
 
     def get_buriedness_property(self):
         return self.buriedness
@@ -215,9 +191,6 @@ class Human(Entity):
     def is_buriedness_defined(self):
         return self.buriedness.defined
 
-    def undefine_buriedness(self):
-        self.buriedness.set_undefined()
-
     def get_travel_distance_property(self):
         return self.travel_distance
 
@@ -229,6 +202,3 @@ class Human(Entity):
 
     def is_travel_distance_defined(self):
         return self.travel_distance.defined
-
-    def undefine_travel_distance(self):
-        self.travel_distance.set_undefined()

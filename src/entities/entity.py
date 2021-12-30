@@ -62,9 +62,6 @@ class Entity:
     def is_x_defined(self):
         return self.x.defined
 
-    def undefine_x(self):
-        self.x.set_undefined()
-
     # x property
     def get_y_property(self):
         return self.y
@@ -77,7 +74,3 @@ class Entity:
 
     def is_y_defined(self):
         return self.y.defined
-
-    def undefine_y(self):
-        self.y.set_undefined()
-

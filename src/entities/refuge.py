@@ -68,9 +68,6 @@ class Refuge(Building):
     def is_bed_capacity_defined(self):
         return self.bed_capacity.defined
 
-    def undefine_bed_capacity(self):
-        self.bed_capacity.set_undefined()
-
     # occupied_beds
     def get_occupied_beds_property(self):
         return self.occupied_beds
@@ -83,9 +80,6 @@ class Refuge(Building):
 
     def is_occupied_beds_defined(self):
         return self.occupied_beds.defined
-
-    def undefine_occupied_beds(self):
-        self.occupied_beds.set_undefined()
 
     # refill_capacity
     def get_refill_capacity_property(self):
@@ -100,9 +94,6 @@ class Refuge(Building):
     def is_refill_capacity_defined(self):
         return self.refill_capacity.defined
 
-    def undefine_refill_capacity(self):
-        self.refill_capacity.set_undefined()
-
     # waiting_list_size
     def get_waiting_list_size_property(self):
         return self.waiting_list_size
@@ -115,6 +106,3 @@ class Refuge(Building):
 
     def is_waiting_list_size_defined(self):
         return self.waiting_list_size.defined
-
-    def undefine_waiting_list_size(self):
-        self.waiting_list_size.set_undefined()
