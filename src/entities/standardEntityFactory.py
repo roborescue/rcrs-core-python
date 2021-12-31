@@ -1,4 +1,3 @@
-from entities.standardEntityURN import StandardEntityURN
 from entities.building import Building
 from entities.road import Road
 from entities.blockade import Blockade
@@ -15,7 +14,16 @@ from entities.gassStation import GasStation
 from connection import URN
 
 
+
 class StandardEntityFactory:
+
+    _instance = None
+
+    def __new__(cls):
+        if not cls._instance:
+            cls._instance = super().__new__(cls)
+        return cls._instance
+
     def __init__(self) -> None:
         pass
 

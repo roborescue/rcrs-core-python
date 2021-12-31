@@ -1,9 +1,10 @@
 from connection import URN
 from worldmodel.entityID import EntityID
 from properties.intProperty import IntProperty
+from abc import ABC, abstractmethod
 
 
-class Entity:
+class Entity(ABC):
     def __init__(self, _entity_id):
         self.entity_id = EntityID(_entity_id)
         self.x = IntProperty(URN.Property.X)
@@ -14,10 +15,8 @@ class Entity:
 
     def set_entity(self, properties):
         for key, values in properties.items():
-
             if key == URN.Property.X:
                 self.x.set_value(values)
-
             elif key == URN.Property.Y:
                 self.y.set_value(values)
 
@@ -66,12 +65,6 @@ class Entity:
     def set_x(self, value):
         self.x.set_value(value)
 
-    def is_x_defined(self):
-        return self.x.is_defined()
-
-    def undefine_x(self):
-        self.x.set_undefined()
-
     # x property
     def get_y_property(self):
         return self.y
@@ -82,9 +75,6 @@ class Entity:
     def set_y(self, value):
         self.y.set_value(value)
 
-    def is_y_defined(self):
-        return self.y.is_defined()
 
-    def undefine_y(self):
-        self.y.set_undefined()
+    
 

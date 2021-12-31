@@ -1,9 +1,9 @@
+from connection import URN
 from entities.road import Road
-from entities.standardEntityURN import StandardEntityURN
 
 
 class Hydrant(Road):
-    urn = StandardEntityURN.HYDRANT.value
+    urn = URN.Entity.HYDRANT
 
     def __init__(self, entity_id):
         super().__init__(entity_id)

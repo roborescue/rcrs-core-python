@@ -1,16 +1,7 @@
 import socket
 import sys
-import threading
-import queue
 from time import time
 from time import sleep
-from connection.encoding_tool import read_int32_from_byte_arr
-from connection.encoding_tool import write_str
-from connection.encoding_tool import write_int32
-from connection.encoding_tool import read_msg
-from connection.encoding_tool import write_msg
-from connection.data_stream import OutputStream
-from connection.data_stream import InputStream
 from messages.KAConnectError import KAConnectError
 
 import connection.rcrs_encoding_utils as rcrs_encoding_utils
@@ -34,12 +25,6 @@ class Connection:
             print('Error connecting server. ', ex)
             sys.exit(0)
 
-        # self.read_thread = threading.Thread(target=self.read_loop)
-        # self.read_thread.daemon = True
-        # self.read_thread.start()
-
-        #self.parseMessageFromKernel()
-    
     def parseMessageFromKernel(self):
         try:
             while True:

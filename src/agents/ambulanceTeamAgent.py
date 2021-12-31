@@ -1,27 +1,31 @@
 from agents.agent import Agent
-from messages.AKCommand import AKCommand
-from commands.AKMove import AKMove
-from log.logger import Logger
+from connection import URN
+from constants import kernel_constants
+
 
 
 class AmbulanceTeamAgent(Agent):
-    def __init__(self):
-        Agent.__init__(self)
+    def __init__(self, pre):
+        Agent.__init__(self, pre)
         self.name = 'AmbulanceTeamAgent'
+    
+    def precompute(self):
+        self.Log.info('precompute finshed')
 
     def get_requested_entities(self):
-        return 'entity:ambulanceteam'
+        return [URN.Entity.AMBULANCE_TEAM]
     
-    def post_connect(self, world, agent_id):
-        self.Log = Logger(self.get_name(), self.get_id())
+    def think(self, time_step, change_set, heard):
+        self.Log.info(time_step)
+        if time_step == self.config.get_value(kernel_constants.IGNORE_AGENT_COMMANDS_KEY):
+            self.send_subscribe(time_step, [1, 2])
 
-    def think(self, time, change_set, heard):
-        self.Log.info(time)
+        my_path = self.random_walk()
 
-        path = self.random_walk()
-        cmd = AKMove(self.get_id(), time, path)
-
-        akcommand = AKCommand()
-        akcommand.add_command(cmd)
-
-        self.send_msg(akcommand)
+        # self.send_load(time_step, target)
+        # self.send_unload(time_step)
+        # self.send_say(time_step, 'HELP')
+        # self.send_speak(time_step, 'HELP meeeee police', 1)
+        self.send_move(time_step, my_path)
+        # self.send_rest(time_step)
+     

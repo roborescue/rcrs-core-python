@@ -1,12 +1,10 @@
 from messages.message import Message
-from messages.controlMessageURN import ControlMessageURN
-import messages.ControlMessageProto_pb2 as protoBuf
+from connection import URN, RCRSProto_pb2
 
 
 class Shutdown(Message):
     def __init__(self, data) -> None:
-        super().__init__()
-        self.urn = ControlMessageURN.SHUTDOWN.value
+        super().__init__(URN.ControlMSG.SHUTDOWN)
 
     def read(self):
         pass

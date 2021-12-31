@@ -1,12 +1,10 @@
 from connection import URN
-from properties.standardPropertyURN import StandardPropertyURN
-from entities.standardEntityURN import StandardEntityURN
 from entities.human import Human
 from properties.intProperty import IntProperty
 
 
 class FireBrigadeEntity(Human):
-    urn = StandardEntityURN.FIRE_BRIGADE.value
+    urn = URN.Entity.FIRE_BRIGADE
 
     def __init__(self, entity_id):
         super().__init__(entity_id)
@@ -40,9 +38,3 @@ class FireBrigadeEntity(Human):
 
     def set_water(self, value):
         self.water.set_value(value)
-
-    def is_water_defined(self):
-        return self.water.is_defined()
-
-    def undefine_water(self):
-        self.water.set_undefined()

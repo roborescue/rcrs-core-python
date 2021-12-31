@@ -1,9 +1,9 @@
+from connection import URN
 from entities.area import Area
-from entities.standardEntityURN import StandardEntityURN
 
 
 class Road(Area):
-    urn = StandardEntityURN.ROAD.value
+    urn = URN.Entity.ROAD
 
     def __init__(self, entity_id) -> None:
         super().__init__(entity_id)

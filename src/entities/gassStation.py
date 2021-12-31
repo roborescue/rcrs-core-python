@@ -1,6 +1,5 @@
 from connection import URN
 from entities.building import Building
-from entities.standardEntityURN import StandardEntityURN
 
 
 class GasStation(Building):

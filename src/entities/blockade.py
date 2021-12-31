@@ -3,11 +3,11 @@ from entities.entity import Entity
 from properties.entityIDProperty import EntityIDProperty
 from properties.intArrayProperty import IntArrayProperty
 from properties.intProperty import IntProperty
-from entities.standardEntityURN import StandardEntityURN
+from connection import URN
 
 
 class Blockade(Entity):
-    urn = StandardEntityURN.BLOCKADE.value
+    urn = URN.Entity.BLOCKADE
 
     def __init__(self, entity_id):
         super().__init__(entity_id)
@@ -62,12 +62,6 @@ class Blockade(Entity):
     def set_x(self, value):
         self.x.set_value(value)
 
-    def is_x_defined(self):
-        return self.x.is_defined()
-
-    def undefine_x(self):
-        self.x.set_undefined()
-
     def get_y_property(self):
         return self.y
 
@@ -76,12 +70,6 @@ class Blockade(Entity):
 
     def set_y(self, value):
         self.y.set_value(value)
-
-    def is_y_defined(self):
-        return self.y.is_defined()
-
-    def undefine_y(self):
-        self.y.set_undefined()
 
     def get_apexes_property(self):
         return self.apexes
@@ -92,12 +80,6 @@ class Blockade(Entity):
     def set_apexes(self, value):
         self.apexes.set_value(value)
 
-    def is_apexes_defined(self):
-        return self.apexes.is_defined()
-
-    def undefine_apexes(self):
-        self.apexes.set_undefined()
-
     def get_position_property(self):
         return self.position
 
@@ -107,12 +89,6 @@ class Blockade(Entity):
     def set_position(self, value):
         self.position.set_value(value)
 
-    def is_position_defined(self):
-        return self.position.is_defined()
-
-    def undefine_position(self):
-        self.position.set_undefined()
-
     def get_repaire_cost_property(self):
         return self.repair_cost
 
@@ -121,12 +97,6 @@ class Blockade(Entity):
 
     def set_repaire_cost(self, value):
         self.repair_cost.set_value(value)
-
-    def is_repaire_cost_defined(self):
-        return self.repair_cost.is_defined()
-
-    def undefine_repaire_cost(self):
-        self.repair_cost.set_undefined()
 
     def get_shape(self):
         return None

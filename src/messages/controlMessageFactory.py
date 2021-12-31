@@ -1,6 +1,7 @@
 from messages.KASense import KASense
 from messages.KAConnectOK import KAConnectOK
 from messages.KAConnectError import KAConnectError
+from messages.Shutdown import Shutdown
 from connection import URN
 
 
@@ -15,5 +16,7 @@ class ControlMessageFactory:
             return KAConnectOK(msg)
         elif msg.urn == URN.ControlMSG.KA_CONNECT_ERROR:
             return KAConnectError(msg)
+        elif msg.urn == URN.ControlMSG.SHUTDOWN:
+            return Shutdown(msg)
 
         return None

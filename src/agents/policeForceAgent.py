@@ -1,41 +1,55 @@
 from agents.agent import Agent
-from commands.AKMove import AKMove
-from messages.AKCommand import AKCommand
-from worldmodel.entityID import EntityID
-from commands.AKClear import AKClear
 from constants import kernel_constants
-from log.logger import Logger
 from connection import URN
+from entities.blockade import Blockade
+from entities.road import Road
+import math
+import sys
 
 class PoliceForceAgent(Agent):
-    def __init__(self):
-        Agent.__init__(self)
+    def __init__(self, pre):
+        Agent.__init__(self, pre)
         self.name = 'PoliceForceAgent'
-        self.Log = Logger('PoliceForceAgent', '')
-
-    def post_connect(self, world, agent_id):
-        self.Log = Logger(self.get_name(), self.get_id())
+    
+    def precompute(self):
+        self.Log.info('precompute finshed')
 
     def get_requested_entities(self):
         return [URN.Entity.POLICE_FORCE]
 
-    def think(self, time, change_set, heard):
-        #print(f'{self.get_name()}({self.get_id()}): think method. timestep = ', time)
-        self.Log.info(time)
+    def think(self, time_step, change_set, heard):
+        self.Log.info(time_step)
+        if time_step == self.config.get_value(kernel_constants.IGNORE_AGENT_COMMANDS_KEY):
+            self.send_subscribe(time_step, [1, 2])
 
-        # if time == self.config.get_value(kernel_constants.IGNORE_AGENT_COMMANDS_KEY):
-        #     # Subscribe to channel 1
-        #     self.send_subscribe(time, 1)
+        my_path = self.random_walk()
+        if isinstance(self.location(), Road):
+            target = self.get_nearest_blockade()
+            if target:
+                self.send_clear(time_step, target)
+                return
+                  
+        # self.send_say(time_step, 'HELP')
+        # self.send_speak(time_step, 'HELP meeeee police', 1)
+        self.send_move(time_step, my_path)
+        # self.send_rest(time_step)
+
+    def get_nearest_blockade(self):
+        best_distance = sys.maxsize
+        best = None
+        area = self.location()
+        x = self.me().get_x()
+        y = self.me().get_y()
+        for en in self.world_model.get_entities():
+            if isinstance(en, Road):
+                for b in en.get_blockades():
+                    blockade = self.world_model.get_entity(b)
+                    if blockade:
+                        dx = abs(blockade.get_x() - x)
+                        dy = abs(blockade.get_y() - y)
+                        distance = math.hypot(dx, dy)
+                        if distance < best_distance and distance < float(self.config.get_value('clear.repair.distance')):
+                            best_distance = distance
+                            best = blockade.get_id()
         
-        path = self.random_walk()
-        # cmd = AKMove(self.get_id(), time, path)
-
-        # #target = self.world_model.get_entity(self.get_id()).get_position()
-
-        # cmd2 = AKClear(self.get_id(), time, EntityID(2100749334))
-
-        # akcommand = AKCommand()
-        # # akcommand.add_command(cmd2)
-        # akcommand.add_command(cmd)
-
-        # self.send_msg(akcommand)
+        return best

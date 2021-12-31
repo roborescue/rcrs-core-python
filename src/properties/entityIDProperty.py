@@ -1,6 +1,6 @@
-from constants.constants import ENTITY_FACTORY_KEY
 from properties.property import Property
 from worldmodel.entityID import EntityID
+from connection import URN
 
 
 class EntityIDProperty(Property):
@@ -10,7 +10,6 @@ class EntityIDProperty(Property):
 
     def set_fields(self, value):
         self.value = EntityID(value)
-        self.set_defined()
 
     def copy(self):
         new_entity_id_prop = EntityIDProperty(self.urn)
@@ -19,10 +18,6 @@ class EntityIDProperty(Property):
 
     def take_value(self, _property):
         if isinstance(_property, EntityIDProperty):
-            i = EntityIDProperty(_property)
-            if i.is_defined():
-                self.set_value(i.get_value())
-            else:
-                self.set_undefined()
+            self.set_value(_property.get_value())
         else:
             raise Exception("cannot take value from ", _property)

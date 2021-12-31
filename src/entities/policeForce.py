@@ -1,9 +1,9 @@
-from entities.standardEntityURN import StandardEntityURN
+from connection import URN
 from entities.human import Human
 
 
 class PoliceForceEntity(Human):
-    urn = StandardEntityURN.POLICE_FORCE.value
+    urn = URN.Entity.POLICE_FORCE
 
     def __init__(self, entity_id):
         super().__init__(entity_id)

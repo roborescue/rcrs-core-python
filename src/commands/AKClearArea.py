@@ -1,30 +1,27 @@
-from Command import Command
+from commands.Command import Command
 from worldmodel.entityID import EntityID
-from commands. standardCommandURN import StandardCommandURN
+from connection import URN
+from connection import RCRSProto_pb2
+
+
 
 
 class AKClearArea(Command):
 
-    def __init__(self, agent_id, time, destinationX, destinationY) -> None:
+    def __init__(self, agent_id: EntityID, time: int, destinationX: int, destinationY: int) -> None:
         super().__init__()
-        self.urn = StandardCommandURN.AK_CLEAR_AREA.value
+        self.urn = URN.Command.AK_CLEAR_AREA
         self.agent_id = agent_id
         self.time = time
         self.x = destinationX
         self.y = destinationY
 
-    def set_fields(self, fields):
-        self.agent_id = EntityID(fields.get('agent_id'))
-        self.time = fields.get('time')
-        self.target = fields.get('target_id')
-        self.target = fields.get('x')
-        self.target = fields.get('y')
+    def prepare_cmd(self):
+        msg = RCRSProto_pb2.MessageProto()
+        msg.urn = self.urn
+        msg.components[URN.ComponentControlMSG.AgentID].entityID = self.agent_id.get_value()
+        msg.components[URN.ComponentControlMSG.Time].intValue = self.time
+        msg.components[URN.ComponentCommand.DestinationX].intValue = self.x
+        msg.components[URN.ComponentCommand.DestinationY].intValue = self.y
+        return msg
 
-    def get_fields(self):
-        fields = {}
-        fields['agent_id'] = self.agent_id.get_value()
-        fields['time'] = self.time
-        fields['x'] = self.x
-        fields['y'] = self.y
-
-        return fields

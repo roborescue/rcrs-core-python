@@ -1,13 +1,15 @@
 from commands.Command import Command
 from worldmodel.entityID import EntityID
-from commands. standardCommandURN import StandardCommandURN
+from connection import RCRSProto_pb2
+from connection import URN
+from typing import List
 
 
 class AKSubscribe(Command):
 
-    def __init__(self, agent_id, time, channels) -> None:
+    def __init__(self, agent_id: EntityID, time: int, channels: List[int]) -> None:
         super().__init__()
-        self.urn = StandardCommandURN.AK_SUBSCRIBE.value
+        self.urn = URN.Command.AK_SUBSCRIBE
         self.agent_id = agent_id
         self.time = time
         self.channels = []
@@ -15,21 +17,11 @@ class AKSubscribe(Command):
         for ch in channels:
             self.channels.append(ch)
 
-    def set_fields(self, fields):
-        self.agent_id = EntityID(fields.get('agent_id'))
-        self.time = fields.get('time')
-        if isinstance(fields.get('channels'), []):
-            for ch in fields.get("channels"):
-                self.channels.append(ch)
-
-    def get_fields(self):
-        fields = {}
-        fields['agent_id'] = self.agent_id.get_value()
-        fields['time'] = self.time
-        channels = []
-        for ch in self.channels:
-            channels.append(ch)
-
-        fields['channels'] = channels
-
-        return fields
+    def prepare_cmd(self):
+        msg = RCRSProto_pb2.MessageProto()
+        msg.urn = self.urn
+        msg.components[URN.ComponentControlMSG.AgentID].entityID = self.agent_id.get_value()
+        msg.components[URN.ComponentControlMSG.Time].intValue = self.time
+        msg.components[URN.ComponentCommand.Channels].intList.values.extend(self.channels)
+        return msg
+    

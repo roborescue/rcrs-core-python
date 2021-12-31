@@ -1,4 +1,5 @@
 from properties.property import Property
+from connection import URN
 
 
 class IntProperty(Property):
@@ -8,7 +9,6 @@ class IntProperty(Property):
 
     def set_fields(self, value):
         self.value = value
-        self.set_defined()
 
     def copy(self):
         new_int_prop = IntProperty(self.urn)
@@ -17,10 +17,6 @@ class IntProperty(Property):
 
     def take_value(self, _property):
         if isinstance(_property, IntProperty):
-            i = IntProperty(_property)
-            if i.is_defined():
-                self.set_value(i.get_value())
-            else:
-                self.set_undefined()
+            self.set_value(_property.get_value())
         else:
             raise Exception("cannot take value from ", _property)

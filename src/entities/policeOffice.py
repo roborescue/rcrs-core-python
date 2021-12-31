@@ -1,9 +1,9 @@
-from entities.standardEntityURN import StandardEntityURN
+from connection import URN
 from entities.building import Building
 
 
 class PoliceOfficeEntity(Building):
-    urn = StandardEntityURN.POLICE_OFFICE.value
+    urn = URN.Entity.POLICE_OFFICE
 
     def __init__(self, entity_id):
         Building.__init__(self, entity_id)

@@ -13,13 +13,11 @@ class EntityIDListProperty(Property):
         for d in data.values:
             _values.append(EntityID(d))
         self.value = _values
-        self.set_defined()
 
     def set_value(self, _value: List[EntityID]):
         if self.value is not None:
             self.value.clear()
             self.value.extend(_value)
-            self.set_defined()
         else:
             self.value = _value
 
@@ -33,10 +31,6 @@ class EntityIDListProperty(Property):
 
     def take_value(self, _property):
         if isinstance(_property, EntityIDListProperty):
-            i = EntityIDListProperty(_property)
-            if i.is_defined():
-                self.set_value(i.get_value())
-            else:
-                self.set_undefined()
+            self.set_value(_property.get_value())
         else:
             raise Exception("cannot take value from ", _property)

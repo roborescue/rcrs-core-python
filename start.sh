@@ -2,4 +2,7 @@
 
 cd src
 
-python3 launcher.py
+python3 launcher.py $*
+
+
+

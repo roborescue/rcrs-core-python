@@ -1,14 +1,16 @@
+from abc import ABC, abstractmethod
 
 
-class Message:
+class Message(ABC):
 
-    def __init__(self) -> None:
-        self.urn = ''
-        pass
+    def __init__(self, _urn) -> None:
+        self.urn = _urn
 
+    @abstractmethod
     def read(self):
         pass
 
+    @abstractmethod
     def write(self):
         pass
 

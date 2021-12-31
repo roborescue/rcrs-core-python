@@ -1,11 +1,10 @@
 from connection import URN
 from entities.entity import Entity
-from standardEntityURN import StandardEntityURN
 from properties.intProperty import IntProperty
 
 
 class World(Entity):
-    urn = StandardEntityURN.WORLD.value
+    urn = URN.Entity.WORLD
 
     def __init__(self, entity_id) -> None:
         super().__init__(entity_id)

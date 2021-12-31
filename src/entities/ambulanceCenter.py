@@ -1,9 +1,8 @@
-from entities.standardEntityURN import StandardEntityURN
 from entities.building import Building
-
+from connection import URN
 
 class AmbulanceCentreEntity(Building):
-    urn = StandardEntityURN.AMBULANCE_CENTRE.value
+    urn = URN.Entity.AMBULANCE_CENTRE
 
     def __init__(self, entity_id):
         super().__init__(entity_id)

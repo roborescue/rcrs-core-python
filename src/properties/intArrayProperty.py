@@ -9,19 +9,13 @@ class IntArrayProperty(Property):
 
     def set_fields(self, data):
         self.value = data.values[:]
-        # _values = []
-        # for d in data.values:
-        #     _values.append(d)
-        # self.value = _values
-        self.set_defined()
 
     def set_value(self, data):
         if self.value is not None:
             self.value.clear()
-            self.value.extend(data.values)
-            self.set_defined()
+            self.value.extend(data.values[:])
         else:
-            self.value = data.values[:]
+            self.value = data[:]
 
     def copy(self):
         new_int_array_prop = IntArrayProperty(self.urn)
@@ -32,10 +26,10 @@ class IntArrayProperty(Property):
     
     def take_value(self, _property):
         if isinstance(_property, IntArrayProperty):
-            i = IntArrayProperty(_property)
-            if i.is_defined():
-                self.set_value(i.get_value())
+            if self.value is not None:
+                self.value.clear()
+                self.value.extend(_property.get_value())
             else:
-                self.set_undefined()
+                self.value = _property.get_value[:]
         else:
             raise Exception("cannot take value from ", _property)

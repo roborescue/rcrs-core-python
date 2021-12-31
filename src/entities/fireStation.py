@@ -1,5 +1,4 @@
 from connection import URN
-from entities.standardEntityURN import StandardEntityURN
 from entities.building import Building
 
 
