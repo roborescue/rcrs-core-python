@@ -9,9 +9,9 @@ class AKAcknowledge(Message):
 
     def write(self, request_id, agent_id):
         msg = RCRSProto_pb2.MessageProto()
-        msg.urn = self.get_urn()
+        msg.urn = self.urn
         msg.components[URN.ComponentControlMSG.RequestID].intValue = request_id
-        msg.components[URN.ComponentControlMSG.AgentID].entityID = agent_id.get_value()
+        msg.components[URN.ComponentControlMSG.AgentID].entityID = agent_id
         return msg
     
     def read(self):

@@ -1,5 +1,4 @@
 from properties.property import Property
-from worldmodel.entityID import EntityID
 from typing import List
 
 
@@ -11,26 +10,18 @@ class EntityIDListProperty(Property):
     def set_fields(self, data):
         _values = []
         for d in data.values:
-            _values.append(EntityID(d))
+            _values.append(d)
         self.value = _values
 
-    def set_value(self, _value: List[EntityID]):
+    def set_value(self, _value: List[int]):
         if self.value is not None:
             self.value.clear()
             self.value.extend(_value)
         else:
             self.value = _value
 
-    def copy(self):
-        new_entity_id_list_prop = EntityIDListProperty(self.urn)
-        new_entity_id_list_prop.value = []
-        for entity_id in self.value:
-            new_entity_id_list_prop.value.append(
-                EntityID(entity_id.get_value()))
-        return new_entity_id_list_prop
-
     def take_value(self, _property):
         if isinstance(_property, EntityIDListProperty):
-            self.set_value(_property.get_value())
+            self.set_value(_property.value)
         else:
             raise Exception("cannot take value from ", _property)

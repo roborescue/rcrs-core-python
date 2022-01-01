@@ -10,9 +10,3 @@ class AmbulanceCentreEntity(Building):
 
     def set_entity(self, properties):
         super().set_entity(properties)
-
-    def get_entity_name(self):
-        return "Ambulance Centre"
-
-    def copy_impl(self):
-        return AmbulanceCentreEntity(self.get_id())

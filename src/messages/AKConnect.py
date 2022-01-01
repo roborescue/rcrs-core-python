@@ -9,7 +9,7 @@ class AKConnect(Message):
     
     def write(self, request_id, agent):
         msg = RCRSProto_pb2.MessageProto()
-        msg.urn = self.get_urn()
+        msg.urn = self.urn
         msg.components[URN.ComponentControlMSG.RequestID].intValue = request_id
         msg.components[URN.ComponentControlMSG.Version].intValue = 2
         msg.components[URN.ComponentControlMSG.Name].stringValue = agent.name

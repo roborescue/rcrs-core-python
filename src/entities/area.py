@@ -13,7 +13,7 @@ class Area(Entity):
         self.blockades = EntityIDListProperty(URN.Property.BLOCKADES)
         self.neighbours = None
         self.shape = None
-        self.apexList = List[int]
+        self.apexList = []
         self.register_properties([self.edges, self.blockades])
 
     def set_entity(self, properties):
@@ -23,23 +23,6 @@ class Area(Entity):
                 self.edges.set_fields(values)
             elif key == URN.Property.BLOCKADES:
                 self.blockades.set_value(values)
-
-    def get_location(self):
-        return self.x.get_value(), self.y.get_value()
-
-    def get_neighbours(self):
-        if self.neighbours is None:
-            self.neighbours = []
-            for edge in self.edges.get_value():
-                if edge.is_passable():
-                    self.neighbours.append(edge.get_neighbour())
-        return self.neighbours
-
-    def get_edge_to(self, neighbour):
-        for edge in self.get_edges():
-            if neighbour.equals(edge.get_neighbour()):
-                return edge
-        return None
 
     def get_property(self, urn):
 
@@ -54,26 +37,19 @@ class Area(Entity):
         else:
             return super().get_property(urn)
 
-    def get_edges_property(self):
-        return self.edges
+    def get_location(self):
+        return self.x.value, self.y.value
 
-    def get_edges(self) -> List[Entity]:
-        return self.edges.get_value()
+    def get_neighbours(self):
+        if self.neighbours is None:
+            self.neighbours = []
+            for edge in self.edges.value:
+                if edge.is_passable():
+                    self.neighbours.append(edge.get_neighbour())
+        return self.neighbours
 
-    def set_edges(self, value):
-        self.edges.set_edges(value)
-
-    def add_edge(self, edge):
-        self.edges.add_edge(edge)
-
-    def get_blockades_property(self):
-        return self.blockades
-
-    def get_blockades(self):
-        return self.blockades.get_value()
-
-    def set_blockades(self, value):
-        self.blockades.set_value(value)
-
-    def get_shape(self):
+    def get_edge_to(self, neighbour):
+        for edge in self.edges.value:
+            if neighbour.equals(edge.get_neighbour()):
+                return edge
         return None
