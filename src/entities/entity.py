@@ -29,5 +29,34 @@ class Entity(ABC):
         for property in _properties:
             self.properties[property.urn] = property
 
+    def get_urn(self):
+        return self.urn
+
+    def __hash__(self):
+        return int(self.entity_id.get_value())
+
     def get_property(self, property_urn):
         return self.properties.get(property_urn)
+    
+    def get_location(self):
+        return self.x.get_value(), self.y.get_value()
+        
+    # y property
+    def get_x_property(self):
+        return self.x
+
+    def get_x(self):
+        return self.x.get_value()
+
+    def set_x(self, value):
+        self.x.set_value(value)
+
+    # x property
+    def get_y_property(self):
+        return self.y
+
+    def get_y(self):
+        return self.y.get_value()
+
+    def set_y(self, value):
+        self.y.set_value(value)

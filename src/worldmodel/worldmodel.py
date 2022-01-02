@@ -55,7 +55,7 @@ class WorldModel:
                 added = True
 
             for property in change_set.get_changed_properties(entity_id):
-                existing_property = existing_entity.get_property(property.urn)   
+                existing_property = existing_entity.get_property(property.get_urn())   
                 existing_property.take_value(property)
 
             if added:

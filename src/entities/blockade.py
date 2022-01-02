@@ -44,3 +44,51 @@ class Blockade(Entity):
             return self.repair_cost
         else:
             return super().get_property(urn)
+
+    def get_x_property(self):
+        return self.x
+
+    def get_x(self):
+        return self.x.get_value()
+
+    def set_x(self, value):
+        self.x.set_value(value)
+
+    def get_y_property(self):
+        return self.y
+
+    def get_y(self):
+        return self.y.get_value()
+
+    def set_y(self, value):
+        self.y.set_value(value)
+
+    def get_apexes_property(self):
+        return self.apexes
+
+    def get_apexes(self):
+        return self.apexes.get_value()
+
+    def set_apexes(self, value):
+        self.apexes.set_value(value)
+
+    def get_position_property(self):
+        return self.position
+
+    def get_position(self):
+        return self.position.get_value()
+
+    def set_position(self, value):
+        self.position.set_value(value)
+
+    def get_repaire_cost_property(self):
+        return self.repair_cost
+
+    def get_repaire_cost(self):
+        return self.repair_cost.get_value()
+
+    def set_repaire_cost(self, value):
+        self.repair_cost.set_value(value)
+
+    def get_shape(self):
+        return None
