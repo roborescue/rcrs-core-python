@@ -107,7 +107,7 @@ class Agent(ABC):
         return self.world_model.get_entity(self.get_id())
 
     def location(self) -> Entity:
-        return self.world_model.get_entity(self.me().position.value)
+        return self.world_model.get_entity(self.me().get_position())
 
     def random_walk(self):
         path = []
@@ -119,7 +119,7 @@ class Agent(ABC):
             rd = self.world_model.get_entity(current)
             if not rd:
                 break
-            edges = rd.edges.value
+            edges = rd.get_edges()
             neighbors = []
             for edge in edges:
                 if edge.get_neighbour() is not None:

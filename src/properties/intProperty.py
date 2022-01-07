@@ -12,6 +12,6 @@ class IntProperty(Property):
 
     def take_value(self, _property):
         if isinstance(_property, IntProperty):
-            self.set_value(_property.value)
+            self.set_value(_property.get_value())
         else:
             raise Exception("cannot take value from ", _property)

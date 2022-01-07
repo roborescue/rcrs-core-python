@@ -19,8 +19,8 @@ class IntArrayProperty(Property):
         if isinstance(_property, IntArrayProperty):
             if self.value is not None:
                 self.value.clear()
-                self.value.extend(_property.value)
+                self.value.extend(_property.get_value())
             else:
-                self.value = _property.value
+                self.value = _property.get_value()
         else:
             raise Exception("cannot take value from ", _property)

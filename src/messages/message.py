@@ -13,3 +13,6 @@ class Message(ABC):
     @abstractmethod
     def write(self):
         pass
+
+    def get_urn(self):
+        return self.urn

@@ -38,15 +38,15 @@ class PoliceForceAgent(Agent):
         best_distance = sys.maxsize
         best = None
         area = self.location()
-        x = self.me().x.value
-        y = self.me().y.value
+        x = self.me().get_x()
+        y = self.me().get_y()
         for en in self.world_model.get_entities():
             if isinstance(en, Road):
-                for b in en.blockades.value:
+                for b in en.get_blockades():
                     blockade = self.world_model.get_entity(b)
                     if blockade:
-                        dx = abs(blockade.x.value - x)
-                        dy = abs(blockade.y.value - y)
+                        dx = abs(blockade.get_x() - x)
+                        dy = abs(blockade.get_y() - y)
                         distance = math.hypot(dx, dy)
                         if distance < best_distance and distance < float(self.config.get_value('clear.repair.distance')):
                             best_distance = distance
