@@ -1,5 +1,4 @@
 from commands.Command import Command
-from worldmodel.entityID import EntityID
 from connection import RCRSProto_pb2
 from connection import URN
 from typing import List
@@ -7,7 +6,7 @@ from typing import List
 
 class AKSubscribe(Command):
 
-    def __init__(self, agent_id: EntityID, time: int, channels: List[int]) -> None:
+    def __init__(self, agent_id: int, time: int, channels: List[int]) -> None:
         super().__init__()
         self.urn = URN.Command.AK_SUBSCRIBE
         self.agent_id = agent_id
@@ -20,7 +19,7 @@ class AKSubscribe(Command):
     def prepare_cmd(self):
         msg = RCRSProto_pb2.MessageProto()
         msg.urn = self.urn
-        msg.components[URN.ComponentControlMSG.AgentID].entityID = self.agent_id.get_value()
+        msg.components[URN.ComponentControlMSG.AgentID].entityID = self.agent_id
         msg.components[URN.ComponentControlMSG.Time].intValue = self.time
         msg.components[URN.ComponentCommand.Channels].intList.values.extend(self.channels)
         return msg

@@ -1,12 +1,11 @@
 from connection import URN
-from worldmodel.entityID import EntityID
 from properties.intProperty import IntProperty
 from abc import ABC, abstractmethod
 
 
 class Entity(ABC):
     def __init__(self, _entity_id):
-        self.entity_id = EntityID(_entity_id)
+        self.entity_id = _entity_id
         self.x = IntProperty(URN.Property.X)
         self.y = IntProperty(URN.Property.Y)
         self.properties = {}
@@ -20,7 +19,7 @@ class Entity(ABC):
             elif key == URN.Property.Y:
                 self.y.set_value(values)
 
-    def get_id(self) -> EntityID:
+    def get_id(self) -> int:
         return self.entity_id
 
     def get_properties(self):
@@ -28,17 +27,7 @@ class Entity(ABC):
 
     def register_properties(self, _properties):
         for property in _properties:
-            self.properties[property.get_urn()] = property
-
-    def copy_impl(self):
-        return Entity(self.get_id())
-
-    def copy(self):
-        entity = self.copy_impl()
-        for property in self.properties:
-            copy = entity.get_property(property.get_urn())
-            copy.take_value(property)
-        return entity
+            self.properties[property.urn] = property
 
     def get_urn(self):
         return self.urn
@@ -50,11 +39,8 @@ class Entity(ABC):
         return self.properties.get(property_urn)
     
     def get_location(self):
-        if self.x.is_defined() and self.y.is_defined():
-            return self.x.get_value(), self.y.get_value()
-        else:
-            return None, None
-    
+        return self.x.get_value(), self.y.get_value()
+        
     # y property
     def get_x_property(self):
         return self.x
@@ -74,7 +60,3 @@ class Entity(ABC):
 
     def set_y(self, value):
         self.y.set_value(value)
-
-
-    
-

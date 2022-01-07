@@ -2,7 +2,6 @@ from commands.Command import Command
 from connection import RCRSProto_pb2
 from properties.standardPropertyFactory import StandardPropertyFactory
 from worldmodel.changeSet import ChangeSet
-from worldmodel.entityID import EntityID
 from messages.message import Message
 from connection import URN
 
@@ -25,7 +24,7 @@ class KASense(Message):
         changes = self.data.components[URN.ComponentControlMSG.Updates].changeSet
         self.hear = self.data.components[URN.ComponentControlMSG.Hearing].commandList
         for change in changes.changes:
-            entity_id = EntityID(change.entityID)
+            entity_id = change.entityID
             for p in change.properties:
                 property_urn = URN.MAP[p.urn]
                 _property = StandardPropertyFactory.make_property(property_urn)
@@ -34,7 +33,7 @@ class KASense(Message):
                     _property.set_fields(value)
                     self.change_set.add_change(entity_id, change.urn, _property)
         for entity_id in changes.deletes:
-            self.change_set.entity_deleted(EntityID(entity_id))
+            self.change_set.entity_deleted(entity_id)
 
     def write(self):
         pass

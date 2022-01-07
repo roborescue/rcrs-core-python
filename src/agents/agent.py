@@ -17,7 +17,6 @@ from messages.KAConnectOK import KAConnectOK
 from messages.KAConnectError import KAConnectError
 from messages.KASense import KASense
 from messages.AKConnect import AKConnect
-from worldmodel.entityID import EntityID
 from worldmodel.worldmodel import WorldModel
 from log.logger import Logger
 from messages.controlMessageFactory import ControlMessageFactory
@@ -78,7 +77,7 @@ class Agent(ABC):
         sys.exit(1)
 
     def handle_connect_ok(self, msg):
-        self.agent_id = EntityID(msg.agent_id)
+        self.agent_id = msg.agent_id
         self.world_model.add_entities(msg.world)
         self.config = msg.config
         self.sendAKAcknowledge(msg.request_id)
@@ -92,7 +91,7 @@ class Agent(ABC):
         self.send_msg(ak_ack.write(request_id, self.agent_id))
 
     def process_sense(self, msg):
-        _id = EntityID(msg.agent_id)
+        _id = msg.agent_id
         time = msg.time
         change_set = msg.change_set
         hear = msg.hear
@@ -115,8 +114,8 @@ class Agent(ABC):
         seen = set()
         current = self.location().get_id()
         for _ in range(10):
-            path.append(current.get_value())
-            seen.add(current.get_value())
+            path.append(current)
+            seen.add(current)
             rd = self.world_model.get_entity(current)
             if not rd:
                 break

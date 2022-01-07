@@ -1,4 +1,3 @@
-from worldmodel.entityID import EntityID
 from abc import ABC, abstractmethod
 
 

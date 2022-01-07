@@ -10,9 +10,3 @@ class AmbulanceTeamEntity(Human):
 
     def set_entity(self, properties):
         super().set_entity(properties)
-
-    def get_entity_name(self):
-        return "Ambulance Team"
-
-    def copy_impl(self):
-        return AmbulanceTeamEntity(self.get_id())

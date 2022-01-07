@@ -5,7 +5,6 @@ from properties.intArrayProperty import IntArrayProperty
 from properties.intProperty import IntProperty
 from connection import URN
 
-
 class Blockade(Entity):
     urn = URN.Entity.BLOCKADE
 
@@ -18,9 +17,6 @@ class Blockade(Entity):
 
         self.register_properties(
             [self.position, self.apexes, self.repair_cost])
-
-    def get_entity_name(self):
-        return "Blockade"
 
     def set_entity(self, properties):
         super().set_entity(properties)
@@ -35,11 +31,7 @@ class Blockade(Entity):
             elif key == URN.Property.APEXES:
                 self.apexes.set_value(values)
 
-    def copy_impl(self):
-        return Blockade(self.get_id())
-
     def get_property(self, urn):
-
         if(urn == URN.Property.X):
             return self.x
         elif(urn == URN.Property.Y):

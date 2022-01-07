@@ -3,7 +3,6 @@
 class Property:
     def __init__(self, _urn):
         self.urn = _urn
-        self.defined = False
         self.value = None
 
     def get_urn(self):
