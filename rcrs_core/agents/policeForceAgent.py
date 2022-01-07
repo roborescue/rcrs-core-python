@@ -1,4 +1,4 @@
-from agents.agent import Agent
+from rcrs_core.agents.agent import Agent
 from rcrs_core.constants import kernel_constants
 from rcrs_core.connection import URN
 from rcrs_core.entities.blockade import Blockade

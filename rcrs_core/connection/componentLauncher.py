@@ -1,4 +1,4 @@
-from agents.agent import Agent
+from rcrs_core.agents.agent import Agent
 from rcrs_core.connection.connection import Connection
 
 
