@@ -27,8 +27,7 @@ class Launcher:
         agents['AmbulanceTeamAgent'] = kwargs['at'] if kwargs['at'] >= 0 else 100
         agents['AmbulanceCenterAgent'] = kwargs['ac'] if kwargs['ac'] >= 0 else 100
         precomute = True if kwargs['pre'].lower() == 'true' else False
-        print(precomute)
-        FireBrigadeAgent(precomute)
+
         for agn, num in agents.items():
             for _ in range(num):
                 request_id = self.launcher.generate_request_ID()
