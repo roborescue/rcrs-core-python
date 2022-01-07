@@ -1,7 +1,7 @@
-from messages.message import Message
-from config.config import Config
-from entities.standardEntityFactory import StandardEntityFactory
-from connection import URN
+from rcrs_core.messages.message import Message
+from rcrs_core.config.config import Config
+from rcrs_core.entities.standardEntityFactory import StandardEntityFactory
+from rcrs_core.connection import URN
 
 
 class KAConnectOK(Message):

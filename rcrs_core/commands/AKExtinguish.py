@@ -1,5 +1,5 @@
-from commands.Command import Command
-from worldmodel.entityID import EntityID
+from rcrs_core.commands.Command import Command
+from rcrs_core.worldmodel.entityID import EntityID
 
 class AKExtinguish(Command):
 

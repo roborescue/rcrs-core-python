@@ -1,8 +1,8 @@
-from messages.KASense import KASense
-from messages.KAConnectOK import KAConnectOK
-from messages.KAConnectError import KAConnectError
-from messages.Shutdown import Shutdown
-from connection import URN
+from rcrs_core.messages.KASense import KASense
+from rcrs_core.messages.KAConnectOK import KAConnectOK
+from rcrs_core.messages.KAConnectError import KAConnectError
+from rcrs_core.messages.Shutdown import Shutdown
+from rcrs_core.connection import URN
 
 
 class ControlMessageFactory:

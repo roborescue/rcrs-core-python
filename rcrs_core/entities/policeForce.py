@@ -1,5 +1,5 @@
-from connection import URN
-from entities.human import Human
+from rcrs_core.connection import URN
+from rcrs_core.entities.human import Human
 
 
 class PoliceForceEntity(Human):

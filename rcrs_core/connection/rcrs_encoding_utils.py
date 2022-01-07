@@ -1,6 +1,6 @@
 """ utils to handle connection """
 
-from connection import RCRSProto_pb2
+from rcrs_core.connection import RCRSProto_pb2
 
 
 def write_int32(value, sock):

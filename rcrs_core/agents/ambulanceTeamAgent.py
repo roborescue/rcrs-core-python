@@ -1,6 +1,6 @@
 from agents.agent import Agent
-from connection import URN
-from constants import kernel_constants
+from rcrs_core.connection import URN
+from rcrs_core.constants import kernel_constants
 
 
 

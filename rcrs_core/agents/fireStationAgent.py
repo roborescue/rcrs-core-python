@@ -1,6 +1,6 @@
 from agents.agent import Agent
-from log.logger import Logger
-from connection import URN
+from rcrs_core.log.logger import Logger
+from rcrs_core.connection import URN
 
 
 

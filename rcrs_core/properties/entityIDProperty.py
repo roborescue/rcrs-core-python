@@ -1,6 +1,6 @@
-from properties.property import Property
-from worldmodel.entityID import EntityID
-from connection import URN
+from rcrs_core.properties.property import Property
+from rcrs_core.worldmodel.entityID import EntityID
+from rcrs_core.connection import URN
 
 
 class EntityIDProperty(Property):

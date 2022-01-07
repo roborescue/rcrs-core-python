@@ -1,5 +1,5 @@
-from properties.property import Property
-from connection import URN
+from rcrs_core.properties.property import Property
+from rcrs_core.connection import URN
 
 
 class IntProperty(Property):

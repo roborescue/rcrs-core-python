@@ -1,7 +1,7 @@
 from typing import List
-from properties.property import Property
-from entities.edge import Edge
-from worldmodel.entityID import EntityID
+from rcrs_core.properties.property import Property
+from rcrs_core.entities.edge import Edge
+from rcrs_core.worldmodel.entityID import EntityID
 
 
 class EdgeListProperty(Property):

@@ -1,6 +1,6 @@
-from connection import URN
-from worldmodel.entityID import EntityID
-from properties.intProperty import IntProperty
+from rcrs_core.connection import URN
+from rcrs_core.worldmodel.entityID import EntityID
+from rcrs_core.properties.intProperty import IntProperty
 from abc import ABC, abstractmethod
 
 

@@ -1,5 +1,5 @@
-from connection import URN
-from entities.building import Building
+from rcrs_core.connection import URN
+from rcrs_core.entities.building import Building
 
 
 class FireStationEntity(Building):

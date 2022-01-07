@@ -1,8 +1,8 @@
 from agents.agent import Agent
-from constants import kernel_constants
-from connection import URN
-from entities.blockade import Blockade
-from entities.road import Road
+from rcrs_core.constants import kernel_constants
+from rcrs_core.connection import URN
+from rcrs_core.entities.blockade import Blockade
+from rcrs_core.entities.road import Road
 import math
 import sys
 

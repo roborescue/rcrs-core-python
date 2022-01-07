@@ -1,10 +1,10 @@
-from commands.Command import Command
-from connection import RCRSProto_pb2
-from properties.standardPropertyFactory import StandardPropertyFactory
-from worldmodel.changeSet import ChangeSet
-from worldmodel.entityID import EntityID
-from messages.message import Message
-from connection import URN
+from rcrs_core.commands.Command import Command
+from rcrs_core.connection import RCRSProto_pb2
+from rcrs_core.properties.standardPropertyFactory import StandardPropertyFactory
+from rcrs_core.worldmodel.changeSet import ChangeSet
+from rcrs_core.worldmodel.entityID import EntityID
+from rcrs_core.messages.message import Message
+from rcrs_core.connection import URN
 
 
 class KASense(Message):

@@ -1,5 +1,5 @@
-from entities.human import Human
-from connection import URN
+from rcrs_core.entities.human import Human
+from rcrs_core.connection import URN
 
 
 class AmbulanceTeamEntity(Human):

@@ -2,7 +2,7 @@ import socket
 import sys
 from time import time
 from time import sleep
-from messages.KAConnectError import KAConnectError
+from rcrs_core.messages.KAConnectError import KAConnectError
 
 import connection.rcrs_encoding_utils as rcrs_encoding_utils
 

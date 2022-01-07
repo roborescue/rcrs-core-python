@@ -1,5 +1,5 @@
-from connection import URN
-from entities.area import Area
+from rcrs_core.connection import URN
+from rcrs_core.entities.area import Area
 
 
 class Road(Area):

@@ -1,12 +1,12 @@
-from connection.componentLauncher import ComponentLauncher
+from rcrs_core.connection.componentLauncher import ComponentLauncher
 from agents.policeForceAgent import PoliceForceAgent
 from agents.ambulanceTeamAgent import AmbulanceTeamAgent
 from agents.fireBrigadeAgent import FireBrigadeAgent
 from agents.fireStationAgent import FireStationAgent
 from agents.policeOfficeAgent import PoliceOfficeAgent
 from agents.ambulanceCenterAgent import AmbulanceCenterAgent
-from constants.constants import DEFAULT_KERNEL_PORT_NUMBER
-from constants.constants import DEFAULT_KERNEL_HOST_NAME
+from rcrs_core.constants.constants import DEFAULT_KERNEL_PORT_NUMBER
+from rcrs_core.constants.constants import DEFAULT_KERNEL_HOST_NAME
 import time
 import sys
 import os

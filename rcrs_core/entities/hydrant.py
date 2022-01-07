@@ -1,5 +1,5 @@
-from connection import URN
-from entities.road import Road
+from rcrs_core.connection import URN
+from rcrs_core.entities.road import Road
 
 
 class Hydrant(Road):

@@ -1,17 +1,17 @@
-from entities.building import Building
-from entities.road import Road
-from entities.blockade import Blockade
-from entities.refuge import Refuge
-from entities.policeForce import PoliceForceEntity
-from entities.policeOffice import PoliceOfficeEntity
-from entities.ambulanceTeam import AmbulanceTeamEntity
-from entities.ambulanceCenter import AmbulanceCentreEntity
-from entities.fireBrigade import FireBrigadeEntity
-from entities.fireStation import FireStationEntity
-from entities.civilian import Civilian
-from entities.hydrant import Hydrant
-from entities.gassStation import GasStation
-from connection import URN
+from rcrs_core.entities.building import Building
+from rcrs_core.entities.road import Road
+from rcrs_core.entities.blockade import Blockade
+from rcrs_core.entities.refuge import Refuge
+from rcrs_core.entities.policeForce import PoliceForceEntity
+from rcrs_core.entities.policeOffice import PoliceOfficeEntity
+from rcrs_core.entities.ambulanceTeam import AmbulanceTeamEntity
+from rcrs_core.entities.ambulanceCenter import AmbulanceCentreEntity
+from rcrs_core.entities.fireBrigade import FireBrigadeEntity
+from rcrs_core.entities.fireStation import FireStationEntity
+from rcrs_core.entities.civilian import Civilian
+from rcrs_core.entities.hydrant import Hydrant
+from rcrs_core.entities.gassStation import GasStation
+from rcrs_core.connection import URN
 
 
 

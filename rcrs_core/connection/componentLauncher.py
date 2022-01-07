@@ -1,5 +1,5 @@
 from agents.agent import Agent
-from connection.connection import Connection
+from rcrs_core.connection.connection import Connection
 
 
 class ComponentLauncher:

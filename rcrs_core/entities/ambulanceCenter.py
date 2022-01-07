@@ -1,5 +1,5 @@
-from entities.building import Building
-from connection import URN
+from rcrs_core.entities.building import Building
+from rcrs_core.connection import URN
 
 class AmbulanceCentreEntity(Building):
     urn = URN.Entity.AMBULANCE_CENTRE

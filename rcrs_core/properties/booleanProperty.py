@@ -1,4 +1,4 @@
-from properties.property import Property
+from rcrs_core.properties.property import Property
 
 
 class BooleanProperty(Property):

@@ -1,16 +1,16 @@
 from typing import List
-from entities.entity import Entity
-from entities import standardEntityFactory
-from entities import human
-from entities.area import Area
-from entities.blockade import Blockade
-from connection import URN
+from rcrs_core.entities.entity import Entity
+from rcrs_core.entities import standardEntityFactory
+from rcrs_core.entities import human
+from rcrs_core.entities.area import Area
+from rcrs_core.entities.blockade import Blockade
+from rcrs_core.connection import URN
 
 from rtree import index
 import sys
 
-from worldmodel.changeSet import ChangeSet
-from worldmodel.entityID import EntityID
+from rcrs_core.worldmodel.changeSet import ChangeSet
+from rcrs_core.worldmodel.entityID import EntityID
 
 
 class WorldModel:

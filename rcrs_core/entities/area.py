@@ -1,8 +1,8 @@
 from typing import List
-from connection import URN
-from entities.entity import Entity
-from properties.edgeListProperty import EdgeListProperty
-from properties.entityIDListProperty import EntityIDListProperty
+from rcrs_core.connection import URN
+from rcrs_core.entities.entity import Entity
+from rcrs_core.properties.edgeListProperty import EdgeListProperty
+from rcrs_core.properties.entityIDListProperty import EntityIDListProperty
 
 
 class Area(Entity):

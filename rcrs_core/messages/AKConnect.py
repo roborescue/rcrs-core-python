@@ -1,6 +1,6 @@
-from messages.message import Message
-from connection import RCRSProto_pb2
-from connection import URN
+from rcrs_core.messages.message import Message
+from rcrs_core.connection import RCRSProto_pb2
+from rcrs_core.connection import URN
 
 class AKConnect(Message):
 

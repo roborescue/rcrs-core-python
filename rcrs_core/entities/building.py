@@ -1,7 +1,7 @@
-from connection import URN
-from entities.edge import Edge
-from entities.area import Area
-from properties.intProperty import IntProperty
+from rcrs_core.connection import URN
+from rcrs_core.entities.edge import Edge
+from rcrs_core.entities.area import Area
+from rcrs_core.properties.intProperty import IntProperty
 
 
 

@@ -1,30 +1,30 @@
 import random
 import sys
-from connection.URN import Entity
-from commands.AKSubscribe import AKSubscribe
-from commands.AKClear import AKClear
-from commands.AKClearArea import AKClearArea
-from commands.AKLoad import AKLoad
-from commands.AKMove import AKMove
-from commands.AKRescue import AKRescue
-from commands.AKUnload import AKUnload
-from commands.AKSay import AKSay
-from commands.AKSpeak import AKSpeak
-from commands.AKTell import AKTell
+from rcrs_core.connection.URN import Entity
+from rcrs_core.commands.AKSubscribe import AKSubscribe
+from rcrs_core.commands.AKClear import AKClear
+from rcrs_core.commands.AKClearArea import AKClearArea
+from rcrs_core.commands.AKLoad import AKLoad
+from rcrs_core.commands.AKMove import AKMove
+from rcrs_core.commands.AKRescue import AKRescue
+from rcrs_core.commands.AKUnload import AKUnload
+from rcrs_core.commands.AKSay import AKSay
+from rcrs_core.commands.AKSpeak import AKSpeak
+from rcrs_core.commands.AKTell import AKTell
 
-from messages.AKAcknowledge import AKAcknowledge
-from messages.KAConnectOK import KAConnectOK
-from messages.KAConnectError import KAConnectError
-from messages.KASense import KASense
-from messages.AKConnect import AKConnect
-from worldmodel.entityID import EntityID
-from worldmodel.worldmodel import WorldModel
-from log.logger import Logger
-from messages.controlMessageFactory import ControlMessageFactory
+from rcrs_core.messages.AKAcknowledge import AKAcknowledge
+from rcrs_core.messages.KAConnectOK import KAConnectOK
+from rcrs_core.messages.KAConnectError import KAConnectError
+from rcrs_core.messages.KASense import KASense
+from rcrs_core.messages.AKConnect import AKConnect
+from rcrs_core.worldmodel.entityID import EntityID
+from rcrs_core.worldmodel.worldmodel import WorldModel
+from rcrs_core.log.logger import Logger
+from rcrs_core.messages.controlMessageFactory import ControlMessageFactory
 from abc import ABC, abstractmethod
 
-from commands.AKRest import AKRest
-from entities.human import Human
+from rcrs_core.commands.AKRest import AKRest
+from rcrs_core.entities.human import Human
 
 
 class Agent(ABC):
