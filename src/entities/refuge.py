@@ -34,6 +34,12 @@ class Refuge(Building):
             self.register_properties(
                 [self.refill_capacity, self.waiting_list_size])
 
+    def copy_impl(self):
+        return Refuge(self.get_id())
+
+    def get_entity_name(self) -> str:
+        return "Refuge"
+
     def get_property(self, urn):
 
         if(urn == URN.Property.BEDCAPACITY):

@@ -2,6 +2,7 @@ from connection import URN
 from entities.entity import Entity
 from properties.intProperty import IntProperty
 
+
 class World(Entity):
     urn = URN.Entity.WORLD
 
@@ -34,3 +35,6 @@ class World(Entity):
 
             elif key == URN.Property.WIND_DIRECTION:
                 self.wind_direction.set_value(values)
+    
+    def copy_impl(self):
+        return World(self.get_id())

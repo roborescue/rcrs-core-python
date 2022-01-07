@@ -11,7 +11,7 @@ class AKAcknowledge(Message):
         msg = RCRSProto_pb2.MessageProto()
         msg.urn = self.get_urn()
         msg.components[URN.ComponentControlMSG.RequestID].intValue = request_id
-        msg.components[URN.ComponentControlMSG.AgentID].entityID = agent_id
+        msg.components[URN.ComponentControlMSG.AgentID].entityID = agent_id.get_value()
         return msg
     
     def read(self):

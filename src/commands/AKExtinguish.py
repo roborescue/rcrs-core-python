@@ -1,4 +1,5 @@
 from commands.Command import Command
+from worldmodel.entityID import EntityID
 
 class AKExtinguish(Command):
 
@@ -8,3 +9,4 @@ class AKExtinguish(Command):
 
     def prepare_cmd():
         pass
+    

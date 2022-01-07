@@ -1,6 +1,8 @@
 from typing import List
 from properties.property import Property
 from entities.edge import Edge
+from worldmodel.entityID import EntityID
+
 
 class EdgeListProperty(Property):
     def __init__(self, urn):
@@ -19,7 +21,7 @@ class EdgeListProperty(Property):
                             edges[i].endX, edges[i].endY, None)
             else:
                 edge = Edge(edges[i].startX, edges[i].startY, edges[i]
-                            .endX, edges[i].endY, edges[i].neighbour)
+                            .endX, edges[i].endY, EntityID(edges[i].neighbour))
 
             _values.append(edge)
 
@@ -47,3 +49,12 @@ class EdgeListProperty(Property):
     def take_value(self, _value):
         print('edge list property was not implemented....?')
         pass
+
+    def copy(self):
+        new_edge_list_prop = EdgeListProperty(self.urn)
+        new_edge_list_prop.value = []
+        for edge in self.value:
+            new_edge_list_prop.value.append(Edge(edge.get_start_x(), edge.get_start_y(),
+                                                 edge.get_end_x(), edge.get_end_y(),
+                                                 EntityID(edge.get_neighbor().get_value())))
+        return new_edge_list_prop

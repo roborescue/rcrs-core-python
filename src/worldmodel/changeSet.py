@@ -1,4 +1,4 @@
-import copy
+
 
 class ChangeSet:
     def __init__(self, _change_set=None):
@@ -15,7 +15,7 @@ class ChangeSet:
         if entity_id in self.deleted:
             return
 
-        new_property = copy.deepcopy(property)
+        new_property = property.copy()
         property_dict = {}
         if entity_id in self.changed:
             property_dict = self.changed.get(entity_id)

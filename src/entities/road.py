@@ -10,3 +10,9 @@ class Road(Area):
 
     def set_entity(self, properties) -> None:
         super().set_entity(properties)
+
+    def get_entity_name(self) -> str:
+        return "Road"
+
+    def copy_impl(self):
+        return Road(self.get_id())

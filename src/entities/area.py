@@ -13,7 +13,7 @@ class Area(Entity):
         self.blockades = EntityIDListProperty(URN.Property.BLOCKADES)
         self.neighbours = None
         self.shape = None
-        self.apexList = []
+        self.apexList = List[int]
         self.register_properties([self.edges, self.blockades])
 
     def set_entity(self, properties):
