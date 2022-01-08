@@ -30,7 +30,7 @@ class WorldModel:
     def add_entities(self, entities: List[Entity]):
         for entity in entities:
             self.unindexedـetities[entity.get_id()] = entity
-        print(len(entities), ' entities added to world_model')
+        # print(len(entities), ' entities added to world_model')
 
     def get_entity(self, entity_id: EntityID) -> Entity:
         if entity_id in self.unindexedـetities:

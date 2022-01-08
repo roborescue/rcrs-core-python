@@ -61,7 +61,8 @@ class Agent(ABC):
         self.send_msg(ak_connect.write(request_id, self))
     
     def post_connect(self):
-        self.Log = Logger(self.get_name(), self.get_id())
+            self.Log = Logger(self.get_name(), self.get_id())
+
 
     def message_received(self, msg):
         c_msg = ControlMessageFactory().make_message(msg)
