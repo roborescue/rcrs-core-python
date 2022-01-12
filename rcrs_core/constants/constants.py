@@ -19,7 +19,7 @@ DEFAULT_KERNEL_PORT_NUMBER  = 27931
 # Config key for the gis port number. 
 GIS_PORT_NUMBER_KEY         = "gis.port"
 # Default gis port number. 
-DEFAULT_GIS_PORT_NUMBER     = 7001
+DEFAULT_GIS_PORT_NUMBER     = 27931
 
 # The name of the communication model class. 
 COMMUNICATION_MODEL_KEY     = "kernel.communication-model"
